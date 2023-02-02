@@ -1,4 +1,4 @@
-const messages = 'Hello World'
+const messages = 'Hello World!'
 
 function App() {
   return (
