@@ -2,15 +2,16 @@ require('dotenv').config({})
 const express = require('express')
 const cors = require('cors')
 const router = require('./router')
-
+const connect = require('./db')
 const PORT = process.env.PORT ?? 3001
 const CLIENT_PATH = __dirname.split('api')[0] + 'app/dist'
 const isProduction = process.env.NODE_ENV === 'production'
+const URLMONGO = process.env.MONGO_URL
 const app = express()
 
 app.use(express.json())
 app.use(cors())
-
+connect(URLMONGO)
 if (isProduction) {
   app.use(express.static(CLIENT_PATH))
 }
