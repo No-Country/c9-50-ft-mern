@@ -1,0 +1,21 @@
+{
+  "name": "c9-50-ft-mern",
+  "version": "1.0.0",
+  "workspaces": [
+    "api",
+    "app"
+  ],
+  "scripts": {
+    "front:dev": "npm run dev --workspace=app",
+    "back:dev": "npm run dev --workspace=api",
+    "dev": "concurrently \"npm:back:dev\" \"npm:front:dev\"",
+    "build": "npm run build --workspace=app",
+    "start": "npm start --workspace=api",
+    "lint": "npm run lint --workspace=api && npm run lint --workspace=app",
+    "formatt": "prettier --write ."
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

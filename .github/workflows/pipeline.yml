@@ -1,0 +1,36 @@
+name: Pull request pipeline
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
+jobs:
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Use Node 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install packages
+        run: npm install
+      - name: Check Linting
+        run: npm run lint
+
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Use Node 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install packages
+        run: npm install
+      - name: Build project
+        run: npm run build
