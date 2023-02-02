@@ -5,7 +5,7 @@
 
 ## 📕 Descripción del proyecto
 
-Aquí debemos de poner la descripción del proyecto que vamos a realizar.
+Aquí debemos de poner la descripción del proyecto que vamos a realizar
 
 ## 👷 Miembros del equipo
 
