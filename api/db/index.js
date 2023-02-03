@@ -2,17 +2,17 @@ const db = require('mongoose')
 
 db.Promise = global.Promise
 
-async function connect(url) {
+async function databaseConnect(url) {
   try {
-    await db.set('strictQuery', false)
-    await db.connect(url, {
+    db.set('strictQuery', false)
+    db.connect(url, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
-    console.log('connect database')
+    console.log('connected database')
   } catch (err) {
     console.log(err)
   }
 }
 
-module.exports = connect
+module.exports = databaseConnect
