@@ -1,5 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Home, Login, Recovery, Register } from './pages'
+import { Home, Login, Recovery, Register } from '@/pages'
+import { ToastContainer } from 'react-toastify'
+import { AxiosInterceptor } from '@/utils'
+import 'react-toastify/dist/ReactToastify.min.css'
+
+AxiosInterceptor()
 
 function App() {
   return (
@@ -10,6 +15,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/recovery' element={<Recovery />} />
       </Routes>
+      <ToastContainer icon theme='colored' />
     </BrowserRouter>
   )
 }
