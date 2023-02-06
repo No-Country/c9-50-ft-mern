@@ -8,10 +8,10 @@ const userSchema = new Schema(
     // TODO: agregar el modelo de rol
     ocupation: { type: String, required: true },
     bornDate: { type: Date, requred: true },
-    role:{
-      tipo:{type: String, enum: ['COLABORATOR', 'PATIENT', 'ADMIN'], required: true },
-      refered:{type: String, },
-      mettUrl:{type: String, }
+    role: {
+      tipo: { type: String, enum: ['COLABORATOR', 'PATIENT', 'ADMIN'], required: true },
+      refered: { type: String },
+      mettUrl: { type: String }
     }
   },
   {
