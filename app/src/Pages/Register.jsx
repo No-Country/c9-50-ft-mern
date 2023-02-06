@@ -1,6 +1,11 @@
+import { FormRegister } from '../components/form/FormRegister'
 
 export const Register = () => {
   return (
-    <div>Register</div>
+    <>
+      <div className='h-screen bg-black'>
+        <FormRegister />
+      </div>
+    </>
   )
 }
