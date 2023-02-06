@@ -7,7 +7,8 @@ module.exports = {
         primary: '#0B99FF',
         primaryHover: '#5eb5f3',
         textWhite: '#FFFFFF',
-        black: '#111'
+        black: '#111',
+        formBg: '#d9d9d960'
       }
     }
   },

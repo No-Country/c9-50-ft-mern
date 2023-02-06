@@ -21,7 +21,7 @@ export const FormRegister = () => {
   return (
     <>
       <div className='flex flex-col min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
-        <div className='w-full max-w-md space-y-8 bg-[#d9d9d960] rounded-lg p-10'>
+        <div className='w-full max-w-md space-y-8 bg-formBg rounded-lg p-10'>
           <div>
             <h2 className='mt-6 text-center text-3xl font-bold tracking-tight text-textWhite'>
               Registrarse
