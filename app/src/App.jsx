@@ -1,9 +1,17 @@
-const messages = 'Hello World'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Home, Login, Recovery, Register } from './Pages'
 
 function App() {
   return (
     <div>
-      <h1 className="tracking-widest font-semibold">{messages}</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/recovery' element={<Recovery />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }
