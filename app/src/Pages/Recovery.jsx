@@ -1,6 +1,3 @@
-
 export const Recovery = () => {
-  return (
-    <div>Recovery</div>
-  )
+  return <h1>Recovery</h1>
 }

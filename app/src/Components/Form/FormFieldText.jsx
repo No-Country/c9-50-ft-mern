@@ -1,6 +1,3 @@
-
 export const FormFieldText = () => {
-  return (
-    <div>FormFieldText</div>
-  )
+  return <div>FormFieldText</div>
 }
