@@ -84,7 +84,7 @@ Aquí debemos de poner la descripción del proyecto que vamos a realizar
 
 ## 🚀 ¿Como usar?
 
-🚨 Es necesario usar la versión de node **v16.16.0** así como crear un archivo **.env** en la carpeta **_/api_** con las variables de entorno necesarias, puedes abrir el archivo **.env.example** para ver un ejemplo con todas las variables de entorno.
+🚨 Es necesario usar la versión de node **v18.13.0** así como crear un archivo **.env** en la carpeta **_/api_** con las variables de entorno necesarias, puedes abrir el archivo **.env.example** para ver un ejemplo con todas las variables de entorno.
 
 Primero clona el repositorio desde GitHub:
 
