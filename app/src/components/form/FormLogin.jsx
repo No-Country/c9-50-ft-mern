@@ -20,7 +20,7 @@ export const FormLogin = () => {
         </div>
         <form className='mt-8 space-y-6' onSubmit={onSubmit}>
           <input type='hidden' name='remember' defaultValue='true' />
-          <div className='-space-y-px rounded-md shadow-sm'>
+          <div className='-space-y-px rounded-md '>
             <div>
               <label htmlFor='email-address' className='sr-only'>
                 Nombre de usuario
@@ -72,7 +72,7 @@ export const FormLogin = () => {
               type='submit'
               className='group relative flex w-full justify-center rounded-md border border-transparent bg-primary py-2 px-4 text-sm font-medium text-textWhite hover:bg-primaryHover focus:outline-none focus:ring-2 focus:ring-slate-50 focus:ring-offset-2 uppercase tracking-widest'
             >
-             Login
+              Login
             </button>
           </div>
         </form>

@@ -19,7 +19,7 @@ export const FormRecovery = () => {
           </div>
           <form className='mt-8 space-y-6' onSubmit={onSubmit}>
             <input type='hidden' name='remember' defaultValue='true' />
-            <div className='-space-y-px rounded-md shadow-sm'>
+            <div className='-space-y-px rounded-md '>
               <div>
                 <label htmlFor='email-address' className='sr-only'>
                   email

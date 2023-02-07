@@ -29,7 +29,7 @@ export const FormRegister = () => {
           </div>
           <form className='mt-8 space-y-6' onSubmit={onSubmit}>
             <input type='hidden' name='remember' defaultValue='true' />
-            <div className='-space-y-px rounded-md shadow-sm'>
+            <div className='-space-y-px rounded-md '>
               <div>
                 <label htmlFor='username' className='sr-only'>
                   Nombre de usuario
@@ -89,6 +89,20 @@ export const FormRegister = () => {
                   placeholder='Repita su contraseña'
                   ref={confirmPasswordRef}
                 />
+              </div>
+              <div className='items-center justify-center flex pt-5'>
+                <label
+                  htmlFor='Toggle3'
+                  className='flex items-center p-2 rounded-md cursor-pointer dark:text-gray-800'
+                >
+                  <input id='Toggle3' type='checkbox' className='hidden peer' />
+                  <span className='px-4 py-2 rounded-l-md dark:bg-primary peer-checked:dark:bg-gray-300'>
+                    Paciente
+                  </span>
+                  <span className='px-4 py-2 rounded-r-md dark:bg-gray-300 peer-checked:dark:bg-primary'>
+                    Colaborador
+                  </span>
+                </label>
               </div>
             </div>
             <div>
