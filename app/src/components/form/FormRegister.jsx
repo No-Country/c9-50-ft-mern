@@ -93,18 +93,20 @@ export const FormRegister = () => {
                 />
               </div>
               <div className='items-center justify-center flex pt-5'>
-                <label className='flex items-center p-2 rounded-md cursor-pointer dark:text-gray-800'>
+                <label
+                  htmlFor='Toggle3'
+                  className='flex items-center p-2 rounded-md cursor-pointer'
+                >
                   <input
                     id='Toggle3'
                     type='checkbox'
                     className='hidden peer'
                     ref={colaboratorRef}
-                    role='switch'
                   />
-                  <span className='px-4 py-2 rounded-l-md dark:bg-primary peer-checked:dark:bg-gray-300 text-textWhite'>
+                  <span className='px-4 py-2 rounded-l-md bg-primary peer-checked:bg-gray-300 text-textWhite'>
                     Paciente
                   </span>
-                  <span className='px-4 py-2 rounded-r-md dark:bg-gray-300 peer-checked:dark:bg-primary text-textWhite'>
+                  <span className='px-4 py-2 rounded-r-md bg-gray-300 peer-checked:bg-primary text-textWhite'>
                     Colaborador
                   </span>
                 </label>
