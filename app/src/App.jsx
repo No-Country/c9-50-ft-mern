@@ -1,8 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Login } from './Pages/Login'
-import { Recovery } from './Pages/Recovery'
-import { Register } from './Pages/Register'
-import { Home } from './Pages/Home'
+import { Home, Login, Recovery, Register } from './pages'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 

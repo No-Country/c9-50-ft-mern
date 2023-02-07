@@ -1,4 +1,4 @@
-import { FormRecovery } from '../components/form/FormRecovery'
+import { FormRecovery } from '../components'
 
 export const Recovery = () => {
   return (
