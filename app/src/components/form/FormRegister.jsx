@@ -2,21 +2,23 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 export const FormRegister = () => {
+  const form = useRef()
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
   const userNameRef = useRef(null)
   const confirmPasswordRef = useRef(null)
-  //   const colaboratorRef = useRef(null)
+  const colaboratorRef = useRef(null)
   const onSubmit = (e) => {
     e.preventDefault()
     const data = {
       username: userNameRef.current.value,
       email: emailRef.current.value,
       password: passwordRef.current.value,
-      confirmPassword: confirmPasswordRef.current.value
-      //   isColaborator: colaboratorRef.current.value
+      confirmPassword: confirmPasswordRef.current.value,
+      isColaborator: colaboratorRef.current.checked
     }
     console.log(data)
+    form.current.reset()
   }
   return (
     <>
@@ -27,7 +29,7 @@ export const FormRegister = () => {
               Registrarse
             </h2>
           </div>
-          <form className='mt-8 space-y-6' onSubmit={onSubmit}>
+          <form className='mt-8 space-y-6' onSubmit={onSubmit} ref={form}>
             <input type='hidden' name='remember' defaultValue='true' />
             <div className='-space-y-px rounded-md '>
               <div>
@@ -91,15 +93,18 @@ export const FormRegister = () => {
                 />
               </div>
               <div className='items-center justify-center flex pt-5'>
-                <label
-                  htmlFor='Toggle3'
-                  className='flex items-center p-2 rounded-md cursor-pointer dark:text-gray-800'
-                >
-                  <input id='Toggle3' type='checkbox' className='hidden peer' />
-                  <span className='px-4 py-2 rounded-l-md dark:bg-primary peer-checked:dark:bg-gray-300'>
+                <label className='flex items-center p-2 rounded-md cursor-pointer dark:text-gray-800'>
+                  <input
+                    id='Toggle3'
+                    type='checkbox'
+                    className='hidden peer'
+                    ref={colaboratorRef}
+                    role='switch'
+                  />
+                  <span className='px-4 py-2 rounded-l-md dark:bg-primary peer-checked:dark:bg-gray-300 text-textWhite'>
                     Paciente
                   </span>
-                  <span className='px-4 py-2 rounded-r-md dark:bg-gray-300 peer-checked:dark:bg-primary'>
+                  <span className='px-4 py-2 rounded-r-md dark:bg-gray-300 peer-checked:dark:bg-primary text-textWhite'>
                     Colaborador
                   </span>
                 </label>

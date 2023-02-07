@@ -2,11 +2,13 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 export const FormRecovery = () => {
+  const form = useRef()
   const emailRef = useRef(null)
   const onSubmit = (e) => {
     e.preventDefault()
     const data = { email: emailRef.current.value }
     console.log(data)
+    form.current.reset()
   }
   return (
     <>
@@ -17,7 +19,7 @@ export const FormRecovery = () => {
               Recuperar contraseña
             </h2>
           </div>
-          <form className='mt-8 space-y-6' onSubmit={onSubmit}>
+          <form className='mt-8 space-y-6' onSubmit={onSubmit} ref={form}>
             <input type='hidden' name='remember' defaultValue='true' />
             <div className='-space-y-px rounded-md '>
               <div>
