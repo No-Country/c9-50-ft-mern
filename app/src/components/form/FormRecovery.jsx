@@ -1,14 +1,23 @@
-import { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
+
+const schema = z.object({
+  email: z.string().min(1, { message: 'Required' }).email({ message: 'Invalid email address' })
+})
 
 export const FormRecovery = () => {
-  const form = useRef()
-  const emailRef = useRef(null)
-  const onSubmit = (e) => {
-    e.preventDefault()
-    const data = { email: emailRef.current.value }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    resolver: zodResolver(schema)
+  })
+  const onSubmit = (data, e) => {
+    e.target.reset()
     console.log(data)
-    form.current.reset()
   }
   return (
     <>
@@ -19,7 +28,7 @@ export const FormRecovery = () => {
               Recuperar contraseña
             </h2>
           </div>
-          <form className='mt-8 space-y-6' onSubmit={onSubmit} ref={form}>
+          <form className='mt-8 space-y-6' onSubmit={handleSubmit(onSubmit)}>
             <input type='hidden' name='remember' defaultValue='true' />
             <div className='-space-y-px rounded-md '>
               <div>
@@ -31,11 +40,11 @@ export const FormRecovery = () => {
                   name='email'
                   type='email'
                   autoComplete='email'
-                  required
                   className='relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
                   placeholder='Ingrese su correo electronico'
-                  ref={emailRef}
+                  {...register('email')}
                 />
+                {errors.email?.message && <p className='py-2 text-white text-xs font-semibold'>{errors.email?.message}</p>}
               </div>
               <p className='text-zinc-100 text-xs font-semibold tracking-widest text-center pt-5'>
                 Se enviara un email para reestablecer su contraseña

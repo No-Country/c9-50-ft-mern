@@ -1,20 +1,24 @@
-import { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
+
+const schema = z.object({
+  email: z.string().email({ message: 'Invalid email address' }),
+  password: z.string().min(1, { message: 'Required' })
+})
 
 export const FormLogin = () => {
-  const form = useRef()
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
-  const rememberRef = useRef(null)
-  const onSubmit = (e) => {
-    e.preventDefault()
-    const data = {
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-      remember: rememberRef.current.checked
-    }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    resolver: zodResolver(schema)
+  })
+  const onSubmit = (data, e) => {
+    e.target.reset()
     console.log(data)
-    form.current.reset()
   }
 
   return (
@@ -25,23 +29,23 @@ export const FormLogin = () => {
             Login
           </h2>
         </div>
-        <form className='mt-8 space-y-6' onSubmit={onSubmit} ref={form}>
+        <form className='mt-8 space-y-6' onSubmit={handleSubmit(onSubmit)}>
           <input type='hidden' name='remember' defaultValue='true' />
           <div className='-space-y-px rounded-md '>
             <div>
               <label htmlFor='email-address' className='sr-only'>
-                Nombre de usuario
+                Email
               </label>
               <input
                 id='email-address'
                 name='email'
                 type='email'
                 autoComplete='email'
-                required
                 className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-slate-50 focus:outline-none focus:ring-slate-50 sm:text-sm'
                 placeholder='Ingrese su correo electronico'
-                ref={emailRef}
+                {...register('email')}
               />
+              {errors.email?.message && <p className='py-2 text-white text-xs font-semibold'>{errors.email?.message}</p>}
             </div>
             <div>
               <label htmlFor='password' className='sr-only'>
@@ -52,11 +56,11 @@ export const FormLogin = () => {
                 name='password'
                 type='password'
                 autoComplete='current-password'
-                required
                 className='relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-slate-50 focus:outline-none focus:ring-slate-50 sm:text-sm'
                 placeholder='Ingrese su contraseña'
-                ref={passwordRef}
+                {...register('password')}
               />
+              {errors.password?.message && <p className='py-2 text-white text-xs font-semibold'>{errors.password?.message}</p>}
             </div>
           </div>
 
@@ -67,7 +71,7 @@ export const FormLogin = () => {
                 name='remember-me'
                 type='checkbox'
                 className='h-4 w-4 rounded border-gray-300 text-slate-50 focus:ring-slate-50'
-                ref={rememberRef}
+                {...register('remember-me')}
               />
               <label htmlFor='remember-me' className='ml-2 block text-sm text-textWhite'>
                 Recordarme
