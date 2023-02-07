@@ -1,14 +1,14 @@
-import { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 
 export const FormRecovery = () => {
-  const form = useRef()
-  const emailRef = useRef(null)
-  const onSubmit = (e) => {
-    e.preventDefault()
-    const data = { email: emailRef.current.value }
+  const {
+    register,
+    handleSubmit
+  } = useForm()
+  const onSubmit = (data, e) => {
+    e.target.reset()
     console.log(data)
-    form.current.reset()
   }
   return (
     <>
@@ -19,7 +19,7 @@ export const FormRecovery = () => {
               Recuperar contraseña
             </h2>
           </div>
-          <form className='mt-8 space-y-6' onSubmit={onSubmit} ref={form}>
+          <form className='mt-8 space-y-6' onSubmit={handleSubmit(onSubmit)}>
             <input type='hidden' name='remember' defaultValue='true' />
             <div className='-space-y-px rounded-md '>
               <div>
@@ -34,7 +34,7 @@ export const FormRecovery = () => {
                   required
                   className='relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
                   placeholder='Ingrese su correo electronico'
-                  ref={emailRef}
+                  {...register('email')}
                 />
               </div>
               <p className='text-zinc-100 text-xs font-semibold tracking-widest text-center pt-5'>

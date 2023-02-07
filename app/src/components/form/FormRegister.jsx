@@ -1,24 +1,14 @@
-import { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 
 export const FormRegister = () => {
-  const form = useRef()
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
-  const userNameRef = useRef(null)
-  const confirmPasswordRef = useRef(null)
-  const colaboratorRef = useRef(null)
-  const onSubmit = (e) => {
-    e.preventDefault()
-    const data = {
-      username: userNameRef.current.value,
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-      confirmPassword: confirmPasswordRef.current.value,
-      isColaborator: colaboratorRef.current.checked
-    }
+  const {
+    register,
+    handleSubmit
+  } = useForm()
+  const onSubmit = (data, e) => {
+    e.target.reset()
     console.log(data)
-    form.current.reset()
   }
   return (
     <>
@@ -29,7 +19,7 @@ export const FormRegister = () => {
               Registrarse
             </h2>
           </div>
-          <form className='mt-8 space-y-6' onSubmit={onSubmit} ref={form}>
+          <form className='mt-8 space-y-6' onSubmit={handleSubmit(onSubmit)}>
             <input type='hidden' name='remember' defaultValue='true' />
             <div className='-space-y-px rounded-md '>
               <div>
@@ -44,7 +34,7 @@ export const FormRegister = () => {
                   required
                   className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-slate-50 focus:outline-none focus:ring-slate-50 sm:text-sm'
                   placeholder='Ingrese su nombre de Usuario'
-                  ref={userNameRef}
+                  {...register('username')}
                 />
               </div>
               <div>
@@ -59,7 +49,7 @@ export const FormRegister = () => {
                   required
                   className='relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-slate-50 focus:outline-none focus:ring-slate-50 sm:text-sm'
                   placeholder='Ingrese su correo electronico'
-                  ref={emailRef}
+                  {...register('email')}
                 />
               </div>
               <div>
@@ -74,7 +64,7 @@ export const FormRegister = () => {
                   required
                   className='relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
                   placeholder='Ingrese su contraseña'
-                  ref={passwordRef}
+                  {...register('password')}
                 />
               </div>
               <div>
@@ -83,13 +73,13 @@ export const FormRegister = () => {
                 </label>
                 <input
                   id='confirmPassword'
-                  name='password'
+                  name='confrim-password'
                   type='password'
                   autoComplete='current-password'
                   required
                   className='relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
                   placeholder='Repita su contraseña'
-                  ref={confirmPasswordRef}
+                  {...register('confirm-password')}
                 />
               </div>
               <div className='items-center justify-center flex pt-5'>
@@ -101,7 +91,8 @@ export const FormRegister = () => {
                     id='Toggle3'
                     type='checkbox'
                     className='hidden peer'
-                    ref={colaboratorRef}
+                    name='isColaborator'
+                    {...register('isColaborator')}
                   />
                   <span className='px-4 py-2 rounded-l-md bg-primary peer-checked:bg-gray-300 text-textWhite'>
                     Paciente
