@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom'
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form'
 
 export const FormRecovery = () => {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
-  const onSubmit = (data,e) => { 
-  e.target.reset()
-  console.log(data)
-}
+  const {
+    register,
+    handleSubmit
+  } = useForm()
+  const onSubmit = (data, e) => {
+    e.target.reset()
+    console.log(data)
+  }
   return (
     <>
       <div className='flex flex-col min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
@@ -31,7 +34,7 @@ export const FormRecovery = () => {
                   required
                   className='relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
                   placeholder='Ingrese su correo electronico'
-                  {...register("email")}
+                  {...register('email')}
                 />
               </div>
               <p className='text-zinc-100 text-xs font-semibold tracking-widest text-center pt-5'>

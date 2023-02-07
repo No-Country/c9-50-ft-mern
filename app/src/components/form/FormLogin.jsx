@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom'
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form'
 
 export const FormLogin = () => {
-  const { register, handleSubmit,reset, formState: { errors } } = useForm();
-  const onSubmit = (data,e) => { 
-  e.target.reset()
-  console.log(data)
-  
-}
+  const {
+    register,
+    handleSubmit
+  } = useForm()
+  const onSubmit = (data, e) => {
+    e.target.reset()
+    console.log(data)
+  }
 
   return (
     <div className='flex flex-col min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
@@ -32,7 +34,7 @@ export const FormLogin = () => {
                 required
                 className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-slate-50 focus:outline-none focus:ring-slate-50 sm:text-sm'
                 placeholder='Ingrese su correo electronico'
-                {...register("email")}
+                {...register('email')}
               />
             </div>
             <div>
@@ -47,7 +49,7 @@ export const FormLogin = () => {
                 required
                 className='relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-slate-50 focus:outline-none focus:ring-slate-50 sm:text-sm'
                 placeholder='Ingrese su contraseña'
-                {...register("password")}
+                {...register('password')}
               />
             </div>
           </div>
@@ -59,7 +61,7 @@ export const FormLogin = () => {
                 name='remember-me'
                 type='checkbox'
                 className='h-4 w-4 rounded border-gray-300 text-slate-50 focus:ring-slate-50'
-                {...register("remember-me")}
+                {...register('remember-me')}
               />
               <label htmlFor='remember-me' className='ml-2 block text-sm text-textWhite'>
                 Recordarme
