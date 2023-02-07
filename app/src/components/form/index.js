@@ -1,3 +1,3 @@
-export * from './FormLogin'
-export * from './FormRecovery'
-export * from './FormRegister'
+export { FormLogin } from './FormLogin'
+export { FormRecovery } from './FormRecovery'
+export { FormRegister } from './FormRegister'
