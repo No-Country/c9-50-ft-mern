@@ -1,21 +1,13 @@
-import { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { useForm } from "react-hook-form";
 
 export const FormLogin = () => {
-  const form = useRef()
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
-  const rememberRef = useRef(null)
-  const onSubmit = (e) => {
-    e.preventDefault()
-    const data = {
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-      remember: rememberRef.current.checked
-    }
-    console.log(data)
-    form.current.reset()
-  }
+  const { register, handleSubmit,reset, formState: { errors } } = useForm();
+  const onSubmit = (data,e) => { 
+  e.target.reset()
+  console.log(data)
+  
+}
 
   return (
     <div className='flex flex-col min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
@@ -25,12 +17,12 @@ export const FormLogin = () => {
             Login
           </h2>
         </div>
-        <form className='mt-8 space-y-6' onSubmit={onSubmit} ref={form}>
+        <form className='mt-8 space-y-6' onSubmit={handleSubmit(onSubmit)}>
           <input type='hidden' name='remember' defaultValue='true' />
           <div className='-space-y-px rounded-md '>
             <div>
               <label htmlFor='email-address' className='sr-only'>
-                Nombre de usuario
+                Email
               </label>
               <input
                 id='email-address'
@@ -40,7 +32,7 @@ export const FormLogin = () => {
                 required
                 className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-slate-50 focus:outline-none focus:ring-slate-50 sm:text-sm'
                 placeholder='Ingrese su correo electronico'
-                ref={emailRef}
+                {...register("email")}
               />
             </div>
             <div>
@@ -55,7 +47,7 @@ export const FormLogin = () => {
                 required
                 className='relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-slate-50 focus:outline-none focus:ring-slate-50 sm:text-sm'
                 placeholder='Ingrese su contraseña'
-                ref={passwordRef}
+                {...register("password")}
               />
             </div>
           </div>
@@ -67,7 +59,7 @@ export const FormLogin = () => {
                 name='remember-me'
                 type='checkbox'
                 className='h-4 w-4 rounded border-gray-300 text-slate-50 focus:ring-slate-50'
-                ref={rememberRef}
+                {...register("remember-me")}
               />
               <label htmlFor='remember-me' className='ml-2 block text-sm text-textWhite'>
                 Recordarme
