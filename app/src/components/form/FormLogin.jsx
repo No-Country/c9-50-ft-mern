@@ -2,12 +2,19 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 export const FormLogin = () => {
+  const form = useRef()
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
+  const rememberRef = useRef(null)
   const onSubmit = (e) => {
     e.preventDefault()
-    const data = { email: emailRef.current.value, password: passwordRef.current.value }
+    const data = {
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+      remember: rememberRef.current.checked
+    }
     console.log(data)
+    form.current.reset()
   }
 
   return (
@@ -18,9 +25,9 @@ export const FormLogin = () => {
             Login
           </h2>
         </div>
-        <form className='mt-8 space-y-6' onSubmit={onSubmit}>
+        <form className='mt-8 space-y-6' onSubmit={onSubmit} ref={form}>
           <input type='hidden' name='remember' defaultValue='true' />
-          <div className='-space-y-px rounded-md shadow-sm'>
+          <div className='-space-y-px rounded-md '>
             <div>
               <label htmlFor='email-address' className='sr-only'>
                 Nombre de usuario
@@ -60,6 +67,7 @@ export const FormLogin = () => {
                 name='remember-me'
                 type='checkbox'
                 className='h-4 w-4 rounded border-gray-300 text-slate-50 focus:ring-slate-50'
+                ref={rememberRef}
               />
               <label htmlFor='remember-me' className='ml-2 block text-sm text-textWhite'>
                 Recordarme
@@ -72,7 +80,7 @@ export const FormLogin = () => {
               type='submit'
               className='group relative flex w-full justify-center rounded-md border border-transparent bg-primary py-2 px-4 text-sm font-medium text-textWhite hover:bg-primaryHover focus:outline-none focus:ring-2 focus:ring-slate-50 focus:ring-offset-2 uppercase tracking-widest'
             >
-             Login
+              Login
             </button>
           </div>
         </form>
