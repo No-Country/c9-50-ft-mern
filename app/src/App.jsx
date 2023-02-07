@@ -1,20 +1,19 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Login } from './Pages/Login'
-import { Recovery } from './Pages/Recovery'
-import { Register } from './Pages/Register'
-import { Home } from './Pages/Home'
+import { Home, Login, Recovery, Register } from './pages'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.min.css'
+
 function App() {
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/recovery' element={<Recovery />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/recovery' element={<Recovery />} />
+      </Routes>
+      <ToastContainer icon theme='colored' />
+    </BrowserRouter>
   )
 }
 
