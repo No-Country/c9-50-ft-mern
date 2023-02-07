@@ -1,11 +1,21 @@
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
+
+const schema = z.object({
+  email: z.string().email({ message: 'Invalid email address' }),
+  password: z.string().min(1, { message: 'Required' })
+})
 
 export const FormLogin = () => {
   const {
     register,
-    handleSubmit
-  } = useForm()
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    resolver: zodResolver(schema)
+  })
   const onSubmit = (data, e) => {
     e.target.reset()
     console.log(data)
@@ -31,11 +41,11 @@ export const FormLogin = () => {
                 name='email'
                 type='email'
                 autoComplete='email'
-                required
                 className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-slate-50 focus:outline-none focus:ring-slate-50 sm:text-sm'
                 placeholder='Ingrese su correo electronico'
                 {...register('email')}
               />
+              {errors.email?.message && <p className='py-2 text-white text-xs font-semibold'>{errors.email?.message}</p>}
             </div>
             <div>
               <label htmlFor='password' className='sr-only'>
@@ -46,11 +56,11 @@ export const FormLogin = () => {
                 name='password'
                 type='password'
                 autoComplete='current-password'
-                required
                 className='relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-slate-50 focus:outline-none focus:ring-slate-50 sm:text-sm'
                 placeholder='Ingrese su contraseña'
                 {...register('password')}
               />
+              {errors.password?.message && <p className='py-2 text-white text-xs font-semibold'>{errors.password?.message}</p>}
             </div>
           </div>
 

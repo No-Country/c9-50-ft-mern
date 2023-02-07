@@ -1,11 +1,27 @@
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
 
+const schema = z
+  .object({
+    username: z.string().min(5, { message: 'Must be 5 or more characters long' }),
+    email: z.string().email({ message: 'Invalid email address' }),
+    password: z.string(),
+    confirmpassword: z.string()
+  })
+  .refine((data) => data.password === data.confirmpassword, {
+    message: "Passwords don't match",
+    path: ['confirmpassword']
+  })
 export const FormRegister = () => {
   const {
     register,
-    handleSubmit
-  } = useForm()
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    resolver: zodResolver(schema)
+  })
   const onSubmit = (data, e) => {
     e.target.reset()
     console.log(data)
@@ -31,11 +47,15 @@ export const FormRegister = () => {
                   name='username'
                   type='text'
                   autoComplete='username'
-                  required
                   className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-slate-50 focus:outline-none focus:ring-slate-50 sm:text-sm'
                   placeholder='Ingrese su nombre de Usuario'
                   {...register('username')}
                 />
+                {errors.username?.message && (
+                  <p className='py-2 text-white text-xs font-semibold'>
+                    {errors.username?.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label htmlFor='email-address' className='sr-only'>
@@ -46,11 +66,13 @@ export const FormRegister = () => {
                   name='email'
                   type='email'
                   autoComplete='email'
-                  required
                   className='relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-slate-50 focus:outline-none focus:ring-slate-50 sm:text-sm'
                   placeholder='Ingrese su correo electronico'
                   {...register('email')}
                 />
+                {errors.email?.message && (
+                  <p className='py-2 text-white text-xs font-semibold'>{errors.email?.message}</p>
+                )}
               </div>
               <div>
                 <label htmlFor='password' className='sr-only'>
@@ -61,11 +83,15 @@ export const FormRegister = () => {
                   name='password'
                   type='password'
                   autoComplete='current-password'
-                  required
                   className='relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
                   placeholder='Ingrese su contraseña'
                   {...register('password')}
                 />
+                {errors.password?.message && (
+                  <p className='py-2 text-white text-xs font-semibold'>
+                    {errors.password?.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label htmlFor='password' className='sr-only'>
@@ -76,11 +102,15 @@ export const FormRegister = () => {
                   name='confrim-password'
                   type='password'
                   autoComplete='current-password'
-                  required
                   className='relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
                   placeholder='Repita su contraseña'
                   {...register('confirm-password')}
                 />
+                {errors.confirmpassword?.message && (
+                  <p className='py-2 text-white text-xs font-semibold'>
+                    {errors.confirmpassword?.message}
+                  </p>
+                )}
               </div>
               <div className='items-center justify-center flex pt-5'>
                 <label
