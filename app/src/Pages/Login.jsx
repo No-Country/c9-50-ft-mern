@@ -1,3 +1,11 @@
+import { FormLogin } from '../components/form/FormLogin'
+
 export const Login = () => {
-  return <h1>Login</h1>
+  return (
+    <>
+      <div className='h-screen bg-black'>
+        <FormLogin />
+      </div>
+    </>
+  )
 }

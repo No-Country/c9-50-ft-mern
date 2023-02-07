@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Home, Login, Recovery, Register } from '@/pages'
+import { Login } from './Pages/Login'
+import { Recovery } from './Pages/Recovery'
+import { Register } from './Pages/Register'
+import { Home } from './Pages/Home'
 import { ToastContainer } from 'react-toastify'
-import { AxiosInterceptor } from '@/utils'
 import 'react-toastify/dist/ReactToastify.min.css'
-
-AxiosInterceptor()
 
 function App() {
   return (

@@ -1,3 +1,11 @@
+import { FormRecovery } from '../components/form/FormRecovery'
+
 export const Recovery = () => {
-  return <h1>Recovery</h1>
+  return (
+    <>
+      <div className='h-screen bg-black '>
+        <FormRecovery />
+      </div>
+    </>
+  )
 }

@@ -1,3 +1,11 @@
+import { FormRegister } from '../components/form/FormRegister'
+
 export const Register = () => {
-  return <h1>Register</h1>
+  return (
+    <>
+      <div className='h-screen bg-black'>
+        <FormRegister />
+      </div>
+    </>
+  )
 }
