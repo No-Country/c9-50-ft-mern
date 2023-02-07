@@ -12,4 +12,4 @@ readdirSync(__dirname).forEach((fileName) => {
   }
 })
 
-module.exports = { router }
+module.exports = router
