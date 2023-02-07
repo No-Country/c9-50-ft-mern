@@ -3,6 +3,7 @@ const express = require('express')
 const cors = require('cors')
 const router = require('./router')
 const databaseConnect = require('./db')
+const { logError } = require('./middlewares/errorHandler')
 
 const PORT = process.env.PORT ?? 3001
 const CLIENT_PATH = __dirname.split('api')[0] + 'app/dist'
@@ -19,7 +20,6 @@ databaseConnect(MONGO_URL)
 if (isProduction) {
   app.use(express.static(CLIENT_PATH))
 }
-
 app.use('/api', router)
 
 if (isProduction) {
@@ -27,6 +27,7 @@ if (isProduction) {
     res.sendFile(CLIENT_PATH + '/index.html')
   })
 }
+app.use(logError)
 
 app.listen(PORT, () => {
   console.log(`server running on PORT: ${PORT}`)
