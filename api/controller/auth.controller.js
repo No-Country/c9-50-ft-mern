@@ -1,7 +1,11 @@
-
 const registerUser = async (req, res, next) => {
   // Registro
-  console.log('registro')
+  try {
+    console.log('Rol Asignado')
+    throw new Error('dddddd')
+  } catch (er) {
+    next(er)
+  }
 }
 
 const loginUser = async (req, res, next) => {
@@ -11,7 +15,6 @@ const loginUser = async (req, res, next) => {
 
 const registerRole = async (req, res, next) => {
   // Asignación de Rol
-  console.log('Rol Asignado')
 }
 
 module.exports = { registerUser, loginUser, registerRole }

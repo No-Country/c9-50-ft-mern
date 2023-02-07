@@ -3,7 +3,7 @@ name: Deploy APP
 on:
   workflow_dispatch:
   schedule:
-    - cron: "00 14 * * 5"
+    - cron: '00 14 * * 5'
 
 jobs:
   lint:
