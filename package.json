@@ -17,5 +17,8 @@
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^7.6.0"
+  },
+  "dependencies": {
+    "crypto-js": "^4.1.1"
   }
 }

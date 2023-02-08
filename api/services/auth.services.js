@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const User = require('../db/models/user.model')
 const { decode } = require('../utils/jwtAuth')
+const { randomPassword } = require('../utils/randomPassword')
 const secret = process.env.SECRET
 
 const saveUser = async (data) => {
@@ -31,4 +32,13 @@ const findUser = async (data) => {
   return { message: 'Email or Password Incorrect' }
 }
 
-module.exports = { saveUser, findUser }
+const passwordReset = async (data) => {
+  const { email } = data.body
+  const newPassword = randomPassword()
+  await User.findOne({ email })
+  await User.updateOne({ email }, { password: newPassword })
+  console.log(newPassword)
+  return { message: 'Password Reset. Check your email' }
+}
+
+module.exports = { saveUser, findUser, passwordReset }
