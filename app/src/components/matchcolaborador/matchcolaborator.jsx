@@ -1,10 +1,10 @@
 export const Matchcolaborator = () => {
   return (
     <>
-      <div className='py-20 bg-gray-50' >
+    <div className='py-20 bg-gray-50' >
         {/* Seleccion de profesional */}
         <form action='' className='w-3/4 m-auto mb-8'>
-          <div className='w-full'>
+        <div className='w-full'>
             <div className='mb-6'>
               <label htmlFor='' className='w-full text-start text-3xl'>
                 ¿Quien estas buscando?
