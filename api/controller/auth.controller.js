@@ -1,4 +1,3 @@
-
 const registerUser = async (req, res, next) => {
   // Registro
   console.log('registro')
