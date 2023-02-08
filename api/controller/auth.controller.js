@@ -1,20 +1,30 @@
 const registerUser = async (req, res, next) => {
-  // Registro
   try {
-    console.log('Rol Asignado')
-    throw new Error('dddddd')
-  } catch (er) {
-    next(er)
+    const body = req.body
+    const user = await saveUser(body)
+    res.status(200).send({
+      error: false,
+      message: 'User register',
+      data: user
+    })
+  } catch (erro) {
+    next({ erro, origin: 'odm' })
   }
 }
 
 const loginUser = async (req, res, next) => {
-  // Logeo
-  console.log('logeado')
+  try {
+    const { email, password } = req.body
+    const user = await findUserEmail(email, password)
+    const token = signToken(user)
+    res.status(200).send({
+      error: false,
+      message: 'User found',
+      data: token
+    })
+  } catch (erro) {
+    next(erro)
+  }
 }
 
-const registerRole = async (req, res, next) => {
-  // Asignación de Rol
-}
-
-module.exports = { registerUser, loginUser, registerRole }
+module.exports = { registerUser, loginUser }
