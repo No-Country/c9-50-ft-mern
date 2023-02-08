@@ -35,10 +35,12 @@ const findUser = async (data) => {
 const passwordReset = async (data) => {
   const { email } = data.body
   const newPassword = randomPassword()
-  await User.findOne({ email })
-  await User.updateOne({ email }, { password: newPassword })
-  console.log(newPassword)
-  return { message: 'Password Reset. Check your email' }
+  const user = await User.findOne({ email })
+  if (user) {
+    await User.updateOne({ email }, { password: newPassword })
+    return { message: 'A new password has been sent to your mail' }
+  }
+  return { message: 'We are not able to found a account with that email' }
 }
 
 module.exports = { saveUser, findUser, passwordReset }
