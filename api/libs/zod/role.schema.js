@@ -4,8 +4,9 @@ const registerRoleSchema = z
   .object({
     tipo: z.enum(['COLABORATOR', 'PATIENT', 'ADMIN']),
     refered: z.string(),
-    url: z.string().url()
-  }).partial()
+    mettUrl: z.string().url()
+  })
+  .partial()
 
 const requiredRole = registerRoleSchema.required({ tipo: true })
 
