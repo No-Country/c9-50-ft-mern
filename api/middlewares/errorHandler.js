@@ -20,7 +20,6 @@ function handlerODMError(err, req, res, next) {
   }
 }
 
- 
 function handlerErrorGeneral(err, req, res, next) {
   error(err, 400, res, { message: 'error general' })
 }
