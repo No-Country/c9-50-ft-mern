@@ -1,4 +1,4 @@
-const { saveUser, findUser } = require('../services/auth.services')
+const { saveUser, findUser, passwordReset } = require('../services/auth.services')
 const { success } = require('../Network/response')
 
 const registerUser = async (req, res, next) => {
@@ -24,4 +24,14 @@ const loginUser = async (req, res, next) => {
   }
 }
 
-module.exports = { registerUser, loginUser }
+const recoverPassword = async (req, res, next) => {
+  try {
+    const data = await passwordReset(req.body)
+
+    success(200, res, { message: data.message })
+  } catch (erro) {
+    next(erro)
+  }
+}
+
+module.exports = { registerUser, loginUser, recoverPassword }

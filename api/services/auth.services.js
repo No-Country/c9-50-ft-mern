@@ -33,7 +33,7 @@ const findUser = async (data) => {
 }
 
 const passwordReset = async (data) => {
-  const { email } = data.body
+  const { email } = data
   const newPassword = randomPassword()
   const user = await User.findOne({ email })
   if (user) {
