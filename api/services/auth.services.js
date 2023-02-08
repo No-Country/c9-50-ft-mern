@@ -31,4 +31,13 @@ const findUser = async (data) => {
   return { message: 'Email or Password Incorrect' }
 }
 
-module.exports = { saveUser, findUser }
+const findByEmail = async (data) => {
+  const { email } = data;
+
+  const user = await User.findOne({ email })
+  
+  if(user) return { user }
+  else return {message: 'Email not registered'}
+}
+
+module.exports = { saveUser, findUser, findByEmail }
