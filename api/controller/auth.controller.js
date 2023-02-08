@@ -1,5 +1,5 @@
 const { saveUser, findUser } = require('../services/auth.services')
-const { success, error } = require('../Network/response')
+const success = require('../Network/response')
 
 const registerUser = async (req, res, next) => {
   try {
@@ -7,7 +7,7 @@ const registerUser = async (req, res, next) => {
     const user = await saveUser(body)
     success(200, res, { payload: user, message: user.message })
   } catch (erro) {
-    error(erro, 404, res, { payload: erro, message: 'Error in the request.' })
+    next(erro)
   }
 }
 
@@ -20,7 +20,7 @@ const loginUser = async (req, res, next) => {
       success(200, res, { message: data.message })
     }
   } catch (erro) {
-    error(erro, 404, res, { payload: erro, message: 'Error in the request.' })
+    next(erro)
   }
 }
 

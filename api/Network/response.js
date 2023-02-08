@@ -8,7 +8,7 @@ const success = (status, res, data) => {
 }
 
 const error = (err, status, res, data) => {
-  const myStatus = status || 200
+  const myStatus = status || 400
   res.status(myStatus).json({
     error: true,
     message: data.message,
