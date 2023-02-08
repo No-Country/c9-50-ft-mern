@@ -1,18 +1,18 @@
 const bcrypt = require('bcrypt')
 const User = require('../db/models/user.model')
-const { encode } = require('../utils')
+const { encode } = require('../utils/jwtAuth')
 const secret = process.env.SECRET
 
 const saveUser = async (data) => {
-  const salt = bcrypt.genSalt(10)
-  const encryptedPassaword = bcrypt.hash(data.password, salt)
+  const encryptedPassaword = await bcrypt.hash(data.password, 10)
   const user = {
     password: encryptedPassaword,
     ...data
   }
-  await User.insertOne(user)
+  const newUser = await new User(user).save()
+
   return {
-    data: { name: user.name, email: user.email },
+    data: { name: newUser.name, email: newUser.email },
     message: 'User created succefully'
   }
 }

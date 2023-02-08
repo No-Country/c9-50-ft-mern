@@ -1,5 +1,5 @@
 const { saveUser, findUser } = require('../services/auth.services')
-const success = require('../Network/response')
+const { success } = require('../Network/response')
 
 const registerUser = async (req, res, next) => {
   try {
