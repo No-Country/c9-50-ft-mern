@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Home, Login, Recovery, Register } from './pages'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
+import { Eleccion } from './pages/Eleccion'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/recovery' element={<Recovery />} />
+        <Route path='/eligetucolaborador' element={<Eleccion />} />
       </Routes>
       <ToastContainer icon theme='colored' />
     </BrowserRouter>
