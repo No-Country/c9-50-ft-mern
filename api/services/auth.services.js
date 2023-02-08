@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const User = require('../db/models/user.model')
 const { decode } = require('../utils/jwtAuth')
+const { randomPassword } = require('../utils/randomPassword')
 const secret = process.env.SECRET
 
 const saveUser = async (data) => {
@@ -31,13 +32,15 @@ const findUser = async (data) => {
   return { message: 'Email or Password Incorrect' }
 }
 
-const findByEmail = async (data) => {
-  const { email } = data;
-
+const passwordReset = async (data) => {
+  const { email } = data
+  const newPassword = randomPassword()
   const user = await User.findOne({ email })
-  
-  if(user) return { user }
-  else return {message: 'Email not registered'}
+  if (user) {
+    await User.updateOne({ email }, { password: newPassword })
+    return { message: 'A new password has been sent to your mail' }
+  }
+  return { message: 'We are not able to found a account with that email' }
 }
 
-module.exports = { saveUser, findUser, findByEmail }
+module.exports = { saveUser, findUser, passwordReset }

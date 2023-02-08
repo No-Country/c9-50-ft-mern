@@ -1,4 +1,4 @@
-const { saveUser, findUser, findByEmail } = require('../services/auth.services')
+const { saveUser, findUser, passwordReset } = require('../services/auth.services')
 const { success } = require('../Network/response')
 
 const registerUser = async (req, res, next) => {
@@ -26,12 +26,9 @@ const loginUser = async (req, res, next) => {
 
 const recoverPassword = async (req, res, next) => {
   try {
-    const data = await findByEmail(req.body)
-    if (data) {
-      //existe
-    } else {
-      success(200, res, { message: data.message })
-    }
+    const data = await passwordReset(req.body)
+
+    success(200, res, { message: data.message })
   } catch (erro) {
     next(erro)
   }
