@@ -2,10 +2,9 @@ const { z } = require('zod')
 
 const registerRoleSchema = z
   .object({
-    type: z.enum(['COLABORATOR', 'PATIENT', 'ADMIN']),
-    refered: z.string(),
-    url: z.string().url()
+    type: z.enum(['COLABORATOR', 'PATIENT', 'ADMIN']).required(),
+    refered: z.string().optional(),
+    url: z.string().url().optional()
   })
-  .required()
 
 module.exports = { registerRoleSchema }

@@ -1,29 +1,26 @@
+const { saveUser, findUser } = require('../services/auth.services')
+const { success, error } = require('../Network/response')
+
 const registerUser = async (req, res, next) => {
   try {
     const body = req.body
     const user = await saveUser(body)
-    res.status(200).send({
-      error: false,
-      message: 'User register',
-      data: user
-    })
+    success(200, res, { payload: user, message: user.message })
   } catch (erro) {
-    next({ erro, origin: 'odm' })
+    error(erro, 404, res, { payload: erro, message: 'Error in the request.' })
   }
 }
 
 const loginUser = async (req, res, next) => {
   try {
-    const { email, password } = req.body
-    const user = await findUserEmail(email, password)
-    const token = signToken(user)
-    res.status(200).send({
-      error: false,
-      message: 'User found',
-      data: token
-    })
+    const data = await findUser(req.body)
+    if (data.token) {
+      success(200, res, { payload: data.token, message: data.message })
+    } else {
+      success(200, res, { message: data.message })
+    }
   } catch (erro) {
-    next(erro)
+    error(erro, 404, res, { payload: erro, message: 'Error in the request.' })
   }
 }
 
