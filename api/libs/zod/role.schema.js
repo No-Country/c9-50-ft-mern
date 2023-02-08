@@ -2,10 +2,12 @@ const { z } = require('zod')
 
 const registerRoleSchema = z
   .object({
-    type: z.enum(['COLABORATOR', 'PATIENT', 'ADMIN']),
+    tipo: z.enum(['COLABORATOR', 'PATIENT', 'ADMIN']),
     refered: z.string(),
-    url: z.string().url()
+    mettUrl: z.string().url()
   })
-  .required()
+  .partial()
 
-module.exports = { registerRoleSchema }
+const requiredRole = registerRoleSchema.required({ tipo: true })
+
+module.exports = { registerRoleSchema, requiredRole }

@@ -1,12 +1,12 @@
 const { z } = require('zod')
-const { registerRoleSchema } = require('./role.schema')
+const { requiredRole } = require('./role.schema')
 const registerUserSchema = z
   .object({
     name: z.string(),
     email: z.string().email(),
-    password: z.string(8),
+    password: z.string().min(8),
     ocupation: z.string(),
-    role: registerRoleSchema,
+    role: requiredRole,
     bornDate: z.coerce.date()
   })
   .required()
