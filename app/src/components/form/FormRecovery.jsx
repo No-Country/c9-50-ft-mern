@@ -44,7 +44,9 @@ export const FormRecovery = () => {
                   placeholder='Ingrese su correo electronico'
                   {...register('email')}
                 />
-                {errors.email?.message && <p className='py-2 text-white text-xs font-semibold'>{errors.email?.message}</p>}
+                {errors.email?.message && (
+                  <p className='py-2 text-white text-xs font-semibold'>{errors.email?.message}</p>
+                )}
               </div>
               <p className='text-zinc-100 text-xs font-semibold tracking-widest text-center pt-5'>
                 Se enviara un email para reestablecer su contraseña

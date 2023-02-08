@@ -45,7 +45,9 @@ export const FormLogin = () => {
                 placeholder='Ingrese su correo electronico'
                 {...register('email')}
               />
-              {errors.email?.message && <p className='py-2 text-white text-xs font-semibold'>{errors.email?.message}</p>}
+              {errors.email?.message && (
+                <p className='py-2 text-white text-xs font-semibold'>{errors.email?.message}</p>
+              )}
             </div>
             <div>
               <label htmlFor='password' className='sr-only'>
@@ -60,7 +62,9 @@ export const FormLogin = () => {
                 placeholder='Ingrese su contraseña'
                 {...register('password')}
               />
-              {errors.password?.message && <p className='py-2 text-white text-xs font-semibold'>{errors.password?.message}</p>}
+              {errors.password?.message && (
+                <p className='py-2 text-white text-xs font-semibold'>{errors.password?.message}</p>
+              )}
             </div>
           </div>
 
