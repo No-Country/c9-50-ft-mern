@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const User = require('../db/models/user.model')
-const { encode } = require('../utils/jwtAuth')
+const { decode } = require('../utils/jwtAuth')
 const secret = process.env.SECRET
 
 const saveUser = async (data) => {
@@ -19,11 +19,14 @@ const saveUser = async (data) => {
 
 const findUser = async (data) => {
   const { email, password } = data
-  const user = User.findOne({ email: email })
+
+  const user = await User.findOne({ email })
+
   const validated = bcrypt.compare(password, user.password)
+
   if (validated) {
-    const token = encode(secret, { userId: user.id, userRole: user.role.id })
-    return { token: token, message: 'Login Succes' }
+    const token = decode(secret, { userId: user.id, userRole: user.role.id })
+    return { token, message: 'Login Succes' }
   }
   return { message: 'Email or Password Incorrect' }
 }
