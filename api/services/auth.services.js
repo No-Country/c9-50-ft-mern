@@ -27,7 +27,7 @@ const findUser = async (data) => {
 
   if (validated) {
     const token = decode(secret, { userId: user.id, userRole: user.role.tipo })
-    return { token, message: 'Login Succes' }
+    return { token, role: user.role.tipo, message: 'Login Succes' }
   }
   return { message: 'Email or Password Incorrect' }
 }
