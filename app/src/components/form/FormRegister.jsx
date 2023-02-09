@@ -32,6 +32,9 @@ export const FormRegister = () => {
       if (data.isColaborator) {
         const role = { tipo: 'COLABORATOR' }
         await axios.post('/api/user/register', { ...data, role })
+      } else {
+        const role = { tipo: 'PATIENT' }
+        await axios.post('/api/user/register', { ...data, role })
       }
 
       navigate('/login')
