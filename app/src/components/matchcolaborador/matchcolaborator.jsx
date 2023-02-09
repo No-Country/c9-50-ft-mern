@@ -22,7 +22,7 @@ export const Matchcolaborator = () => {
           <p className='text-xl font-normal'>1 Resultados Encontrados</p>
         </div>
         {/* Primer Card */}
-        <div className='flex flex-row justify-between items-center w-3/4 h-auto py-4 px-8 m-auto bg-neutral-300 mb-8'>
+        <div className='flex flex-col justify-center items-center w-3/4 h-auto py-2 px-8 m-auto bg-neutral-300 mb-8 space-y-10 sm:flex-row sm:justify-between md:flex-row md:justify-between'>
           <div className='flex flex-row items-center space-x-6'>
             <div className='flex flex-row justify-center items-center rounded-full w-20 h-20 bg-black overflow-hidden'>
               <img
@@ -37,13 +37,13 @@ export const Matchcolaborator = () => {
             </div>
           </div>
           <div className='h-16 w-40 my-auto'>
-            <button className='w-full h-4/5 bg-sky-500 text-white hover:bg-sky-600 transition-all'>
+            <button className='w-full h-4/5 bg-sky-500 text-white hover:bg-sky-600 transition-all -mt-4'>
               INICIAR CHAT
             </button>
           </div>
         </div>
         {/* Segunda card */}
-        <div className='flex flex-row justify-between items-center w-3/4 h-auto py-4 px-8 m-auto bg-neutral-300'>
+        <div className='flex flex-col justify-center items-center w-3/4 h-auto py-2 px-8 m-auto bg-neutral-300 mb-8 space-y-10 sm:flex-row sm:justify-between md:flex-row md:justify-between'>
           <div className='flex flex-row items-center space-x-6'>
             <div className='flex flex-row justify-center items-center rounded-full w-20 h-20 bg-black overflow-hidden'>
               <img
@@ -58,7 +58,7 @@ export const Matchcolaborator = () => {
             </div>
           </div>
           <div className='h-16 w-40 my-auto'>
-            <button className='w-full h-4/5 bg-sky-500 text-white hover:bg-sky-600 transition-all'>
+            <button className='w-full h-4/5 bg-sky-500 text-white hover:bg-sky-600 transition-all -mt-4'>
               INICIAR CHAT
             </button>
           </div>
