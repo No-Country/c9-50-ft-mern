@@ -3,7 +3,7 @@ const success = (status, res, data) => {
   res.status(myStatus).json({
     error: false,
     message: data.message,
-    paylod: data.payload
+    payload: data.payload
   })
 }
 
@@ -12,7 +12,7 @@ const error = (err, status, res, data) => {
   res.status(myStatus).json({
     error: true,
     message: data.message,
-    paylod: err
+    payload: err
   })
 }
 

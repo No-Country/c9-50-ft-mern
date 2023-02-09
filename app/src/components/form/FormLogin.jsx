@@ -1,7 +1,9 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
+import axios from 'axios'
 
 const schema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
@@ -9,6 +11,10 @@ const schema = z.object({
 })
 
 export const FormLogin = () => {
+  const [blocked, setIsBlocked] = useState(false)
+  const [remember, setRemember] = useState(false)
+  const navigate = useNavigate()
+
   const {
     register,
     handleSubmit,
@@ -16,9 +22,20 @@ export const FormLogin = () => {
   } = useForm({
     resolver: zodResolver(schema)
   })
-  const onSubmit = (data, e) => {
-    e.target.reset()
-    console.log(data)
+
+  const onSubmit = async (data) => {
+    setIsBlocked(true)
+    try {
+      const { data: res } = await axios.post('/api/user/login', data)
+      if (remember) {
+        window.localStorage.setItem('token', res.payload)
+      } else {
+        window.sessionStorage.setItem('token', res.payload)
+      }
+      navigate('/eligetucolaborador')
+    } catch (error) {
+      setIsBlocked(false)
+    }
   }
 
   return (
@@ -75,7 +92,7 @@ export const FormLogin = () => {
                 name='remember-me'
                 type='checkbox'
                 className='h-4 w-4 rounded border-gray-300 text-slate-50 focus:ring-slate-50'
-                {...register('remember-me')}
+                onChange={({ target }) => setRemember(target.checked)}
               />
               <label htmlFor='remember-me' className='ml-2 block text-sm text-textWhite'>
                 Recordarme
@@ -85,6 +102,7 @@ export const FormLogin = () => {
 
           <div>
             <button
+              disabled={blocked}
               type='submit'
               className='group relative flex w-full justify-center rounded-md border border-transparent bg-primary py-2 px-4 text-sm font-medium text-textWhite hover:bg-primaryHover focus:outline-none focus:ring-2 focus:ring-slate-50 focus:ring-offset-2 uppercase tracking-widest'
             >
