@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import punto from '../shared/img/Punto.png'
+import { Link } from 'react-router-dom'
 
 const navigation = [
   { name: 'Nosotros', href: '#', current: false },
@@ -20,59 +20,48 @@ export const Navbar = () => {
           <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
             <div className='relative flex h-16 items-center justify-between'>
               <div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
-                <Disclosure.Button className='inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'>
+                {/* <Disclosure.Button className='inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'>
                   <span className='sr-only'>Open main menu</span>
-                  {open
-                    ? <XMarkIcon className='block h-6 w-6' aria-hidden='true' />
-                    : <Bars3Icon className='block h-6 w-6' aria-hidden='true' />
-                  }
-                </Disclosure.Button>
+                  {open ? ( <XMarkIcon className='block h-6 w-6' aria-hidden='true' /> ) : (
+                    <Bars3Icon className='block h-6 w-6' aria-hidden='true' />
+                  )}
+                </Disclosure.Button> */}
               </div>
               <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
                 <div className='flex flex-shrink-0 items-center'>
-                  <img
-                    className='block h-4 w-auto lg:hidden'
-                    src={punto}
-                    alt='Your Company'
-                  />
-                  <img
-                    className='hidden h-4 w-auto lg:block'
-                    src={punto}
-                    alt='mettapp'
-                  />
+                  <img className='hidden h-4 w-auto sm:block' src={punto} alt='mettapp' />
                 </div>
                 <div className='hidden sm:ml-6 sm:block'>
                   <div className='flex items-center space-x-4'>
                     <p>MeetApp</p>
                     <div className='inset-28'>
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? 'bg-gray-900 text-white'
-                            : 'text-black hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
+                      {navigation.map((item) => (
+                        <a
+                          key={item.name}
+                          href={item.href}
+                          className={classNames(
+                            item.current
+                              ? 'bg-gray-900 text-white'
+                              : 'text-black hover:bg-gray-700 hover:text-white',
+                            'px-3 py-2 rounded-md text-sm font-medium'
+                          )}
+                          aria-current={item.current ? 'page' : undefined}
+                        >
+                          {item.name}
+                        </a>
+                      ))}
                     </div>
                   </div>
                 </div>
               </div>
-              <div className='absolute inset-y-0 right-0 flex items-center m-auto sm:static sm:inset-auto sm:ml-6 sm:pr-0 bg-primary bg-primaryHover h-8'>
-                <p className='w-auto h-auto text-xs text-white p-4 ml-3'>
-                    Inicio Sesión
-                </p>
+              <div className='absolute inset-y-0 right-0 flex items-center m-auto sm:static sm:inset-auto sm:ml-6 sm:pr-0 bg-primary hover:bg-primaryHover h-8'>
+                <Link className='w-auto h-auto text-xs text-white p-4 ml-3' to='/login'>
+                  Inicio Sesión
+                </Link>
 
                 {/* Profile dropdown */}
                 <Menu as='div' className='relative ml-3'>
-                  <div>
-                  </div>
+                  <div></div>
                   <Transition
                     as={Fragment}
                     enter='transition ease-out duration-100'
