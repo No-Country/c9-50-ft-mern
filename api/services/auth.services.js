@@ -25,7 +25,7 @@ const findUser = async (data) => {
   const validated = await bcrypt.compare(password, user.password)
 
   if (validated) {
-    const token = decode(secret, { userId: user.id, userRole: user.role.id })
+    const token = decode(secret, { userId: user.id, userRole: user.role.tipo })
     return { token, message: 'Login Succes' }
   }
   return { message: 'Email or Password Incorrect' }

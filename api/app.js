@@ -7,7 +7,8 @@ const {
   logError,
   handlerErrorZod,
   handlerErrorGeneral,
-  handlerODMError
+  handlerODMError,
+  handlerErrorAuth
 } = require('./middlewares/errorHandler')
 
 const PORT = process.env.PORT ?? 3001
@@ -35,6 +36,7 @@ if (isProduction) {
 app.use(logError)
 app.use(handlerErrorZod)
 app.use(handlerODMError)
+app.use(handlerErrorAuth)
 app.use(handlerErrorGeneral)
 app.listen(PORT, () => {
   console.log(`server running on PORT: ${PORT}`)

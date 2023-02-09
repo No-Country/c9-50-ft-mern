@@ -20,8 +20,17 @@ function handlerODMError(err, req, res, next) {
   }
 }
 
-function handlerErrorGeneral(err, req, res, next) {
-  error(err, 400, res, { message: 'error general' })
+function handlerErrorAuth(err,req,res,next){
+  if(err?.name==="JsonWebTokenError"){
+    error(err,400,res,{message: "AuthToken Error"})
+  }else{
+    next(err)
+  }
 }
 
-module.exports = { logError, handlerErrorZod, handlerErrorGeneral, handlerODMError }
+
+function handlerErrorGeneral(err, req, res, next) {
+  error(err.message, 400, res, { message: err.message })
+}
+
+module.exports = { logError, handlerErrorZod, handlerErrorGeneral, handlerErrorAuth, handlerODMError }
