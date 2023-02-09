@@ -11,12 +11,12 @@ function checkjwt(req, res, next) {
 
 function roleCheck(...roles) {
   return (req, res, next) => {
-     const role = req.user.userRole
-     if(roles.includes(role)){
-        next()
-     }else{
-        next(new Error('Autorization Error'))
-     }
+    const role = req.user.userRole
+    if (roles.includes(role)) {
+      next()
+    } else {
+      next(new Error('Autorization Error'))
+    }
   }
 }
 

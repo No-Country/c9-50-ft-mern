@@ -13,24 +13,31 @@ function handlerErrorZod(err, req, res, next) {
 }
 
 function handlerODMError(err, req, res, next) {
-  if (err.hasOwnProperty('keyPattern')) {
+  const hasKeyPattern = Object.prototype.hasOwnProperty.call(err, 'keyPattern')
+
+  if (hasKeyPattern) {
     error(err, 400, res, { message: 'Error MongoDB' })
   } else {
     next(err)
   }
 }
 
-function handlerErrorAuth(err,req,res,next){
-  if(err?.name==="JsonWebTokenError"){
-    error(err,400,res,{message: "AuthToken Error"})
-  }else{
+function handlerErrorAuth(err, req, res, next) {
+  if (err?.name === 'JsonWebTokenError') {
+    error(err, 400, res, { message: 'AuthToken Error' })
+  } else {
     next(err)
   }
 }
-
 
 function handlerErrorGeneral(err, req, res, next) {
   error(err.message, 400, res, { message: err.message })
 }
 
-module.exports = { logError, handlerErrorZod, handlerErrorGeneral, handlerErrorAuth, handlerODMError }
+module.exports = {
+  logError,
+  handlerErrorZod,
+  handlerErrorGeneral,
+  handlerErrorAuth,
+  handlerODMError
+}
