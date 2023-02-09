@@ -1,8 +1,8 @@
 const { Router } = require('express')
-
+const { checkjwt, roleCheck } = require('./../middlewares/authHandler')
 const router = Router()
 
-router.get('/', (_req, res) => {
+router.get('/', checkjwt, roleCheck('COLABORATOR'), (_req, res) => {
   res.status(200).json({ message: 'Hello World' })
 })
 

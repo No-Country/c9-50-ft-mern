@@ -7,8 +7,8 @@ const secret = process.env.SECRET
 const saveUser = async (data) => {
   const encryptedPassaword = await bcrypt.hash(data.password, 10)
   const user = {
-    password: encryptedPassaword,
-    ...data
+    ...data,
+    password: encryptedPassaword
   }
   const newUser = await new User(user).save()
 
@@ -23,10 +23,10 @@ const findUser = async (data) => {
 
   const user = await User.findOne({ email })
 
-  const validated = bcrypt.compare(password, user.password)
+  const validated = await bcrypt.compare(password, user.password)
 
   if (validated) {
-    const token = decode(secret, { userId: user.id, userRole: user.role.id })
+    const token = decode(secret, { userId: user.id, userRole: user.role.tipo })
     return { token, message: 'Login Succes' }
   }
   return { message: 'Email or Password Incorrect' }
