@@ -98,9 +98,12 @@ export const FormLogin = () => {
           </Link>
         </div>
       </div>
-      <div className='mt-10 items-center'>
+      <div className='mt-10 items-center flex-col flex gap-10'>
         <Link to={'/register'} className='text-textWhite text-sm font-semibold'>
           Registra tu usuario aqui!
+        </Link>
+        <Link to='/' className='text-textWhite text-sm font-semibold '>
+          Home
         </Link>
       </div>
     </div>
