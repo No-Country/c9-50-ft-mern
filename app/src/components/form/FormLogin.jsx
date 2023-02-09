@@ -28,9 +28,9 @@ export const FormLogin = () => {
     try {
       const { data: res } = await axios.post('/api/user/login', data)
       if (remember) {
-        window.localStorage.setItem('token', res.payload)
+        window.localStorage.setItem('token', res.payload.token)
       } else {
-        window.sessionStorage.setItem('token', res.payload)
+        window.sessionStorage.setItem('token', res.payload.token)
       }
       navigate('/eligetucolaborador')
     } catch (error) {
