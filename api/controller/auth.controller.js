@@ -16,7 +16,7 @@ const loginUser = async (req, res, next) => {
   try {
     const data = await findUser(req.body)
     if (data.token) {
-      success(200, res, { payload:{token: data.token , role: data.role}, message: data.message })
+      success(200, res, { payload: { token: data.token, role: data.role }, message: data.message })
     } else {
       success(200, res, { message: data.message })
     }
