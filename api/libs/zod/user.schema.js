@@ -20,4 +20,8 @@ const recoverPasswordSchema = z.object({
   email: z.string().email()
 })
 
-module.exports = { registerUserSchema, loginUserSchema, recoverPasswordSchema }
+const changePasswordSchema = z.object({
+  password: z.string().min(8)
+})
+
+module.exports = { registerUserSchema, loginUserSchema, recoverPasswordSchema, changePasswordSchema }
