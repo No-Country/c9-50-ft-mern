@@ -5,7 +5,7 @@ const registerUserSchema = z
     name: z.string(),
     email: z.string().email(),
     password: z.string().min(8),
-    ocupation: z.string(),
+    occupation: z.string(),
     role: requiredRole,
     bornDate: z.coerce.date()
   })

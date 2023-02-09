@@ -6,7 +6,7 @@ const userSchema = new Schema(
     email: { type: String, require: true, unique: true },
     password: { type: String, required: true },
     // TODO: agregar el modelo de rol
-    ocupation: { type: String, required: true },
+    occupation: { type: String, required: true },
     bornDate: { type: Date, requred: true },
     role: {
       tipo: { type: String, enum: ['COLABORATOR', 'PATIENT', 'ADMIN'], required: true },
