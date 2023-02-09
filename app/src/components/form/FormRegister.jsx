@@ -1,20 +1,25 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
+import axios from 'axios'
 
 const schema = z
   .object({
-    username: z.string().min(5, { message: 'Must be 5 or more characters long' }),
+    name: z.string().min(5, { message: 'Must be 5 or more characters long' }),
     email: z.string().email({ message: 'Invalid email address' }),
-    password: z.string(),
-    confirmpassword: z.string()
+    bornDate: z.string(),
+    occupation: z.string().min(1, { message: 'Required' }),
+    password: z.string().min(8, { message: 'Must be 8 or more characters long' }),
+    confirmpassword: z.string(),
+    isColaborator: z.boolean()
   })
   .refine((data) => data.password === data.confirmpassword, {
     message: "Passwords don't match",
     path: ['confirmpassword']
   })
 export const FormRegister = () => {
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -22,9 +27,17 @@ export const FormRegister = () => {
   } = useForm({
     resolver: zodResolver(schema)
   })
-  const onSubmit = (data, e) => {
-    e.target.reset()
-    console.log(data)
+  const onSubmit = async (data) => {
+    try {
+      if (data.isColaborator) {
+        const role = { tipo: 'COLABORATOR' }
+        await axios.post('/api/user/register', { ...data, role })
+      }
+
+      navigate('/login')
+    } catch (err) {
+      console.log(err)
+    }
   }
   console.log(errors)
   return (
@@ -40,22 +53,20 @@ export const FormRegister = () => {
             <input type='hidden' name='remember' defaultValue='true' />
             <div className='-space-y-px rounded-md '>
               <div>
-                <label htmlFor='username' className='sr-only'>
+                <label htmlFor='name' className='sr-only'>
                   Nombre de usuario
                 </label>
                 <input
-                  id='username'
-                  name='username'
+                  id='name'
+                  name='name'
                   type='text'
-                  autoComplete='username'
+                  autoComplete='name'
                   className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-slate-50 focus:outline-none focus:ring-slate-50 sm:text-sm'
                   placeholder='Ingrese su nombre de Usuario'
-                  {...register('username')}
+                  {...register('name')}
                 />
-                {errors.username?.message && (
-                  <p className='py-2 text-white text-xs font-semibold'>
-                    {errors.username?.message}
-                  </p>
+                {errors.name?.message && (
+                  <p className='py-2 text-white text-xs font-semibold'>{errors.name?.message}</p>
                 )}
               </div>
               <div>
@@ -73,6 +84,45 @@ export const FormRegister = () => {
                 />
                 {errors.email?.message && (
                   <p className='py-2 text-white text-xs font-semibold'>{errors.email?.message}</p>
+                )}
+              </div>
+              <div>
+                <label htmlFor='bornDate' className='sr-only'>
+                  Fecha de nacimiento
+                </label>
+                <input
+                  id='bornDate'
+                  name='bornDate'
+                  type='date'
+                  max={new Date().toISOString().split('T')[0]}
+                  autoComplete='bornDate'
+                  className='relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-slate-50 focus:outline-none focus:ring-slate-50 sm:text-sm'
+                  placeholder='Ingrese su Fecha de nacimiento'
+                  {...register('bornDate')}
+                />
+                {errors.bornDate?.message && (
+                  <p className='py-2 text-white text-xs font-semibold'>
+                    {errors.bornDate?.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label htmlFor='occupation' className='sr-only'>
+                  Ocupacion
+                </label>
+                <input
+                  id='occupation'
+                  name='occupation'
+                  type='text'
+                  autoComplete='occupation'
+                  className='relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-slate-50 focus:outline-none focus:ring-slate-50 sm:text-sm'
+                  placeholder='Ingrese su nombre Ocupacion'
+                  {...register('occupation')}
+                />
+                {errors.occupation?.message && (
+                  <p className='py-2 text-white text-xs font-semibold'>
+                    {errors.occupation?.message}
+                  </p>
                 )}
               </div>
               <div>
