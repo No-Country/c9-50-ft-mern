@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { startLogin } from '../../redux/auth/thunks'
 
 const schema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
@@ -11,8 +12,9 @@ const schema = z.object({
 })
 
 export const FormLogin = () => {
-  const [blocked, setIsBlocked] = useState(false)
   const [remember, setRemember] = useState(false)
+  const dispatch = useDispatch()
+  const { status, role, isLoading, error, errorMessage } = useSelector((state) => state.auth)
   const navigate = useNavigate()
 
   const {
@@ -24,20 +26,19 @@ export const FormLogin = () => {
   })
 
   const onSubmit = async (data) => {
-    setIsBlocked(true)
-    try {
-      const { data: res } = await axios.post('/api/user/login', data)
-      if (remember) {
-        window.localStorage.setItem('token', res.payload.token)
-      } else {
-        window.sessionStorage.setItem('token', res.payload.token)
-      }
-      navigate('/eligetucolaborador')
-    } catch (error) {
-      setIsBlocked(false)
-    }
+    dispatch(startLogin(data, remember))
   }
 
+  useEffect(() => {
+    if (status === 'authenticated') {
+      if (role === 'PATIENT') {
+        navigate('/eligetucolaborador')
+      } else {
+        console.log('iscolaborator')
+      }
+    }
+  }, [status])
+  console.log(isLoading, error, errorMessage)
   return (
     <div className='flex flex-col min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
       <div className='w-full max-w-md space-y-8  bg-formBg rounded-lg p-10'>
@@ -102,7 +103,7 @@ export const FormLogin = () => {
 
           <div>
             <button
-              disabled={blocked}
+              disabled={isLoading}
               type='submit'
               className='group relative flex w-full justify-center rounded-md border border-transparent bg-primary py-2 px-4 text-sm font-medium text-textWhite hover:bg-primaryHover focus:outline-none focus:ring-2 focus:ring-slate-50 focus:ring-offset-2 uppercase tracking-widest'
             >
