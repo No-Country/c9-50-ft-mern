@@ -43,4 +43,17 @@ const passwordReset = async (data) => {
   return { message: 'We are not able to found a account with that email' }
 }
 
-module.exports = { saveUser, findUser, passwordReset }
+const changePasswordDB = async (userId, newPassword) => {
+  try {
+    const user = await User.findById(userId)
+    if (user) {
+      const encryptedPassaword = await bcrypt.hash(newPassword, 10)
+      await User.updateOne({ _id: userId }, { password: encryptedPassaword })
+      return { message: 'Password changed successfully' }
+    } else return { message: 'User not found' }
+  } catch (error) {
+    return { message: 'Error changing password' }
+  }
+}
+
+module.exports = { saveUser, findUser, passwordReset, changePasswordDB }
