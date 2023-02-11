@@ -9,25 +9,25 @@ const transporter = createTransport({
   }
 })
 
-const gmailOptions = (emailSubject, htmlTemplate) => {
-  return {
-    from: process.env.GMAIL_ACCOUNT,
-    to: ['someAccount@gmail.com'],
-    subject: emailSubject,
-    html: htmlTemplate
+const mailOptions = (option, userEmail, htmlTemplate) => {
+  const from = 'Servicio meetApp'
+
+  if (option === 'activation') {
+    return {
+      from: process.env.GMAIL_ACCOUNT,
+      to: userEmail,
+      subject: 'Confirmación de Cuenta',
+      html: htmlTemplate
+    }
+  } else if (option === 'renewPass') {
+    return {
+      from,
+      to: userEmail,
+      cc: process.env.GMAIL_ACCOUNT,
+      subject: 'Cambio de Contraseña',
+      html: htmlTemplate
+    }
   }
 }
 
-const sendGmail = (subject, htmlTemplate) => {
-  try {
-    const mailOptions = gmailOptions(
-      subject,
-      htmlTemplate
-    )
-    const answer = transporter.sendMail(mailOptions)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-module.exports = sendGmail
+module.exports = { transporter, mailOptions }
