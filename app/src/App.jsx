@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import { Eleccion } from './pages/Eleccion'
 import { AxiosInterceptor } from './utils'
 import { Nosotros } from './pages/Nosotros'
+import { Contacto } from './pages/Contacto'
 
 AxiosInterceptor()
 
@@ -19,6 +20,7 @@ function App() {
         <Route path='/eligetucolaborador' element={<Eleccion />} />
         <Route path='/chat' element={<Chat />} />
         <Route path='/nosotros' element={<Nosotros />} />
+        <Route path='/contacto' element={<Contacto/>} />
       </Routes>
       <ToastContainer icon theme='colored' />
     </BrowserRouter>
