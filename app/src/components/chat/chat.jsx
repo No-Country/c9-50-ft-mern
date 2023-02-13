@@ -1,8 +1,14 @@
-import { AiOutlineArrowRight } from 'react-icons/ai'
+import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai'
+import { useNavigate } from 'react-router-dom'
+
 export const ChatView = () => {
+  const navigate = useNavigate()
   return (
     <>
       <div className='w-full h-screen relative overflow-hidden flex flex-col'>
+        <div className='fixed bg-white p-5 rounded-full shadow-md bottom-8 left-5 text-4xl z-50 cursor-pointer'>
+          <AiOutlineArrowLeft onClick={() => navigate(-1)} />
+        </div>
         <div className='w-full relative sm:w-3/4 h-full sm:absolute right-0 top-0'>
           <div className='flex flex-col w-full h-full items-end'>
             <div className='flex flex-row right-0 w-full p bg-slate-500'>
@@ -37,7 +43,10 @@ export const ChatView = () => {
                   placeholder='Escribe un mensaje'
                   className='w-3/4 p-4 rounded-lg border-none outline-none bg-neutral-200'
                 />
-                <button type='submit' className='bg-sky-500 py-5 px-6 rounded-full font-bold text-white'>
+                <button
+                  type='submit'
+                  className='bg-sky-500 py-5 px-6 rounded-full font-bold text-white'
+                >
                   <AiOutlineArrowRight />
                 </button>
               </form>
