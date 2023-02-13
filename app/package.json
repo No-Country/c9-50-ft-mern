@@ -31,6 +31,7 @@
     "@hookform/resolvers": "^2.9.10",
     "axios": "^1.2.6",
     "heroicons": "^2.0.14",
+    "nodemailer": "^6.9.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.1",
