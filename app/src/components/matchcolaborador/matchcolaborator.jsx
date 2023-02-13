@@ -10,8 +10,8 @@ export const Matchcolaborator = () => {
                 ¿Quien estas buscando?
               </label>
             </div>
-            <select className='w-full bg-neutral-300 rounded-2xl h-20 px-4 text-lg' name='' id=''>
-              <option value='' selected disabled>
+            <select defaultValue={'selected'} className='w-full bg-neutral-300 rounded-2xl h-20 px-4 text-lg' name='' id=''>
+              <option value='selected' disabled>
                 Elige a tu colaborador
               </option>
               <option value=''>Psicologo</option>
