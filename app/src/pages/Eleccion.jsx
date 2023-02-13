@@ -4,10 +4,10 @@ import { Matchcolaborator } from '../components/matchcolaborador/matchcolaborato
 
 export const Eleccion = () => {
   return (
-    <>
-    <Navbar />
-    <Matchcolaborator />
-    <Footer />
-    </>
+    <div className='flex flex-col justify-between h-screen'>
+      <Navbar />
+      <Matchcolaborator />
+      <Footer />
+    </div>
   )
 }
