@@ -19,7 +19,7 @@ import { useSelector } from 'react-redux'
 AxiosInterceptor()
 
 function App() {
-  const { status, role } = useSelector((state) => state.auth)
+  const { status } = useSelector((state) => state.auth)
   return (
     <BrowserRouter>
       <Routes>
