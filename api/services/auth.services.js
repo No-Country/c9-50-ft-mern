@@ -23,13 +23,18 @@ const findUser = async (data) => {
 
   const user = await User.findOne({ email })
 
+  if (!user) {
+    throw new Error('Error not found')
+  }
+
   const validated = await bcrypt.compare(password, user.password)
 
   if (validated) {
     const token = decode(secret, { userId: user.id, userRole: user.role.tipo })
     return { token, role: user.role.tipo, name: user.name, message: 'Login Succes' }
   }
-  return { message: 'Email or Password Incorrect' }
+
+  throw new Error('Email or Password Incorrect')
 }
 
 const passwordReset = async (data) => {

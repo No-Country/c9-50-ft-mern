@@ -20,8 +20,6 @@ const loginUser = async (req, res, next) => {
         payload: { token: data.token, role: data.role, name: data.name },
         message: data.message
       })
-    } else {
-      success(200, res, { message: data.message })
     }
   } catch (erro) {
     next(erro)

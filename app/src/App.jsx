@@ -1,9 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Home, Login, Recovery, Register } from './pages'
+import { Home, Login, Recovery, Register, Chat } from './pages'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 import { Eleccion } from './pages/Eleccion'
-import { Chat } from './pages/Chat'
+import { AxiosInterceptor } from './utils'
+
+AxiosInterceptor()
 
 function App() {
   return (
