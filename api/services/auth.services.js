@@ -31,7 +31,7 @@ const findUser = async (data) => {
 
   if (validated) {
     const token = decode(secret, { userId: user.id, userRole: user.role.tipo })
-    return { token, role: user.role.tipo, name: user.name, message: 'Login Succes' }
+    return { token, _id: user._id, role: user.role.tipo, name: user.name, message: 'Login Succes' }
   }
 
   throw new Error('Email or Password Incorrect')
