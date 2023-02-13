@@ -11,4 +11,14 @@ function sendNewPass(email) {
   })
 }
 
-module.exports = sendNewPass
+function sendNewUser(email) {
+  fs.readFile('../static/emailNewContact.html', 'utf8', (error, data) => {
+    if (error) {
+      console.log('Error al leer el archivo HTML:', error)
+    } else {
+      transporter.sendMail(mailOptions('activation', email, data))
+    }
+  })
+}
+
+module.exports = { sendNewPass, sendNewUser }
