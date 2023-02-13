@@ -1,17 +1,24 @@
 export const Matchcolaborator = () => {
   return (
     <>
-    <div className='py-20 bg-gray-50' >
+      <div className='py-20 bg-gray-50'>
         {/* Seleccion de profesional */}
         <form action='' className='w-3/4 m-auto mb-8'>
-        <div className='w-full'>
+          <div className='w-full'>
             <div className='mb-6'>
               <label htmlFor='' className='w-full text-start text-3xl'>
                 ¿Quien estas buscando?
               </label>
             </div>
-            <select defaultValue={'selected'} className='w-full bg-neutral-300 rounded-2xl h-20 px-4 text-lg' name='' id=''>
-              <option value="selected" disabled>Elige a tu colaborador</option>
+            <select
+              defaultValue={'selected'}
+              className='w-full bg-neutral-300 rounded-2xl h-20 px-4 text-lg'
+              name=''
+              id=''
+            >
+              <option value='selected' disabled>
+                Elige a tu colaborador
+              </option>
               <option value=''>Psicologo</option>
               <option value=''>Abogado</option>
             </select>
