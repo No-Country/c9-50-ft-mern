@@ -1,12 +1,15 @@
+const mongoose = require('mongoose')
 const { Schema, model } = require('mongoose')
 
 const messageSchema = new Schema(
   {
-    message: { type: String, required: true },
-    // lo dejo preparado con String para que queden completos, modificalos para hacer la relacion.
-    senderId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    revieverId: { type: Schema.Types.ObjectId, ref: 'User', required: true }
-  },
+    sender : {type:mongoose.Schema.Types.ObjectId,
+                ref:"User"},
+    Content:{type:String,
+            trim:true},
+    chat:{type:mongoose.Schema.Types.ObjectId,
+                ref:"Chat"}
+},
   {
     timestamps: true
   }
