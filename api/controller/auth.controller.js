@@ -1,4 +1,4 @@
-const { saveUser, findUser, passwordReset } = require('../services/auth.services')
+const { saveUser, findUser, passwordReset, changePasswordDB } = require('../services/auth.services')
 const { success } = require('../Network/response')
 const { encode } = require('../utils/jwtAuth')
 const secret = process.env.SECRET
@@ -39,8 +39,8 @@ const recoverPassword = async (req, res, next) => {
 const changePassword = async (req, res, next) => {
   const newPassword = req.body.password
   const { userId } = encode(req.token, secret)
-
-  console.log(newPassword, userId)
+  const data = await changePasswordDB(userId, newPassword)
+  success(200, res, { message: data.message })
 }
 
 module.exports = { registerUser, loginUser, recoverPassword, changePassword }
