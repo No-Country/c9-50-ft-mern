@@ -3,6 +3,9 @@ import { Home, Login, Recovery, Register } from './pages'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 import { Eleccion } from './pages/Eleccion'
+import { AxiosInterceptor } from './utils'
+
+AxiosInterceptor()
 
 function App() {
   return (

@@ -7,8 +7,8 @@ export const AxiosInterceptor = () => {
       return response
     },
     (error) => {
-      const response = error.response.data.data
-      toast.error(response ? response.message : error.response.statusText)
+      const message = error.response.data.message
+      toast.error(message ?? error.response.statusText)
       return Promise.reject(error)
     }
   )
