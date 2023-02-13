@@ -10,8 +10,8 @@ export const Footer = () => {
       </div>
       <div>
         <div className='flex gap-4 lg:text-xl'>
-          <Link>Nosotros</Link>
-          <Link>Contacto</Link>
+          <Link to='/nosotros'>Nosotros</Link>
+          <Link to='/contacto'>Contacto</Link>
         </div>
       </div>
       <div className='flex md:flex-row flex-col gap-2 text-xs'>
@@ -19,15 +19,21 @@ export const Footer = () => {
         <div className='flex gap-2 flex-wrap justify-start'>
           <div className='flex items-center gap-1'>
             <RiYoutubeLine />
-            <Link>Youtube</Link>
+            <a href='https://www.youtube.com/' target='_blank' rel='noreferrer'>
+              Youtube
+            </a>
           </div>
           <div className='flex items-center gap-1'>
             <RiFacebookBoxLine />
-            <Link>Facebook</Link>
+            <a href='https://www.facebook.com/' target='_blank' rel='noreferrer'>
+              Facebook
+            </a>
           </div>
           <div className='flex items-center gap-1'>
             <RiInstagramLine />
-            <Link>Instagram</Link>
+            <a href='https://www.instagram.com/' target='_blank' rel='noreferrer'>
+              Instagram
+            </a>
           </div>
         </div>
       </div>
