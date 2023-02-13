@@ -4,6 +4,8 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 import { Eleccion } from './pages/Eleccion'
 import { AxiosInterceptor } from './utils'
+import { ColUrls } from './pages/ColUrls'
+import { SalaColaborador } from './pages/SalaColaborador'
 
 AxiosInterceptor()
 
@@ -17,6 +19,8 @@ function App() {
         <Route path='/recovery' element={<Recovery />} />
         <Route path='/eligetucolaborador' element={<Eleccion />} />
         <Route path='/chat' element={<Chat />} />
+        <Route path='/tusurls' element={<ColUrls />} />
+        <Route path='/colaborador' element={<SalaColaborador />} />
       </Routes>
       <ToastContainer icon theme='colored' />
     </BrowserRouter>
