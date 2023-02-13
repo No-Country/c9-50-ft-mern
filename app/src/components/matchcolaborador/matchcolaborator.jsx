@@ -1,17 +1,19 @@
 export const Matchcolaborator = () => {
   return (
     <>
-    <div className='py-20 bg-gray-50' >
+      <div className='py-20 bg-gray-50 h-full'>
         {/* Seleccion de profesional */}
         <form action='' className='w-3/4 m-auto mb-8'>
-        <div className='w-full'>
+          <div className='w-full'>
             <div className='mb-6'>
               <label htmlFor='' className='w-full text-start text-3xl'>
                 ¿Quien estas buscando?
               </label>
             </div>
             <select className='w-full bg-neutral-300 rounded-2xl h-20 px-4 text-lg' name='' id=''>
-              <option value="" selected disabled>Elige a tu colaborador</option>
+              <option value='' selected disabled>
+                Elige a tu colaborador
+              </option>
               <option value=''>Psicologo</option>
               <option value=''>Abogado</option>
             </select>
@@ -22,8 +24,8 @@ export const Matchcolaborator = () => {
           <p className='text-xl font-normal'>1 Resultados Encontrados</p>
         </div>
         {/* Primer Card */}
-        <div className='flex flex-col justify-center items-center w-3/4 h-auto py-2 px-8 m-auto bg-neutral-300 mb-8 space-y-10 sm:flex-row sm:justify-between md:flex-row md:justify-between'>
-          <div className='flex flex-row items-center space-x-6'>
+        <div className='flex flex-col justify-center items-center w-3/4 h-auto p-5 sm:py-2 sm:px-8 m-auto bg-neutral-300 mb-8 space-y-10 sm:flex-row sm:justify-between md:flex-row md:justify-between'>
+          <div className='flex flex-col sm:flex-row md:flex-row md:items-center space-y-5 sm:space-y-0 items-center space-x-6'>
             <div className='flex flex-row justify-center items-center rounded-full w-20 h-20 bg-black overflow-hidden'>
               <img
                 className='w-full'
@@ -43,8 +45,8 @@ export const Matchcolaborator = () => {
           </div>
         </div>
         {/* Segunda card */}
-        <div className='flex flex-col justify-center items-center w-3/4 h-auto py-2 px-8 m-auto bg-neutral-300 mb-8 space-y-10 sm:flex-row sm:justify-between md:flex-row md:justify-between'>
-          <div className='flex flex-row items-center space-x-6'>
+        <div className='flex flex-col justify-center items-center w-3/4 h-auto p-4 sm:py-2 sm:px-8 m-auto bg-neutral-300 mb-8 space-y-10 sm:flex-row sm:justify-between md:flex-row md:justify-between'>
+          <div className='flex flex-col sm:flex-row md:flex-row md:items-center space-y-5 sm:space-y-0 items-center space-x-6'>
             <div className='flex flex-row justify-center items-center rounded-full w-20 h-20 bg-black overflow-hidden'>
               <img
                 className='w-full'

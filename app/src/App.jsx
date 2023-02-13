@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Home, Login, Recovery, Register } from './pages'
+import { Home, Login, Recovery, Register, Chat } from './pages'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 import { Eleccion } from './pages/Eleccion'
@@ -16,6 +16,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/recovery' element={<Recovery />} />
         <Route path='/eligetucolaborador' element={<Eleccion />} />
+        <Route path='/chat' element={<Chat />} />
       </Routes>
       <ToastContainer icon theme='colored' />
     </BrowserRouter>
