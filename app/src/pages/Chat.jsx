@@ -4,10 +4,10 @@ import { ChatView } from '../components/chat/chat'
 
 export const Chat = () => {
   return (
-    <>
+    <div className='flex flex-col justify-between h-screen'>
       <Navbar />
       <ChatView />
       <Footer />
-    </>
+    </div>
   )
 }

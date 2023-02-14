@@ -6,8 +6,8 @@ export const ChatView = () => {
   return (
     <>
       <div className='w-full h-screen relative overflow-hidden flex flex-col'>
-        <div className='fixed bg-white p-5 rounded-full shadow-md bottom-8 left-5 text-4xl z-50 cursor-pointer'>
-          <AiOutlineArrowLeft onClick={() => navigate(-1)} />
+        <div className='fixed bg-white p-5 rounded-full shadow-md bottom-8 left-5 text-4xl z-50 cursor-pointer' onClick={() => navigate(-1)}>
+          <AiOutlineArrowLeft />
         </div>
         <div className='w-full relative sm:w-3/4 h-full sm:absolute right-0 top-0'>
           <div className='flex flex-col w-full h-full items-end'>
@@ -20,7 +20,7 @@ export const ChatView = () => {
                   />
                 </div>
                 <div className='flex flex-col items-start justify-center'>
-                  <h2 className='text-white text-xl font-light'>Marcela Rodriguez</h2>
+                  <h2 className='text-white text-lg font-light'>Marcela Rodriguez</h2>
                   <p className='text-white font-medium text-sm'>Psicologa</p>
                 </div>
               </div>
@@ -60,7 +60,7 @@ export const ChatView = () => {
               alt=''
             />
           </div>
-          <p className='text-white font-ligth md:text-2xl sm:text-lg text-md'>Mi Perfil</p>
+          <p className='text-white font-ligth md:text-lg sm:text-md text-md'>Mi Perfil</p>
         </div>
         <div className='hidden sm:flex flex-col w-1/4 absolute top-24 left-0 h-full bg-neutral-100'>
           {/* Contact 1 */}
@@ -72,7 +72,7 @@ export const ChatView = () => {
               />
             </div>
             <div className='flex-col'>
-              <h2 className=' text-sm sm:text-mg md:text-lg font-semibold'>Marcela Rodriguez</h2>
+              <h2 className=' text-sm sm:text-md md:text-md font-semibold'>Marcela Rodriguez</h2>
               <p className='hidden  sm:inline text-sm'>Last Message</p>
             </div>
           </div>
@@ -85,7 +85,7 @@ export const ChatView = () => {
               />
             </div>
             <div className='flex-col'>
-              <h2 className=' text-sm sm:text-mg md:text-lg font-semibold'>Marcela Rodriguez II</h2>
+              <h2 className=' text-sm sm:text-md md:text-md font-semibold'>Marcela Rodriguez II</h2>
               <p className='hidden  sm:inline text-sm'>Last Message</p>
             </div>
           </div>
