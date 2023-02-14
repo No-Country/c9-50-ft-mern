@@ -13,6 +13,8 @@ import {
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 import { AxiosInterceptor } from './utils'
+import { Nosotros } from './pages/Nosotros'
+import { Contacto } from './pages/Contacto'
 import { ProtectedRoutes } from './components/protectedRoutes/ProtectedRoutes'
 import { useSelector } from 'react-redux'
 
@@ -27,13 +29,14 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/recovery' element={<Recovery />} />
+        <Route path='/nosotros' element={<Nosotros />} />
+        <Route path='/contacto' element={<Contacto/>} />
         <Route element={<ProtectedRoutes isAllowed={status === 'authenticated'} />}>
           <Route path='/eligetucolaborador' element={<Eleccion />} />
           <Route path='/chat' element={<Chat />} />
           <Route path='/tusurls' element={<ColUrls />} />
           <Route path='/colaborador' element={<SalaColaborador />} />
         </Route>
-
         <Route path='/*' element={<NotFound />} />
       </Routes>
       <ToastContainer icon theme='colored' />
