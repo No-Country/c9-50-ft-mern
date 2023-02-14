@@ -29,15 +29,14 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/recovery' element={<Recovery />} />
+        <Route path='/nosotros' element={<Nosotros />} />
+        <Route path='/contacto' element={<Contacto/>} />
         <Route element={<ProtectedRoutes isAllowed={status === 'authenticated'} />}>
           <Route path='/eligetucolaborador' element={<Eleccion />} />
           <Route path='/chat' element={<Chat />} />
-        <Route path='/nosotros' element={<Nosotros />} />
-        <Route path='/contacto' element={<Contacto/>} />
           <Route path='/tusurls' element={<ColUrls />} />
           <Route path='/colaborador' element={<SalaColaborador />} />
         </Route>
-
         <Route path='/*' element={<NotFound />} />
       </Routes>
       <ToastContainer icon theme='colored' />
