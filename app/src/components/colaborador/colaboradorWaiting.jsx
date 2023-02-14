@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom'
 export const ColaboradorWaiting = () => {
   const navigate = useNavigate()
   return (
-    <div className='flex flex-col items-center w-4/5 h-screen m-auto mt-10'>
-      <div className='flex flex-row items-center w-full h-32 justify-between'>
-        <div className='h-full flex flex-row items-center'>
+    <div className='flex flex-col items-center w-4/5 h-auto pb-28 m-auto mt-10'>
+      <div className='flex flex-col space-y-8 sm:space-y-0 sm:flex-row items-center w-full sm:h-32 sm:justify-between'>
+        <div className='h-full flex flex-row items-center justify-center sm:justify-start w-full sm:w-auto'>
           <div className='h-24 w-24 rounded-3xl flex justify-center items-center overflow-hidden'>
             <img
               className='h-full w-full'
@@ -17,11 +17,11 @@ export const ColaboradorWaiting = () => {
             <p className='text-md '>Mi Profesion</p>
           </div>
         </div>
-        <div className='flex flex-row w-80 justify-between h-full items-center'>
-          <button className='w-2/5 py-2 bg-sky-500 text-white' onClick={() => navigate('/tusurls')}>
+        <div className='flex flex-row space-x-2 sm:space-x-0 w-4/5 sm:w-80 justify-center gap-5 sm:gap-0 sm:justify-between h-full items-center'>
+          <button className='sm:w-2/5 py-2 sm:px-0 px-3 w-auto bg-sky-500 text-white' onClick={() => navigate('/tusurls')}>
             Configuracion
           </button>
-          <button className='w-2/5 py-2 bg-sky-500 text-white' onClick={() => navigate('/chat')}>
+          <button className='sm:w-2/5 py-2 sm:px-0 px-3 w-auto bg-sky-500 text-white' onClick={() => navigate('/chat')}>
             Mis Chats
           </button>
         </div>
@@ -31,8 +31,8 @@ export const ColaboradorWaiting = () => {
       </div>
       <div className='w-full flex flex-col items-center gap-5'>
         {/* Paciente 1 */}
-        <div className='flex flex-row justify-between items-center px-6 w-full h-20 mt-4'>
-          <div className='flex flex-row items-center'>
+        <div className='flex flex-col sm:flex-row sm:justify-between items-center px-6 w-full h-auto sm:h-20 mt-4'>
+          <div className='flex flex-col space-y-5 sm:flex-row items-center sm:space-y-0'>
             <div className='w-16 h-16 overflow-hidden rounded-full flex flex-row justify-center items-center'>
               <img
                 className='h-full'
@@ -51,8 +51,8 @@ export const ColaboradorWaiting = () => {
           </div>
         </div>
         {/* Paciente 2 */}
-        <div className='flex flex-row justify-between items-center px-6 w-full h-20 mt-4'>
-          <div className='flex flex-row items-center'>
+        <div className='flex flex-col sm:flex-row sm:justify-between items-center px-6 w-full h-auto sm:h-20 mt-4'>
+          <div className='flex flex-col space-y-5 sm:flex-row items-center sm:space-y-0'>
             <div className='w-16 h-16 overflow-hidden rounded-full flex flex-row justify-center items-center'>
               <img
                 className='h-full'
