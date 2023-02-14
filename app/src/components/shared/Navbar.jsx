@@ -2,11 +2,13 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import punto from '../shared/img/Punto.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { startLogout } from '../../redux/auth/thunks'
 
 const navigation = [
-  { name: 'Nosotros', href: '#', current: false },
-  { name: 'Contacto', href: '#', current: false }
+  { name: 'Nosotros', href: '/nosotros', current: false },
+  { name: 'Contacto', href: '/contacto', current: false }
 ]
 
 function classNames(...classes) {
@@ -14,6 +16,14 @@ function classNames(...classes) {
 }
 
 export const Navbar = () => {
+  const { status } = useSelector((state) => state.auth)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  console.log(status)
+  const logout = () => {
+    dispatch(startLogout())
+    navigate('/')
+  }
   return (
     <Disclosure as='nav' className='F2F1EF'>
       {({ open }) => (
@@ -23,7 +33,11 @@ export const Navbar = () => {
               <div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
                 <Disclosure.Button className='inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'>
                   <span className='sr-only'>Open main menu</span>
-                  {open ? (<XMarkIcon className='block h-6 w-6' aria-hidden='true' />) : (<Bars3Icon className='block h-6 w-6' aria-hidden='true' />)}
+                  {open
+                    ? (<XMarkIcon className='block h-6 w-6' aria-hidden='true' />)
+                    : (
+                    <Bars3Icon className='block h-6 w-6' aria-hidden='true' />
+                      )}
                 </Disclosure.Button>
               </div>
               <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
@@ -35,9 +49,9 @@ export const Navbar = () => {
                     <p>MeetApp</p>
                     <div className='inset-28'>
                       {navigation.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
-                          href={item.href}
+                          to={item.href}
                           className={classNames(
                             item.current
                               ? 'bg-gray-900 text-white'
@@ -47,16 +61,24 @@ export const Navbar = () => {
                           aria-current={item.current ? 'page' : undefined}
                         >
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
                 </div>
               </div>
-              <div className='absolute inset-y-0 right-0 flex items-center m-auto sm:static sm:inset-auto sm:ml-6 sm:pr-0 bg-primary hover:bg-primaryHover h-8'>
-                <Link className='w-auto h-auto text-xs text-white p-4 ml-3' to='/login'>
-                  Inicio Sesión
-                </Link>
+              <div className='absolute inset-y-0 right-0 flex items-center m-auto sm:static sm:inset-auto sm:ml-6 sm:pr-0 bg-primary hover:bg-primaryHover h-8 shadow-md'>
+                {status === 'authenticated'
+                  ? (
+                  <button className='w-auto h-auto text-xs text-white p-4 ml-3' onClick={logout}>
+                    Logout
+                  </button>
+                    )
+                  : (
+                  <Link className='w-auto h-auto text-xs text-white p-4 ml-3' to='/login'>
+                    Inicio Sesión
+                  </Link>
+                    )}
 
                 {/* Profile dropdown */}
                 <Menu as='div' className='relative ml-3'>

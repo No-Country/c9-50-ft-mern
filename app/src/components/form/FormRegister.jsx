@@ -2,7 +2,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { startRegister } from '../../redux/auth/thunks'
 
 const schema = z
   .object({
@@ -19,6 +20,7 @@ const schema = z
     path: ['confirmpassword']
   })
 export const FormRegister = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const {
     register,
@@ -28,19 +30,8 @@ export const FormRegister = () => {
     resolver: zodResolver(schema)
   })
   const onSubmit = async (data) => {
-    try {
-      if (data.isColaborator) {
-        const role = { tipo: 'COLABORATOR' }
-        await axios.post('/api/user/register', { ...data, role })
-      } else {
-        const role = { tipo: 'PATIENT' }
-        await axios.post('/api/user/register', { ...data, role })
-      }
-
-      navigate('/login')
-    } catch (err) {
-      console.log(err)
-    }
+    dispatch(startRegister(data))
+    navigate('/login')
   }
   console.log(errors)
   return (
