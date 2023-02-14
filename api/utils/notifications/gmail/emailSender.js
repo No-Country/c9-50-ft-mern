@@ -10,8 +10,6 @@ const transporter = createTransport({
 })
 
 const mailOptions = (option, userEmail, htmlTemplate) => {
-  const from = 'Servicio meetApp'
-
   if (option === 'activation') {
     return {
       from: process.env.GMAIL_ACCOUNT,
@@ -21,7 +19,7 @@ const mailOptions = (option, userEmail, htmlTemplate) => {
     }
   } else if (option === 'renewPass') {
     return {
-      from,
+      from: process.env.GMAIL_ACCOUNT,
       to: userEmail,
       cc: process.env.GMAIL_ACCOUNT,
       subject: 'Cambio de Contraseña',

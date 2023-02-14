@@ -1,6 +1,7 @@
 const { saveUser, findUser, passwordReset, changePasswordDB } = require('../services/auth.services')
 const { success } = require('../Network/response')
 const { encode } = require('../utils/jwtAuth')
+
 const secret = process.env.SECRET
 const registerUser = async (req, res, next) => {
   try {
@@ -29,7 +30,6 @@ const loginUser = async (req, res, next) => {
 const recoverPassword = async (req, res, next) => {
   try {
     const data = await passwordReset(req.body)
-
     success(200, res, { message: data.message })
   } catch (erro) {
     next(erro)

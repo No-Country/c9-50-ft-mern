@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt')
 const User = require('../db/models/user.model')
 const { decode } = require('../utils/jwtAuth')
 const { randomPassword } = require('../utils/randomPassword')
+const { sendNewUser, sendNewPass } = require('../middlewares/emailHandler')
 const secret = process.env.SECRET
 
 const saveUser = async (data) => {
@@ -11,7 +12,7 @@ const saveUser = async (data) => {
     password: encryptedPassaword
   }
   const newUser = await new User(user).save()
-
+  await sendNewUser(newUser.email, newUser.name)
   return {
     data: { name: newUser.name, email: newUser.email },
     message: 'User created succefully'
@@ -42,7 +43,9 @@ const passwordReset = async (data) => {
   const newPassword = randomPassword()
   const user = await User.findOne({ email })
   if (user) {
-    await User.updateOne({ email }, { password: newPassword })
+    const encryptedPassaword = await bcrypt.hash(newPassword, 10)
+    await User.updateOne({ email }, { password: encryptedPassaword })
+    await sendNewPass(email, newPassword)
     return { message: 'A new password has been sent to your mail' }
   }
   return { message: 'We are not able to found a account with that email' }
