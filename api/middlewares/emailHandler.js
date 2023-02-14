@@ -1,24 +1,22 @@
-const fs = require('fs')
 const { transporter, mailOptions } = require('../utils/notifications/gmail/emailSender')
-
-function sendNewPass(email) {
-  fs.readFile('../static/email.html', 'utf8', (error, data) => {
-    if (error) {
-      console.log('Error al leer el archivo HTML:', error)
-    } else {
-      transporter.sendMail(mailOptions('renewPass', email, data))
-    }
-  })
+const { emailNewContact } = require('../static/emailNewContact')
+const { emailRecoverPassword } = require('../static/emailRecoverPassword')
+async function sendNewPass(email, newPassword) {
+  try {
+    const data = emailRecoverPassword(newPassword)
+    transporter.sendMail(mailOptions('renewPass', email, data))
+  } catch (error) {
+    console.log('Error al leer el archivo HTML:', error)
+  }
 }
 
-function sendNewUser(email) {
-  fs.readFile('../static/emailNewContact.html', 'utf8', (error, data) => {
-    if (error) {
-      console.log('Error al leer el archivo HTML:', error)
-    } else {
-      transporter.sendMail(mailOptions('activation', email, data))
-    }
-  })
+async function sendNewUser(email, userName) {
+  try {
+    const data = emailNewContact(userName)
+    transporter.sendMail(mailOptions('activation', email, data))
+  } catch (error) {
+    console.log('Error al leer el archivo HTML:', error)
+  }
 }
 
 module.exports = { sendNewPass, sendNewUser }
