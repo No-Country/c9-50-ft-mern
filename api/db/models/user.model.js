@@ -7,7 +7,8 @@ const userSchema = new Schema(
     password: { type: String, required: true },
     // TODO: agregar el modelo de rol
     occupation: { type: String, required: true },
-    bornDate: { type: Date, requred: true },
+    bornDate: { type: Date, required: true },
+    isOnline: { type: Boolean, required: true, default: false },
     role: {
       tipo: { type: String, enum: ['COLABORATOR', 'PATIENT', 'ADMIN'], required: true },
       refered: { type: String },
