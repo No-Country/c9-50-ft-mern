@@ -5,7 +5,7 @@ import * as z from 'zod'
 
 const schema = z.object({
   meet: z.string().min(1, { message: 'Required' }).url({ message: 'Invalid URL' }),
-  cafecito: z.string().min(0)
+  cafecito: z.string().optional()
 })
 
 export const ColaboradorUrls = () => {
