@@ -57,14 +57,14 @@ export const ColaboradorUrls = () => {
               <p className='py-2 text-black text-xs font-semibold'>{errors.cafecito?.message}</p>
             )}
           </div>
-          <div className='w-2/3 flex flex-row items-center justify-around'>
+          <div className='w-2/3 flex flex-col space-y-5 sm:space-y-0 sm:flex-row items-center sm:justify-around'>
             <button
-              className='bg-sky-500 text-white py-3 px-10'
+              className='bg-sky-500 text-white w-52 h-10 sm:w-auto sm:h-auto sm:py-3 sm:px-10'
               onClick={() => navigate('/colaborador')}
             >
               Omitir
             </button>
-            <button className='bg-sky-500 text-white py-3 px-10' type='submit'>
+            <button className='bg-sky-500 text-white w-52 h-10 sm:w-auto sm:h-auto sm:py-3 sm:px-10' type='submit'>
               Continuar
             </button>
           </div>
