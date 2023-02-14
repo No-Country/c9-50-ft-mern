@@ -14,7 +14,7 @@ const schema = z.object({
 export const FormLogin = () => {
   const [remember, setRemember] = useState(false)
   const dispatch = useDispatch()
-  const { status, role, isLoading, error, errorMessage } = useSelector((state) => state.auth)
+  const { status, role, isLoading } = useSelector((state) => state.auth)
   const navigate = useNavigate()
 
   const {
@@ -34,11 +34,11 @@ export const FormLogin = () => {
       if (role === 'PATIENT') {
         navigate('/eligetucolaborador')
       } else {
-        console.log('iscolaborator')
+        navigate('/tusurls')
       }
     }
   }, [status])
-  console.log(isLoading, error, errorMessage)
+
   return (
     <div className='flex flex-col min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
       <div className='w-full max-w-md space-y-8  bg-formBg rounded-lg p-10'>

@@ -14,7 +14,7 @@ export const Hero = () => {
             </p>
             <Link
               to='/login'
-              className='text-base font-semibold leading-7 text-textWhite bg-primary py-3 px-6'
+              className='text-base font-semibold leading-7 text-textWhite bg-primary hover:bg-primaryHover py-3 px-6'
             >
               Prueba Gratis <span aria-hidden='true'>→</span>
             </Link>
