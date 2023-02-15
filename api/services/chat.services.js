@@ -1,4 +1,5 @@
 const Message = require('../db/models/messages.model')
+const Chat = require('../db/models/chat.model')
 
 const addMessage = async (senderId, revieverId, message) => {
   try {
@@ -9,4 +10,12 @@ const addMessage = async (senderId, revieverId, message) => {
   }
 }
 
-module.exports = { addMessage }
+const addChat = async () => {
+  try {
+
+  } catch (error) {
+    return { message: 'Error adding chat' }
+  }
+}
+
+module.exports = { addMessage, addChat }
