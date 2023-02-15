@@ -1,3 +1,4 @@
+
 class Socket {
   constructor(io) {
     this.io = io
@@ -6,13 +7,10 @@ class Socket {
 
   socketEvents() {
     this.io.on('connection', async (socket) => {
-      const token = socket.handshake.query.token
-
-      if (!token) {
-        socket.disconnect()
-      }
+      console.log("esto esta bien")
     })
   }
+  
 }
 
 module.exports = Socket
