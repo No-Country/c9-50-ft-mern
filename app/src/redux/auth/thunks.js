@@ -102,14 +102,9 @@ export const startRecovery = (data, remember) => {
   return async (dispatch) => {
     try {
       const { data: res } = await axios.post('/api/user/recover', data)
-
       toast.success(res.message)
     } catch (error) {
       console.log(error, 'failed')
-      const response = {
-        error: error.error,
-        errorMessage: error.message
-      }
     }
   }
 }
