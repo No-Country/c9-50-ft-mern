@@ -18,6 +18,7 @@ import { Contacto } from './pages/Contacto'
 import { ProtectedRoutes } from './components/protectedRoutes/ProtectedRoutes'
 import { useDispatch, useSelector } from 'react-redux'
 import { startRememberUser } from './redux/auth/thunks'
+import { SalaChat } from './pages/SalaChat'
 
 AxiosInterceptor()
 
@@ -37,6 +38,7 @@ function App() {
         <Route element={<ProtectedRoutes isAllowed={status === 'authenticated'} />}>
           <Route path='/eligetucolaborador' element={<Eleccion />} />
           <Route path='/chat' element={<Chat />} />
+        <Route path='/chatting' element={<SalaChat />} />
           <Route path='/tusurls' element={<ColUrls />} />
           <Route path='/colaborador' element={<SalaColaborador />} />
         </Route>
