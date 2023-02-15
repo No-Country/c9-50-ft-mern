@@ -10,6 +10,7 @@ export const startRememberUser = () => {
   return async (dispatch) => {
     const userInfoLocal = JSON.parse(window.localStorage.getItem('userInfo'))
     const userInfoSesion = JSON.parse(window.sessionStorage.getItem('userInfo'))
+    if (userInfoLocal === null && userInfoSesion === null) return
     if (userInfoLocal !== null) {
       dispatch(login(userInfoLocal))
     } else {

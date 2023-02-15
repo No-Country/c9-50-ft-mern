@@ -13,8 +13,8 @@ export const ColaboradorWaiting = () => {
             />
           </div>
           <div className='ml-5 flex flex-col items-start'>
-            <h3 className='text-3xl font-semibold'>Mi Perfil</h3>
-            <p className='text-md '>Mi Profesion</p>
+            <h3 className='text-3xl sm:text-xl md:text-3xl font-semibold'>Mi Perfil</h3>
+            <p className='text-md sm:text-sm md:text-md '>Mi Profesion</p>
           </div>
         </div>
         <div className='flex flex-row space-x-2 sm:space-x-0 w-4/5 sm:w-80 justify-center gap-5 sm:gap-0 sm:justify-between h-full items-center'>
