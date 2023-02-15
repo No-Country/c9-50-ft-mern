@@ -8,7 +8,8 @@ import {
   Eleccion,
   SalaColaborador,
   NotFound,
-  ColUrls
+  ColUrls,
+  SalaChat
 } from './pages'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
@@ -37,6 +38,7 @@ function App() {
         <Route element={<ProtectedRoutes isAllowed={status === 'authenticated'} />}>
           <Route path='/eligetucolaborador' element={<Eleccion />} />
           <Route path='/chat' element={<Chat />} />
+        <Route path='/chatting' element={<SalaChat />} />
           <Route path='/tusurls' element={<ColUrls />} />
           <Route path='/colaborador' element={<SalaColaborador />} />
         </Route>
