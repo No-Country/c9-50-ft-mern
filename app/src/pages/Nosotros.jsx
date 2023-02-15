@@ -3,10 +3,10 @@ import { Footer, Navbar } from '../components/shared'
 
 export const Nosotros = () => {
   return (
-    <>
-    <Navbar/>
-      <HeroNosotros/>
-      <Footer/>
-    </>
+    <div className='flex flex-col justify-between h-screen'>
+      <Navbar />
+      <HeroNosotros />
+      <Footer />
+    </div>
   )
 }

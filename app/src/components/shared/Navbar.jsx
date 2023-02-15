@@ -8,7 +8,8 @@ import { startLogout } from '../../redux/auth/thunks'
 
 const navigation = [
   { name: 'Nosotros', href: '/nosotros', current: false },
-  { name: 'Contacto', href: '/contacto', current: false }
+  { name: 'Contacto', href: '/contacto', current: false },
+  { name: 'Chat', href: '/chat', current: false }
 ]
 
 function classNames(...classes) {
@@ -19,7 +20,6 @@ export const Navbar = () => {
   const { status } = useSelector((state) => state.auth)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  console.log(status)
   const logout = () => {
     dispatch(startLogout())
     navigate('/')
@@ -34,7 +34,9 @@ export const Navbar = () => {
                 <Disclosure.Button className='inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'>
                   <span className='sr-only'>Open main menu</span>
                   {open
-                    ? (<XMarkIcon className='block h-6 w-6' aria-hidden='true' />)
+                    ? (
+                    <XMarkIcon className='block h-6 w-6' aria-hidden='true' />
+                      )
                     : (
                     <Bars3Icon className='block h-6 w-6' aria-hidden='true' />
                       )}
@@ -46,7 +48,7 @@ export const Navbar = () => {
                 </div>
                 <div className='hidden sm:ml-6 sm:block'>
                   <div className='flex items-center space-x-4'>
-                    <p>MeetApp</p>
+                    <Link to='/'>MeetApp</Link>
                     <div className='inset-28'>
                       {navigation.map((item) => (
                         <Link

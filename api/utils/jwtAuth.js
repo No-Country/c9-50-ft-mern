@@ -10,14 +10,4 @@ const encode = (token, secret) => {
   return newtoken
 }
 
-const checkToken = (req, res, next) => {
-  if (!req.headers.authorization) {
-    res.status(403).send('missing token in header')
-  } else {
-    const bearer = req.headers.authorization
-    const token = bearer.replace('Bearer ', '')
-    req.token = token
-    next()
-  }
-}
-module.exports = { decode, encode, checkToken }
+module.exports = { decode, encode }
