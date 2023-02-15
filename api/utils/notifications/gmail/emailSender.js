@@ -1,17 +1,24 @@
-const { createTransport } = require('nodemailer')
+const nodemailer = require('nodemailer')
 
-const transporter = createTransport({
-  service: 'gmail',
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
   port: 587,
+  secure: false,
   auth: {
     user: process.env.GMAIL_ACCOUNT,
     pass: process.env.GMAIL_PASSWORD
+  },
+  tls: {
+    rejectUnauthorized: false
   }
 })
 
-const mailOptions = (option, userEmail, htmlTemplate) => {
-  const from = 'Servicio meetApp'
+transporter.verify().then(() => {
+  console.log('ready for send emails')
+}
+)
 
+const mailOptions = (option, userEmail, htmlTemplate) => {
   if (option === 'activation') {
     return {
       from: process.env.GMAIL_ACCOUNT,
@@ -19,11 +26,11 @@ const mailOptions = (option, userEmail, htmlTemplate) => {
       subject: 'Confirmación de Cuenta',
       html: htmlTemplate
     }
-  } else if (option === 'renewPass') {
+  }
+  if (option === 'renewPass') {
     return {
-      from,
+      from: process.env.GMAIL_ACCOUNT,
       to: userEmail,
-      cc: process.env.GMAIL_ACCOUNT,
       subject: 'Cambio de Contraseña',
       html: htmlTemplate
     }

@@ -24,4 +24,8 @@ const changePasswordSchema = z.object({
   password: z.string().min(8)
 })
 
-module.exports = { registerUserSchema, loginUserSchema, recoverPasswordSchema, changePasswordSchema }
+const sendMessageSchema = z.object({
+  chatId: z.string(),
+  message: z.string()
+})
+module.exports = { registerUserSchema, loginUserSchema, recoverPasswordSchema, changePasswordSchema, sendMessageSchema }

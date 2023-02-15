@@ -38,6 +38,7 @@ export const authSlice = createSlice({
       state.email = null
       state.name = null
       state.role = null
+      state.id = null
       state.token = null
       state.isLoading = false
       state.error = null
