@@ -6,6 +6,7 @@ import { Eleccion } from './pages/Eleccion'
 import { AxiosInterceptor } from './utils'
 import { ColUrls } from './pages/ColUrls'
 import { SalaColaborador } from './pages/SalaColaborador'
+import { SalaChat } from './pages/SalaChat'
 
 AxiosInterceptor()
 
@@ -19,6 +20,7 @@ function App() {
         <Route path='/recovery' element={<Recovery />} />
         <Route path='/eligetucolaborador' element={<Eleccion />} />
         <Route path='/chat' element={<Chat />} />
+        <Route path='/chatting' element={<SalaChat />} />
         <Route path='/tusurls' element={<ColUrls />} />
         <Route path='/colaborador' element={<SalaColaborador />} />
       </Routes>
