@@ -22,10 +22,16 @@ export const ColaboradorWaiting = () => {
           </div>
         </div>
         <div className='flex flex-row space-x-2 sm:space-x-0 w-4/5 sm:w-80 justify-center gap-5 sm:gap-0 sm:justify-between h-full items-center'>
-          <button className='sm:w-2/5 py-2 sm:px-0 px-3 w-auto bg-sky-500 text-white' onClick={() => navigate('/tusurls')}>
+          <button
+            className='sm:w-2/5 py-2 sm:px-0 px-3 w-auto bg-sky-500 text-white'
+            onClick={() => navigate('/tusurls')}
+          >
             Configuracion
           </button>
-          <button className='sm:w-2/5 py-2 sm:px-0 px-3 w-auto bg-sky-500 text-white' onClick={() => navigate('/chat')}>
+          <button
+            className='sm:w-2/5 py-2 sm:px-0 px-3 w-auto bg-sky-500 text-white'
+            onClick={() => navigate('/chat')}
+          >
             Mis Chats
           </button>
         </div>
@@ -35,27 +41,30 @@ export const ColaboradorWaiting = () => {
       </div>
       <div className='w-full flex flex-col items-center gap-5'>
         {/* Paciente 1 */}
-        {personas.map((paciente)=> 
-          <div key={paciente.id} className='flex flex-col sm:flex-row sm:justify-between items-center px-6 w-full h-auto sm:h-20 mt-4'>
-          <div className='flex flex-col space-y-5 sm:flex-row items-center sm:space-y-0'>
-            <div className='w-16 h-16 overflow-hidden rounded-full flex flex-row justify-center items-center'>
-              <img
-                className='h-full'
-                src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0Q4JmxazuBpck48ReHTEyA1aVZNq5JOCWug&usqp=CAU'
-                alt=''
-              />
+        {personas.map((paciente) => (
+          <div
+            key={paciente.id}
+            className='flex flex-col sm:flex-row sm:justify-between items-center px-6 w-full h-auto sm:h-20 mt-4'
+          >
+            <div className='flex flex-col space-y-5 sm:flex-row items-center sm:space-y-0'>
+              <div className='w-16 h-16 overflow-hidden rounded-full flex flex-row justify-center items-center'>
+                <img
+                  className='h-full'
+                  src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0Q4JmxazuBpck48ReHTEyA1aVZNq5JOCWug&usqp=CAU'
+                  alt=''
+                />
+              </div>
+              <div className='flex flex-row items-start justify-start ml-3'>
+                <p className='text-lg font-medium pb-4'>{paciente.nombre}</p>
+              </div>
             </div>
-            <div className='flex flex-row items-start justify-start ml-3'>
-              <p className='text-lg font-medium pb-4'>{paciente.nombre}</p>
+            <div className='flex flex-row items-center h-full'>
+              <button className='w-32 text-white bg-sky-500 h-10' onClick={() => navigate('/chat')}>
+                IR AL CHAT
+              </button>
             </div>
           </div>
-          <div className='flex flex-row items-center h-full'>
-            <button className='w-32 text-white bg-sky-500 h-10' onClick={() => navigate('/chat')}>
-              IR AL CHAT
-            </button>
-          </div>
-        </div>
-        )}
+        ))}
       </div>
     </div>
   )
