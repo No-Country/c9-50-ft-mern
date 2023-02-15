@@ -8,7 +8,8 @@ import {
   Eleccion,
   SalaColaborador,
   NotFound,
-  ColUrls
+  ColUrls,
+  SalaChat
 } from './pages'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
@@ -18,7 +19,6 @@ import { Contacto } from './pages/Contacto'
 import { ProtectedRoutes } from './components/protectedRoutes/ProtectedRoutes'
 import { useDispatch, useSelector } from 'react-redux'
 import { startRememberUser } from './redux/auth/thunks'
-import { SalaChat } from './pages/SalaChat'
 
 AxiosInterceptor()
 

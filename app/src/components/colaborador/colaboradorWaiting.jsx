@@ -1,4 +1,8 @@
 import { useNavigate } from 'react-router-dom'
+const personas = [
+  { id: 1, nombre: 'Marcela Rodriguez', last: 'Saludos' },
+  { id: 2, nombre: 'Alejandra Jimenez', last: 'Genial' }
+]
 export const ColaboradorWaiting = () => {
   const navigate = useNavigate()
   return (
@@ -31,7 +35,8 @@ export const ColaboradorWaiting = () => {
       </div>
       <div className='w-full flex flex-col items-center gap-5'>
         {/* Paciente 1 */}
-        <div className='flex flex-col sm:flex-row sm:justify-between items-center px-6 w-full h-auto sm:h-20 mt-4'>
+        {personas.map((paciente)=> 
+          <div key={paciente.id} className='flex flex-col sm:flex-row sm:justify-between items-center px-6 w-full h-auto sm:h-20 mt-4'>
           <div className='flex flex-col space-y-5 sm:flex-row items-center sm:space-y-0'>
             <div className='w-16 h-16 overflow-hidden rounded-full flex flex-row justify-center items-center'>
               <img
@@ -41,7 +46,7 @@ export const ColaboradorWaiting = () => {
               />
             </div>
             <div className='flex flex-row items-start justify-start ml-3'>
-              <p className='text-lg font-medium pb-4'>Maria Jimenez</p>
+              <p className='text-lg font-medium pb-4'>{paciente.nombre}</p>
             </div>
           </div>
           <div className='flex flex-row items-center h-full'>
@@ -50,26 +55,7 @@ export const ColaboradorWaiting = () => {
             </button>
           </div>
         </div>
-        {/* Paciente 2 */}
-        <div className='flex flex-col sm:flex-row sm:justify-between items-center px-6 w-full h-auto sm:h-20 mt-4'>
-          <div className='flex flex-col space-y-5 sm:flex-row items-center sm:space-y-0'>
-            <div className='w-16 h-16 overflow-hidden rounded-full flex flex-row justify-center items-center'>
-              <img
-                className='h-full'
-                src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0Q4JmxazuBpck48ReHTEyA1aVZNq5JOCWug&usqp=CAU'
-                alt=''
-              />
-            </div>
-            <div className='flex flex-row items-start justify-start ml-3'>
-              <p className='text-lg font-medium pb-4'>Maria Jimenez II</p>
-            </div>
-          </div>
-          <div className='flex flex-row items-center h-full'>
-            <button className='w-32 text-white bg-sky-500 h-10' onClick={() => navigate('/chat')}>
-              IR AL CHAT
-            </button>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   )
