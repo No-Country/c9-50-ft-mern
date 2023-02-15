@@ -41,9 +41,7 @@ if (isProduction) {
   })
 }
 
-const socket = new SocketModel(io)
-
-socket()
+new SocketModel(io) // eslint-disable-line
 
 app.use(logError)
 app.use(handlerErrorZod)
