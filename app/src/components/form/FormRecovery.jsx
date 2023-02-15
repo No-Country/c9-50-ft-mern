@@ -2,12 +2,15 @@ import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
+import { useDispatch } from 'react-redux'
+import { startRecovery } from '../../redux/auth/thunks'
 
 const schema = z.object({
   email: z.string().min(1, { message: 'Required' }).email({ message: 'Invalid email address' })
 })
 
 export const FormRecovery = () => {
+  const dispatch = useDispatch()
   const {
     register,
     handleSubmit,
@@ -17,6 +20,7 @@ export const FormRecovery = () => {
   })
   const onSubmit = (data, e) => {
     e.target.reset()
+    dispatch(startRecovery(data))
     console.log(data)
   }
   return (
