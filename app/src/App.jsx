@@ -37,11 +37,46 @@ function App() {
         <Route path='/nosotros' element={<Nosotros />} />
         <Route path='/contacto' element={<Contacto />} />
         <Route element={<ProtectedRoutes isAllowed={status === 'authenticated'} />}>
-          <Route path='/eligetucolaborador' element={<Eleccion />} />
-          <Route path='/chat' element={<Chat />} />
-          <Route path='/chatting' element={<SalaChat />} />
-          <Route path='/tusurls' element={<ColUrls />} />
-          <Route path='/colaborador' element={<SalaColaborador />} />
+          <Route
+            path='/eligetucolaborador'
+            element={
+              <SocketsWrapper>
+                <Eleccion />
+              </SocketsWrapper>
+            }
+          />
+          <Route
+            path='/chat'
+            element={
+              <SocketsWrapper>
+                <Chat />
+              </SocketsWrapper>
+            }
+          />
+          <Route
+            path='/chatting'
+            element={
+              <SocketsWrapper>
+                <SalaChat />
+              </SocketsWrapper>
+            }
+          />
+          <Route
+            path='/tusurls'
+            element={
+              <SocketsWrapper>
+                <ColUrls />
+              </SocketsWrapper>
+            }
+          />
+          <Route
+            path='/colaborador'
+            element={
+              <SocketsWrapper>
+                <SalaColaborador />
+              </SocketsWrapper>
+            }
+          />
         </Route>
         <Route path='/*' element={<NotFound />} />
       </Routes>
