@@ -1,9 +1,8 @@
 require('dotenv').config({})
-const http = require('http')
-const socketIo = require('socket.io')
+const { Server } = require('socket.io')
+const Socket = require('./libs/socket')
 const express = require('express')
 const cors = require('cors')
-const SocketModel = require('./libs/socket')
 const router = require('./router')
 const databaseConnect = require('./db')
 const {
@@ -21,8 +20,7 @@ const MONGO_URL = process.env.MONGO_URL
 
 const app = express()
 
-const server = http.createServer(app)
-const io = socketIo(server)
+const io = new Server(3002)
 
 app.use(express.json())
 app.use(cors())
@@ -41,7 +39,7 @@ if (isProduction) {
   })
 }
 
-new SocketModel(io) // eslint-disable-line
+new Socket(io)
 
 app.use(logError)
 app.use(handlerErrorZod)
