@@ -2,26 +2,23 @@ import { createSlice } from '@reduxjs/toolkit'
 import { io } from 'socket.io-client'
 
 const initialState = {
-  socket: undefined,
   online: false
 }
 
-export const authSlice = createSlice({
+export const socketSlice = createSlice({
   name: 'socket',
   initialState,
   reducers: {
-    connect: () => {
+    connect: (state, { payload }) => {
       try {
-        const token = window.localStorage.getItem('token')
-
-        const socket = io('ws://localhost:3002', {
+        io('ws://localhost:3002', {
           transports: ['websocket'],
           autoConnect: true,
           forceNew: true,
-          query: { token }
+          query: { token: payload }
         })
 
-        socket.emit('message', 'world')
+        state.online = true
       } catch (error) {
         throw new Error(error)
       }
@@ -29,5 +26,5 @@ export const authSlice = createSlice({
   }
 })
 
-export const { connect } = authSlice.actions
-export default authSlice.reducer
+export const { connect } = socketSlice.actions
+export default socketSlice.reducer

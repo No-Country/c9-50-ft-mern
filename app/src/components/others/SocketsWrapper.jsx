@@ -3,12 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { connect } from '../../redux/socket/socketSlice'
 
 export const SocketsWrapper = ({ children }) => {
-  const { status } = useSelector((state) => state.auth)
+  const { status, online } = useSelector(({ auth, socket }) => ({ ...auth, ...socket }))
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (status === 'authenticated') {
-      dispatch(connect())
+    const { token } = JSON.parse(window.sessionStorage.userInfo)
+
+    if (status === 'authenticated' && !online) {
+      dispatch(connect(token))
     }
   }, [status])
 

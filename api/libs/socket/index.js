@@ -6,7 +6,7 @@ class Socket {
 
   socketEvents() {
     this.io.on('connection', async (socket) => {
-      socket.on('message', (msg) => console.log(msg))
+      console.log(socket.handshake.query.token)
     })
   }
 }
