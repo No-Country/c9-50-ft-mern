@@ -56,7 +56,9 @@ jobs:
         with:
           name: dist
           path: app/dist
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
+      - name: Install Railway
+        run: npm i -g @railway/cli
+      - name: Deploy
+        run: railway up
         env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
