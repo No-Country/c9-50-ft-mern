@@ -16,6 +16,7 @@ import { AxiosInterceptor } from './utils'
 import { Nosotros } from './pages/Nosotros'
 import { Contacto } from './pages/Contacto'
 import { ProtectedRoutes } from './components/protectedRoutes/ProtectedRoutes'
+import { SocketsWrapper } from './components'
 import { useDispatch, useSelector } from 'react-redux'
 import { startRememberUser } from './redux/auth/thunks'
 
@@ -38,7 +39,14 @@ function App() {
           <Route path='/eligetucolaborador' element={<Eleccion />} />
           <Route path='/chat' element={<Chat />} />
           <Route path='/tusurls' element={<ColUrls />} />
-          <Route path='/colaborador' element={<SalaColaborador />} />
+          <Route
+            path='/colaborador'
+            element={
+              <SocketsWrapper>
+                <SalaColaborador />
+              </SocketsWrapper>
+            }
+          />
         </Route>
         <Route path='/*' element={<NotFound />} />
       </Routes>

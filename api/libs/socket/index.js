@@ -1,4 +1,3 @@
-
 class Socket {
   constructor(io) {
     this.io = io
@@ -7,10 +6,9 @@ class Socket {
 
   socketEvents() {
     this.io.on('connection', async (socket) => {
-      console.log("esto esta bien")
+      socket.on('message', (msg) => console.log(msg))
     })
   }
-  
 }
 
 module.exports = Socket
