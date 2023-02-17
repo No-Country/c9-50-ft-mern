@@ -6,8 +6,8 @@ const decode = (secret, information) => {
 }
 
 const encode = (token, secret) => {
-  const newtoken = jwt.verify(token, secret)
-  return newtoken
+  const tokenData = jwt.verify(token, secret)
+  return tokenData
 }
 
 module.exports = { decode, encode }

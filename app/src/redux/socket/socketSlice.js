@@ -11,7 +11,7 @@ export const socketSlice = createSlice({
   reducers: {
     connect: (state, { payload }) => {
       try {
-        io('ws://localhost:3002', {
+        const socket = io('ws://localhost:3002', {
           transports: ['websocket'],
           autoConnect: true,
           forceNew: true,
@@ -19,6 +19,8 @@ export const socketSlice = createSlice({
         })
 
         state.online = true
+
+        console.log(socket)
       } catch (error) {
         throw new Error(error)
       }
