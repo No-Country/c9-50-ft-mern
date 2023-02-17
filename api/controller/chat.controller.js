@@ -35,7 +35,7 @@ const chatById = async (req, res, next) => {
   try {
     const { chatId } = req.params
     const roomChat = await findChatByChatId(chatId)
-    success(200, res, { message: roomChat.message, payload: roomChat.data })
+    success(200, res, { message: roomChat.message, payload: roomChat.id })
   } catch (error) {
     next(error)
   }
