@@ -21,14 +21,15 @@ const addChat = async (colaboratorId, userId) => {
       }
     })
     if (availableRoom) {
+      const oldChat = await findChatByChatId(availableRoom.id)
       return {
-        chatId: availableRoom.id,
+        data: oldChat,
         message: 'Retrieving an old chat room'
       }
     }
     const newChat = await new ChatModel({ users: [colaboratorId, userId] }).save()
     return {
-      chatId: newChat.id,
+      data: newChat,
       message: 'Chat Created'
     }
   } catch (error) {
@@ -61,9 +62,17 @@ const findChatByChatId = async (chatId) => {
     const messageInChat = await Message.find({ chat: chatId })
       .populate('sender', 'name')
       .populate('chat', 'users')
-    return {
-      data: messageInChat,
-      message: 'Room chat found'
+    if (messageInChat.length) {
+      return {
+        data: messageInChat,
+        message: 'Room chat found'
+      }
+    } else {
+      const infoInChat = await ChatModel.findOne({ _id: chatId })
+        .populate('users', 'name')
+      return {
+        infoInChat
+      }
     }
   } catch (error) {
     return {
