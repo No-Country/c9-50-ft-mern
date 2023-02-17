@@ -22,7 +22,6 @@ const addChat = async (colaboratorId, userId) => {
 const findChatsByUserId = async (userId) => {
   try {
     const allChatsForUserId = await ChatModel.find({ users: { $all: [userId] } })
-    console.log({allChatsForUserId})
     return {
       allChatsForUserId,
       message: 'Chats found'
@@ -31,4 +30,17 @@ const findChatsByUserId = async (userId) => {
     return { message: 'Error finding chat' }
   }
 }
-module.exports = { addMessage, addChat, findChatsByUserId }
+
+const findChatByChatId = async (chatId) => {
+  try {
+    const roomChatFound = await ChatModel.findOne({ _id: chatId })
+    return {
+      id: roomChatFound,
+      message: 'Room chat found'
+    }
+  } catch (error) {
+    return { message: 'Error finding chat' }
+  }
+}
+
+module.exports = { addMessage, addChat, findChatsByUserId, findChatByChatId }

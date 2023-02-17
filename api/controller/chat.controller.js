@@ -1,4 +1,4 @@
-const { addMessage, addChat, findChatsByUserId } = require('../services/chat.services')
+const { addMessage, addChat, findChatsByUserId, findChatByChatId } = require('../services/chat.services')
 const { success } = require('../Network/response')
 
 const sendMessage = async (userId, chatId, message, next) => {
@@ -25,17 +25,17 @@ const allChats = async (req, res, next) => {
   try {
     const { userId } = req.user
     const userChats = await findChatsByUserId(userId)
-    success(200, res, { message: userChats.message, payload: userChats.allChatsForUserId})
+    success(200, res, { message: userChats.message, payload: userChats.allChatsForUserId })
   } catch (error) {
     next(error)
   }
 }
 
 const chatById = async (req, res, next) => {
-  // const { chatId } = req.params
   try {
-    const chat = 0
-    success(200, res, chat)
+    const { chatId } = req.params
+    const roomChat = await findChatByChatId(chatId)
+    success(200, res, { message: roomChat.message, payload: roomChat.id })
   } catch (error) {
     next(error)
   }
