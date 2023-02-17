@@ -1,15 +1,44 @@
-const { addMessage } = require('../services/chat.services')
+const { addMessage, addChat, findChatsByUserId, findChatByChatId } = require('../services/chat.services')
 const { success } = require('../Network/response')
 
-const sendMessage = async (req, res, next) => {
+const sendMessage = async (userId, chatId, message, next) => {
   try {
-    const { userId } = req.user
-    const { revieverId, message } = req.body
-    const data = await addMessage(userId, revieverId, message)
-    success(200, res, { message: data.message })
+    const data = await addMessage(userId, message, chatId)
+    return data
   } catch (error) {
     next(error)
   }
 }
 
-module.exports = { sendMessage }
+const createChat = async (req, res, next) => {
+  try {
+    const { colaboratorId } = req.body
+    const { userId } = req.user
+    const newChat = await addChat(colaboratorId, userId)
+    success(200, res, { message: newChat.message, payload: newChat.chatId })
+  } catch (error) {
+    next(error)
+  }
+}
+
+const allChats = async (req, res, next) => {
+  try {
+    const { userId } = req.user
+    const userChats = await findChatsByUserId(userId)
+    success(200, res, { message: userChats.message, payload: userChats.allChatsForUserId })
+  } catch (error) {
+    next(error)
+  }
+}
+
+const chatById = async (req, res, next) => {
+  try {
+    const { chatId } = req.params
+    const roomChat = await findChatByChatId(chatId)
+    success(200, res, { message: roomChat.message, payload: roomChat.id })
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports = { sendMessage, createChat, allChats, chatById }

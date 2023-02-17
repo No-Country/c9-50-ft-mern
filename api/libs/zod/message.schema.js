@@ -1,7 +1,7 @@
 const { z } = require('zod')
 
 const sendMessageSchema = z.object({
-  revieverId: z.string(),
+  chatId: z.string(),
   message: z.string()
 })
 
