@@ -33,9 +33,9 @@ const findChatsByUserId = async (userId) => {
 
 const findChatByChatId = async (chatId) => {
   try {
-    const roomChatFound = await ChatModel.findOne({ _id: chatId })
+    const messageInChat = await Message.find({ chat: chatId }).populate('sender', 'name').populate('chat', 'users')
     return {
-      id: roomChatFound,
+      data: messageInChat,
       message: 'Room chat found'
     }
   } catch (error) {
