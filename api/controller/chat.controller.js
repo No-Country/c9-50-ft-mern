@@ -15,7 +15,7 @@ const createChat = async (req, res, next) => {
     const { colaboratorId } = req.body
     const { userId } = req.user
     const newChat = await addChat(colaboratorId, userId)
-    success(200, res, { message: newChat.message, payload: newChat.chatId })
+    success(200, res, { message: newChat.message, payload: newChat.data })
   } catch (error) {
     next(error)
   }
@@ -35,7 +35,7 @@ const chatById = async (req, res, next) => {
   try {
     const { chatId } = req.params
     const roomChat = await findChatByChatId(chatId)
-    success(200, res, { message: roomChat.message, payload: roomChat.data })
+    success(200, res, { message: roomChat.message, payload: roomChat.id })
   } catch (error) {
     next(error)
   }
