@@ -1,11 +1,11 @@
 const Message = require('../db/models/messages.model')
 const ChatModel = require('../db/models/chat.model')
 
-const addMessage = async (senderId, message, chatId) => {
+const addMessage = async ({ sender, content, chat }) => {
   try {
-    await new Message({ sender: senderId, Content: message, chat: chatId }).save()
-    return { message: 'Adding message succefully' }
+    return await new Message({ sender, content, chat }).save()
   } catch (error) {
+    console.log(error)
     return { message: 'Error adding message' }
   }
 }

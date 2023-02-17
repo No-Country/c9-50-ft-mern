@@ -1,3 +1,8 @@
+const { addMessage } = require('../../services/chat.services')
+const { encode } = require('../../utils/jwtAuth')
+
+const { SECRET } = process.env
+
 class Socket {
   constructor(io) {
     this.io = io
@@ -6,7 +11,23 @@ class Socket {
 
   socketEvents() {
     this.io.on('connection', async (socket) => {
-      console.log(socket.handshake.query.token)
+      const { token } = socket.handshake.query
+
+      try {
+        const { userId } = encode(token, SECRET)
+        console.log(`Connected user ${userId}`)
+
+        socket.on('join-chat', (chatId) => {
+          socket.join(chatId)
+        })
+
+        socket.on('message', async (payload) => {
+          const newMessage = await addMessage(payload)
+          this.io.to(payload.chat).emit('messages', JSON.parse(JSON.stringify(newMessage)))
+        })
+      } catch (error) {
+        socket.disconnect()
+      }
     })
   }
 }
