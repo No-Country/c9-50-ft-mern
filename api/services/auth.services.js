@@ -29,7 +29,7 @@ const findUser = async (data) => {
   }
 
   const validated = await bcrypt.compare(password, user.password)
-
+  await User.updateOne({ email }, { isOnline: true })
   if (validated) {
     const token = decode(secret, { userId: user.id, userRole: user.role.tipo })
     return { token, _id: user._id, role: user.role.tipo, name: user.name, message: 'Login Succes' }
@@ -64,4 +64,13 @@ const changePasswordDB = async (userId, newPassword) => {
   }
 }
 
-module.exports = { saveUser, findUser, passwordReset, changePasswordDB }
+const disconnectUser = async (userId) => {
+  try {
+    await User.updateOne({ _id: userId }, { isOnline: false })
+    return { message: 'User disconnected' }
+  } catch (error) {
+    return { message: 'Failed to disconnect user' }
+  }
+}
+
+module.exports = { saveUser, findUser, passwordReset, changePasswordDB, disconnectUser }
