@@ -75,11 +75,8 @@ const disconnectUser = async (userId) => {
 
 const updateOneUser = async (userId, data) => {
   try {
-    const user = await User.findOne({ _id: userId })
-    const newData = { ...user, data }
-    const newuser = await User.updateOne({ _id: userId }, { newData })
-    const newUserInfo = { name: newuser.name, email: newuser.email, occupation: newuser.occupatiom }
-    return { message: 'User updated successfully', data: newUserInfo }
+    await User.updateOne({ _id: userId }, { data })
+    return { message: 'User updated successfully' }
   } catch (error) {
     return 'There was an error updating the user, try again later'
   }
