@@ -17,22 +17,16 @@ export const ColaboradorWaiting = () => {
             />
           </div>
           <div className='ml-5 flex flex-col items-start'>
-            <h3 className='text-3xl sm:text-xl md:text-3xl font-semibold'>Mi Perfil</h3>
-            <p className='text-md sm:text-sm md:text-md '>Mi Profesion</p>
+            <h3 className='text-3xl font-semibold'>Mi Perfil</h3>
+            <p className='text-md '>Mi Profesion</p>
           </div>
         </div>
-        <div className='flex flex-row space-x-2 sm:space-x-0 w-4/5 sm:w-80 justify-center gap-5 sm:gap-0 sm:justify-between h-full items-center'>
+        <div className='flex flex-row space-x-2 sm:space-x-0 w-4/5 sm:w-80 justify-center sm:justify-end sm:pr-10 h-full items-center'>
           <button
             className='sm:w-2/5 py-2 sm:px-0 px-3 w-auto bg-sky-500 text-white'
             onClick={() => navigate('/tusurls')}
           >
             Configuracion
-          </button>
-          <button
-            className='sm:w-2/5 py-2 sm:px-0 px-3 w-auto bg-sky-500 text-white'
-            onClick={() => navigate('/chat')}
-          >
-            Mis Chats
           </button>
         </div>
       </div>
@@ -59,7 +53,7 @@ export const ColaboradorWaiting = () => {
               </div>
             </div>
             <div className='flex flex-row items-center h-full'>
-              <button className='w-32 text-white bg-sky-500 h-10' onClick={() => navigate('/chat')}>
+              <button className='w-32 text-white bg-sky-500 h-10' onClick={() => navigate('/chatting')}>
                 IR AL CHAT
               </button>
             </div>
