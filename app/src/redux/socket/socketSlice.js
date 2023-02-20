@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import { io } from 'socket.io-client'
 
 const initialState = {
-  online: false
+  online: false,
+  socket: undefined
 }
 
 export const socketSlice = createSlice({
@@ -20,7 +21,7 @@ export const socketSlice = createSlice({
 
         state.online = true
 
-        console.log(socket)
+        state.socket = socket
       } catch (error) {
         throw new Error(error)
       }
