@@ -8,7 +8,7 @@ import { startLogin } from '../../redux/auth/thunks'
 
 const schema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
-  password: z.string().min(1, { message: 'Required' })
+  password: z.string().min(8, { message: 'Password must be 8 characters or longer' })
 })
 
 export const FormLogin = () => {
