@@ -8,6 +8,10 @@ const registerRoleSchema = z
   })
   .partial()
 
+const modifyUser = z.object({
+  refered: z.string(),
+  mettUrl: z.string()
+})
 const requiredRole = registerRoleSchema.required({ tipo: true })
 
-module.exports = { registerRoleSchema, requiredRole }
+module.exports = { registerRoleSchema, requiredRole, modifyUser }

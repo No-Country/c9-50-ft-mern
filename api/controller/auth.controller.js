@@ -62,7 +62,7 @@ const updateUser = async (req, res, next) => {
   const { userId } = req.user
   try {
     const data = await updateOneUser(userId, req.body)
-    success(200, res, { message: data.message, payload: data.data })
+    success(200, res, { message: data.message })
   } catch (err) {
     next(err)
   }

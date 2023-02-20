@@ -15,6 +15,7 @@ const {
   updateUser
 } = require('../controller/auth.controller')
 const { sendMessage } = require('../controller/chat.controller')
+const { modifyUser } = require('../libs/zod/role.schema')
 const { checkjwt } = require('../middlewares/authHandler')
 const { sendMessageSchema } = require('../libs/zod/message.schema')
 const { getConnectedUsers } = require('../controller/user.controller')
@@ -32,6 +33,6 @@ router.post(
 router.post('/sendMessage', [validatorHandle(sendMessageSchema, 'body'), checkjwt], sendMessage)
 router.get('/getConnectedUsers', checkjwt, getConnectedUsers)
 router.get('/logout', checkjwt, logout)
-router.post('/modifyUser', checkjwt, validatorHandle(registerUserSchema, 'body'), updateUser)
+router.post('/modifyUser', checkjwt, validatorHandle(modifyUser, 'body'), updateUser)
 
 module.exports = router
