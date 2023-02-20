@@ -7,9 +7,9 @@ const calendarSchema = new Schema(
     // Similar a mensajes dejo tipe String, modificalo para la relacion
     colaboratorId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     pacientId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    endHour: { type: String, unique: true, required: true },
+    endHour: { type: Date, unique: true, required: true },
     // habria que definir si lo vamos a usar numerico o tipo string
-    startHour: { type: String, unique: true, required: true }
+    startHour: { type: Date, unique: true, required: true }
   },
   {
     timestamps: true
