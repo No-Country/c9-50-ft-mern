@@ -3,12 +3,20 @@ import { useNavigate } from 'react-router-dom'
 
 export const Modal = () => {
   const navigate = useNavigate()
+
+  // const handleMessage = (messageInfo) => {
+  //   socket.emit('message', messageInfo)
+  // }
+
   return (
     <>
       <div className='w-full relative h-screen'>
         <div className='flex flex-col w-full h-full items-end'>
           <div className='flex flex-row right-0 w-full p bg-slate-500'>
-            <div className='cursor-pointer h-full flex flex-row items-center ml-5 text-white text-xl' onClick={() => navigate('/chat')}>
+            <div
+              className='cursor-pointer h-full flex flex-row items-center ml-5 text-white text-xl'
+              onClick={() => navigate('/chat')}
+            >
               <AiOutlineArrowLeft />
             </div>
             <div className='flex flex-row w-full h-24 pl-10 items-center space-x-3'>
