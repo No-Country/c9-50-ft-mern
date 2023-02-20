@@ -59,17 +59,20 @@ const findChatsByUserId = async (userId) => {
 
 const findChatByChatId = async (chatId) => {
   try {
-    const messageInChat = await Message.find({ chat: chatId })
+    const infoInChat = await ChatModel.findOne({ _id: chatId }).populate('users', 'name role')
+    const messages = await Message.find({ chat: chatId })
       .populate('sender', 'name')
       .populate('chat', 'users')
-    if (messageInChat.length) {
+    if (messages.length) {
       return {
-        data: messageInChat,
+        data: {
+          infoInChat,
+          messages
+        },
         message: 'Room chat found'
       }
     } else {
-      const infoInChat = await ChatModel.findOne({ _id: chatId })
-        .populate('users', 'name')
+      const infoInChat = await ChatModel.findOne({ _id: chatId }).populate('users', 'name')
       return {
         infoInChat
       }
