@@ -17,8 +17,12 @@ class Socket {
         const { userId } = encode(token, SECRET)
         console.log(`Connected user ${userId}`)
 
-        socket.on('join-chat', (chatId) => {
+        socket.on('join-room', (chatId) => {
           socket.join(chatId)
+        })
+
+        socket.on('leave-room', (chatId) => {
+          socket.leave(chatId)
         })
 
         socket.on('message', async (payload) => {
