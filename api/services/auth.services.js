@@ -73,4 +73,22 @@ const disconnectUser = async (userId) => {
   }
 }
 
-module.exports = { saveUser, findUser, passwordReset, changePasswordDB, disconnectUser }
+const updateOneUser = async (userId, data) => {
+  try {
+    const user = await User.findOne({ _id: userId })
+    const newData = { ...user, data }
+    const newuser = await User.updateOne({ _id: userId }, { newData })
+    const newUserInfo = { name: newuser.name, email: newuser.email, occupation: newuser.occupatiom }
+    return { message: 'User updated successfully', data: newUserInfo }
+  } catch (error) {
+    return 'There was an error updating the user, try again later'
+  }
+}
+module.exports = {
+  saveUser,
+  findUser,
+  passwordReset,
+  changePasswordDB,
+  disconnectUser,
+  updateOneUser
+}
