@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const validatorHandle = require('../middlewares/validatorHandler')
-const { CreateCalendar, UpdateCalendar, GetCalendar } = require('../libs/zod/user.schema.js')
+const { CreateCalendar, UpdateCalendar, GetCalendar } = require('../libs/zod/calendar.schema.js')
 const {
   createCalendar,
   updateCalendar,

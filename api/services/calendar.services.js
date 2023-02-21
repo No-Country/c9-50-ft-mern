@@ -37,4 +37,3 @@ const updateEvent = async (id, body) => {
 }
 
 module.exports = { save, deleteEvent, get, getAll, updateEvent }
-c 
