@@ -26,11 +26,11 @@ export const ChatView = () => {
         </div>
         <div className='flex flex-col w-full absolute top-24 left-0 h-full bg-neutral-100'>
           {/* Contact 1 */}
-          {personas.map((per) => (
+          {personas?.map((per) => (
             <div
               key={per.id}
               className='flex flex-row items-center space-x-3 pl-4 w-full h-24 border-b-2 cursor-pointer'
-              onClick={() => navigate('/chatting')}
+              onClick={() => navigate(`/chat/${per.id}`)}
             >
               <div className='h-16 w-16 overflow-hidden rounded-full'>
                 <img
