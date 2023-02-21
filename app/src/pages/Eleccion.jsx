@@ -1,20 +1,31 @@
+import { useEffect, useState } from 'react'
 import { Navbar } from '../components/shared/Navbar'
 import { Footer } from '../components/shared/Footer'
 import { Matchcolaborator } from '../components/matchcolaborador/matchcolaborator'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { getChats } from '../redux/profile/thunks'
+import { useSelector } from 'react-redux'
+import axios from 'axios'
 
 export const Eleccion = () => {
-  const { token, name } = useSelector((state) => state.auth)
-  const dispatch = useDispatch()
+  const { token } = useSelector((state) => state.auth)
+  const [connectedUsers, setConnetedUsers] = useState([])
+
+  const getConnectedUsers = async () => {
+    const { data } = await axios.get('/api/user/getconnectedusers', {
+      headers: {
+        Authorization: `Barer ${token}`
+      }
+    })
+    setConnetedUsers(data.payload)
+  }
+
   useEffect(() => {
-    dispatch(getChats(token, name))
+    getConnectedUsers()
   }, [])
+
   return (
     <div className='flex flex-col justify-between h-screen'>
       <Navbar />
-      <Matchcolaborator />
+      <Matchcolaborator users={connectedUsers} />
       <Footer />
     </div>
   )
