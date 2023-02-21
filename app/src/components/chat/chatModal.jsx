@@ -1,12 +1,29 @@
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
+import * as z from 'zod'
 
+import { useSelector } from 'react-redux'
+const schema = z.object({
+  chatMessage: z.string().min(1, { message: 'Message is required' })
+})
 export const Modal = () => {
   const navigate = useNavigate()
+  const { socket } = useSelector((state) => state.socket)
+  const {
+    register,
+    handleSubmit,
 
-  // const handleMessage = (messageInfo) => {
-  //   socket.emit('message', messageInfo)
-  // }
+    formState: { errors }
+  } = useForm({
+    resolver: zodResolver(schema)
+  })
+
+  const onSubmit = (data) => {
+    console.log(data)
+    socket.emit('message', data)
+  }
 
   return (
     <>
@@ -44,15 +61,21 @@ export const Modal = () => {
             <form
               action=''
               className='absolute w-full flex flex-row justify-center bottom-10 gap-4'
+              onSubmit={handleSubmit(onSubmit)}
             >
               <input
+                name='chatMessage'
                 type='text'
                 placeholder='Escribe un mensaje'
-                className='w-3/4 p-4 rounded-lg border-none outline-none bg-neutral-200'
+                className='w-3/4 p-4 rounded-lg border-none outline-none bg-neutral-200
+                '
+                {...register('chatMessage', { required: true, minLength: 1 })}
               />
+
               <button
                 type='submit'
-                className='bg-sky-500 py-5 px-6 rounded-full font-bold text-white'
+                className='bg-primary py-5 px-6 hover:bg-primaryHover rounded-full font-bold text-white'
+                disabled={!!errors.chatMessage?.message}
               >
                 <AiOutlineArrowRight />
               </button>

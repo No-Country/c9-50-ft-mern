@@ -14,10 +14,10 @@ export const SalaChat = () => {
   // }, [])
 
   return (
-    <>
+    <div className='flex flex-col justify-between h-screen'>
       <Navbar />
       <Modal />
       <Footer />
-    </>
+    </div>
   )
 }
