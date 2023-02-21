@@ -59,6 +59,14 @@ export const HeroContacto = () => {
                 className='relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm m-5'
                 placeholder='Ingrese su número telefónico'
               />
+               <input
+                id='number-phone'
+                name='number-phone'
+                type='number-phone'
+                autoComplete='email'
+                className='relative block w-full h-20 appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm m-5'
+                placeholder='Ingrese su pregunta'
+              />
               <div>
                 <button
                   type='submit'
