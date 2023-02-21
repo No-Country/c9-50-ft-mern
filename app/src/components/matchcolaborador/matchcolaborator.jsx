@@ -1,12 +1,34 @@
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import axios from 'axios'
 
-const personas = [
-  { id: 1, nombre: 'Marcela Rodriguez', last: 'Saludos' },
-  { id: 2, nombre: 'Alejandra Jimenez', last: 'Genial' }
-]
-
-export const Matchcolaborator = () => {
+export const Matchcolaborator = ({ users }) => {
+  const { token } = useSelector((state) => state.auth)
   const navigate = useNavigate()
+
+  const handleCreateChat = async (colaboratorId) => {
+    const {
+      data: { payload }
+    } = await axios.post(
+      '/api/chat',
+      { colaboratorId },
+      {
+        headers: {
+          Authorization: `Barer ${token}`
+        }
+      }
+    )
+
+    if (payload.infoInChat) {
+      const { _id } = payload.infoInChat
+      navigate(`/chat/${_id}`)
+      return
+    }
+
+    const { _id } = payload
+    navigate(`/chat/${_id}`)
+  }
+
   return (
     <>
       <div className='py-20 bg-gray-50 h-full'>
@@ -15,14 +37,14 @@ export const Matchcolaborator = () => {
         </p>
         {/* Resultados */}
         <div className='w-3/4 m-auto mb-16'>
-          <p className='text-xl font-normal'>2 Resultados Encontrados</p>
+          <p className='text-xl font-normal'>{users.length} Resultados Encontrados</p>
         </div>
         {/* Primer Card */}
-        {personas.map((paciente) => {
+        {users.map(({ _id, name, occupation }) => {
           return (
             <>
               <div
-                key={paciente.id}
+                key={_id}
                 className='flex flex-col justify-center items-center w-3/4 h-auto p-5 sm:py-2 sm:px-8 m-auto bg-neutral-300 mb-8 space-y-10 sm:flex-row sm:justify-between md:flex-row md:justify-between'
               >
                 <div className='flex flex-col sm:flex-row md:flex-row md:items-center space-y-5 sm:space-y-0 items-center space-x-6'>
@@ -34,13 +56,13 @@ export const Matchcolaborator = () => {
                     />
                   </div>
                   <div className='flex flex-col items-start'>
-                    <h2 className='font-semibold text-xl'>{paciente.nombre}</h2>
-                    <p>Profesion</p>
+                    <h2 className='font-semibold text-xl'>{name}</h2>
+                    <p>Profesion: {occupation}</p>
                   </div>
                 </div>
                 <div className='h-16 w-40 my-auto'>
                   <button
-                    onClick={() => navigate('/chatting')}
+                    onClick={() => handleCreateChat(_id)}
                     className='w-full h-4/5 bg-sky-500 text-white hover:bg-sky-600 transition-all -mt-4'
                   >
                     INICIAR CHAT
