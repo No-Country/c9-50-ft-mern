@@ -1,10 +1,12 @@
 const User = require('../db/models/user.model')
 
-const getConnectedColaborator = async () => {
+const getConnectedColaborator = async (userId) => {
   try {
-    const users = await User.find({ isOnline: true })
+    const users = await User.find({ isOnline: true, _id: { $ne: userId } })
     const collaborators = []
-    users.forEach(e => { if (e.role.tipo === 'COLABORATOR') collaborators.push(e) })
+    users.forEach((e) => {
+      if (e.role.tipo === 'COLABORATOR') collaborators.push(e)
+    })
     return {
       data: collaborators,
       message: 'Online collaborators successfully found'
@@ -14,11 +16,13 @@ const getConnectedColaborator = async () => {
   }
 }
 
-const getConnectedPatient = async () => {
+const getConnectedPatient = async (userId) => {
   try {
-    const users = await User.find({ isOnline: true })
+    const users = await User.find({ isOnline: true, _id: { $ne: userId } })
     const collaborators = []
-    users.forEach(e => { if (e.role.tipo === 'PATIENT') collaborators.push(e) })
+    users.forEach((e) => {
+      if (e.role.tipo === 'PATIENT') collaborators.push(e)
+    })
     return {
       data: collaborators,
       message: 'Online collaborators successfully found'
