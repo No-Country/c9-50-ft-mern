@@ -1,16 +1,18 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import * as z from 'zod'
-
+import { getChatById } from '../../redux/profile/thunks'
 import { useSelector } from 'react-redux'
 const schema = z.object({
   chatMessage: z.string().min(1, { message: 'Message is required' })
 })
 export const Modal = () => {
+  const { id } = useParams()
   const navigate = useNavigate()
   const { socket } = useSelector((state) => state.socket)
+  const { token } = useSelector((state) => state.auth)
   const {
     register,
     handleSubmit,
@@ -24,7 +26,7 @@ export const Modal = () => {
     console.log(data)
     socket.emit('message', data)
   }
-
+  getChatById(id, token)
   return (
     <>
       <div className='w-full relative h-screen'>

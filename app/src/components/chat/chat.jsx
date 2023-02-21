@@ -1,11 +1,16 @@
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
-const personas = [
-  { id: 1, nombre: 'Marcela Rodriguez', last: 'Saludos' },
-  { id: 2, nombre: 'Alejandra Jimenez', last: 'Genial' }
-]
+import { useSelector } from 'react-redux'
+import { getChats } from '../../redux/profile/thunks'
+
 export const ChatView = () => {
   const navigate = useNavigate()
+  const { token } = useSelector((state) => state.auth)
+  const { name } = useSelector((state) => state.auth)
+  const { chats } = useSelector((state) => state.profile)
+
+  getChats(token, name)
+
   return (
     <>
       <div className='w-full h-screen relative overflow-hidden flex flex-col'>
@@ -26,11 +31,11 @@ export const ChatView = () => {
         </div>
         <div className='flex flex-col w-full absolute top-24 left-0 h-full bg-neutral-100'>
           {/* Contact 1 */}
-          {personas?.map((per) => (
+          {chats?.map((chat) => (
             <div
-              key={per.id}
+              key={chat.id}
               className='flex flex-row items-center space-x-3 pl-4 w-full h-24 border-b-2 cursor-pointer'
-              onClick={() => navigate(`/chat/${per.id}`)}
+              onClick={() => navigate(`/chat/${chat._id}`)}
             >
               <div className='h-16 w-16 overflow-hidden rounded-full'>
                 <img
@@ -39,8 +44,8 @@ export const ChatView = () => {
                 />
               </div>
               <div className='flex-col'>
-                <h2 className=' text-sm sm:text-md md:text-md font-semibold'>{per.nombre}</h2>
-                <p className='text-sm'>{per.last}</p>
+                <h2 className=' text-sm sm:text-md md:text-md font-semibold'>{chat.users[0]}</h2>
+                <p className='text-sm'>{}</p>
               </div>
             </div>
           ))}
