@@ -1,14 +1,39 @@
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
+import * as z from 'zod'
 
+import { useSelector } from 'react-redux'
+const schema = z.object({
+  chatMessage: z.string().min(1, { message: 'Message is required' })
+})
 export const Modal = () => {
   const navigate = useNavigate()
+  const { socket } = useSelector((state) => state.socket)
+  const {
+    register,
+    handleSubmit,
+
+    formState: { errors }
+  } = useForm({
+    resolver: zodResolver(schema)
+  })
+
+  const onSubmit = (data) => {
+    console.log(data)
+    socket.emit('message', data)
+  }
+
   return (
     <>
       <div className='w-full relative h-screen'>
         <div className='flex flex-col w-full h-full items-end'>
           <div className='flex flex-row right-0 w-full p bg-slate-500'>
-            <div className='cursor-pointer h-full flex flex-row items-center ml-5 text-white text-xl' onClick={() => navigate('/chat')}>
+            <div
+              className='cursor-pointer h-full flex flex-row items-center ml-5 text-white text-xl'
+              onClick={() => navigate('/chat')}
+            >
               <AiOutlineArrowLeft />
             </div>
             <div className='flex flex-row w-full h-24 pl-10 items-center space-x-3'>
@@ -36,15 +61,21 @@ export const Modal = () => {
             <form
               action=''
               className='absolute w-full flex flex-row justify-center bottom-10 gap-4'
+              onSubmit={handleSubmit(onSubmit)}
             >
               <input
+                name='chatMessage'
                 type='text'
                 placeholder='Escribe un mensaje'
-                className='w-3/4 p-4 rounded-lg border-none outline-none bg-neutral-200'
+                className='w-3/4 p-4 rounded-lg border-none outline-none bg-neutral-200
+                '
+                {...register('chatMessage', { required: true, minLength: 1 })}
               />
+
               <button
                 type='submit'
-                className='bg-sky-500 py-5 px-6 rounded-full font-bold text-white'
+                className='bg-primary py-5 px-6 hover:bg-primaryHover rounded-full font-bold text-white'
+                disabled={!!errors.chatMessage?.message}
               >
                 <AiOutlineArrowRight />
               </button>
