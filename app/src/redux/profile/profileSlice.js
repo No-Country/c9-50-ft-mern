@@ -5,7 +5,8 @@ const initialState = {
   chats: [],
   activeChat: null,
   message: null,
-  messages: []
+  messages: [],
+  oldChats: []
 }
 
 export const profileSlice = createSlice({
