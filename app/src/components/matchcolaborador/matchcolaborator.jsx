@@ -1,12 +1,10 @@
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import axios from 'axios'
-import { getChats } from '../../redux/profile/thunks'
 
 export const Matchcolaborator = ({ users }) => {
   const { token } = useSelector((state) => state.auth)
   const navigate = useNavigate()
-  const dispatch = useDispatch()
   const handleCreateChat = async (colaboratorId) => {
     const {
       data: { payload }
@@ -29,7 +27,6 @@ export const Matchcolaborator = ({ users }) => {
     const { _id } = payload
     navigate(`/chat/${_id}`)
   }
-  dispatch(getChats(token, ''))
 
   return (
     <>

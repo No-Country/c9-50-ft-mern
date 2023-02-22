@@ -20,13 +20,17 @@ import { ProtectedRoutes } from './components/protectedRoutes/ProtectedRoutes'
 import { SocketsWrapper } from './components'
 import { useDispatch, useSelector } from 'react-redux'
 import { startRememberUser } from './redux/auth/thunks'
+import { useEffect } from 'react'
 
 AxiosInterceptor()
 
 function App() {
   const { status } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
-  dispatch(startRememberUser())
+  useEffect(() => {
+    dispatch(startRememberUser())
+  }, [])
+
   return (
     <BrowserRouter>
       <Routes>

@@ -1,11 +1,22 @@
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getChats } from '../../redux/profile/thunks'
 
 export const ChatView = () => {
   const navigate = useNavigate()
-  const { chats } = useSelector((state) => state.profile)
+  const { token, name, chats } = useSelector(({ socket, auth, profile }) => ({
+    ...auth,
+    ...socket,
+    ...profile
+  }))
   console.log(chats)
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getChats(token, name))
+  }, [])
   return (
     <>
       <div className='w-full h-screen relative overflow-hidden flex flex-col'>
