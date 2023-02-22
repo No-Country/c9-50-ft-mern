@@ -17,6 +17,9 @@ export const profileSlice = createSlice({
       state.name = payload.name
       state.chats = payload.chats
     },
+    loadActiveChat: (state, { payload }) => {
+      state.activeChat = payload.activeChat
+    },
     sendMessage: (state, { payload }) => {
       state.message = payload.message
       state.messages = payload.messages
@@ -24,5 +27,5 @@ export const profileSlice = createSlice({
   }
 })
 
-export const { loadProfile, sendMessage } = profileSlice.actions
+export const { loadProfile, sendMessage, loadActiveChat } = profileSlice.actions
 export default profileSlice.reducer
