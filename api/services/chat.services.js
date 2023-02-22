@@ -45,7 +45,7 @@ const findChatsByUserId = async (userId) => {
       users: {
         $all: [userId]
       }
-    })
+    }).populate()
     return {
       allChatsForUserId,
       message: 'Chats found'
@@ -59,6 +59,7 @@ const findChatsByUserId = async (userId) => {
 
 const findChatByChatId = async (chatId) => {
   try {
+
     let messageInChat = await Message.find({ chat: chatId })
       .populate({ path: 'sender', model: 'User' })
       .populate({ path: 'chat', model: 'Chat' })
@@ -68,6 +69,7 @@ const findChatByChatId = async (chatId) => {
     return {
       data: messageInChat,
       message: messageInChat
+ 
     }
   } catch (error) {
     return {
