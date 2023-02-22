@@ -1,16 +1,23 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import * as z from 'zod'
-
-import { useSelector } from 'react-redux'
+import { getChatById } from '../../redux/profile/thunks'
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
 const schema = z.object({
   chatMessage: z.string().min(1, { message: 'Message is required' })
 })
 export const Modal = () => {
+  const { id } = useParams()
   const navigate = useNavigate()
-  const { socket } = useSelector((state) => state.socket)
+  const dispatch = useDispatch()
+  const { socket, token, activeChat } = useSelector(({ socket, auth, profile }) => ({
+    ...auth,
+    ...socket,
+    ...profile
+  }))
   const {
     register,
     handleSubmit,
@@ -24,6 +31,9 @@ export const Modal = () => {
     console.log(data)
     socket.emit('message', data)
   }
+  useEffect(() => {
+    dispatch(getChatById(id, token))
+  }, [])
 
   return (
     <>
@@ -44,7 +54,9 @@ export const Modal = () => {
                 />
               </div>
               <div className='flex flex-col items-start justify-center'>
-                <h2 className='text-white text-lg font-light'>Marcela Rodriguez</h2>
+                <h2 className='text-white text-lg font-light'>
+                 {activeChat.payload.infoInChat.users[0].name}
+                </h2>
                 <p className='text-white font-medium text-sm'>Psicologa</p>
               </div>
             </div>
