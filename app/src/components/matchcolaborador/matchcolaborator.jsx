@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import axios from 'axios'
-import { getChats } from '../../redux/profile/thunks'
 
 export const Matchcolaborator = ({ users }) => {
   const { token } = useSelector((state) => state.auth)
