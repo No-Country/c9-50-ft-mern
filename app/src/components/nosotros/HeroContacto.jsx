@@ -1,4 +1,4 @@
-import { FaFacebookSquare, FaInstagram, FaEnvelope, FaPhoneAlt } from 'react-icons/fa'
+// import { FaFacebookSquare, FaInstagram, FaEnvelope, FaPhoneAlt } from 'react-icons/fa'
 
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
@@ -96,8 +96,7 @@ export const HeroContacto = () => {
   )
 }
 
-{
-  /* <div className='flex gap-3  justify-start'>
+/* <div className='flex gap-3  justify-start'>
 <FaPhoneAlt />
 <p className='tracking-widest'>Telefóno +1729303726</p>
 </div>
@@ -113,4 +112,3 @@ export const HeroContacto = () => {
 <FaEnvelope />
 <p className='tracking-widest'>Email meet_app@gmail.com</p>
 </div> */
-}
