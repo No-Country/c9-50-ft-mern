@@ -1,6 +1,6 @@
 const Message = require('../db/models/messages.model')
 const ChatModel = require('../db/models/chat.model')
-
+const UserModel = require('../db/models/user.model')
 const addMessage = async ({ sender, content, chat }) => {
   try {
     return await new Message({ sender, content, chat }).save()
@@ -59,23 +59,15 @@ const findChatsByUserId = async (userId) => {
 
 const findChatByChatId = async (chatId) => {
   try {
-    const infoInChat = await ChatModel.findOne({ _id: chatId }).populate('users', 'name role')
-    const messages = await Message.find({ chat: chatId })
-      .populate('sender', 'name')
-      .populate('chat', 'users')
-    if (messages.length) {
-      return {
-        data: {
-          infoInChat,
-          messages
-        },
-        message: 'Room chat found'
-      }
-    } else {
-      const infoInChat = await ChatModel.findOne({ _id: chatId }).populate('users', 'name')
-      return {
-        infoInChat
-      }
+    let messageInChat = await Message.find({ chat: chatId })
+      .populate({ path: 'sender', model: 'User' })
+      .populate({ path: 'chat', model: 'Chat' })
+      .exec()
+    messageInChat = await UserModel.populate(messageInChat, { path: 'chat.users', select: 'name' })
+
+    return {
+      data: messageInChat,
+      message: messageInChat
     }
   } catch (error) {
     return {
