@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { useDispatch, useSelector } from 'react-redux'
 import { startLogin } from '../../redux/auth/thunks'
+import { getChats } from '../../redux/profile/thunks'
 
 const schema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
