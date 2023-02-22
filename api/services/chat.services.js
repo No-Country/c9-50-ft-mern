@@ -45,7 +45,7 @@ const findChatsByUserId = async (userId) => {
       users: {
         $all: [userId]
       }
-    })
+    }).populate()
     return {
       allChatsForUserId,
       message: 'Chats found'
@@ -63,19 +63,13 @@ const findChatByChatId = async (chatId) => {
     const messages = await Message.find({ chat: chatId })
       .populate('sender', 'name')
       .populate('chat', 'users')
-    if (messages.length) {
-      return {
-        data: {
-          infoInChat,
-          messages
-        },
-        message: 'Room chat found'
-      }
-    } else {
-      const infoInChat = await ChatModel.findOne({ _id: chatId }).populate('users', 'name')
-      return {
-        infoInChat
-      }
+
+    return {
+      data: {
+        infoInChat,
+        messages
+      },
+      message: 'Room chat found'
     }
   } catch (error) {
     return {
