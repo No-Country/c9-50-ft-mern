@@ -11,7 +11,6 @@ export const ChatView = () => {
     ...socket,
     ...profile
   }))
-  console.log(chats)
 
   const dispatch = useDispatch()
   useEffect(() => {

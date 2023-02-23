@@ -13,7 +13,7 @@ export const Modal = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { socket, token, activeChat } = useSelector(({ socket, auth, profile }) => ({
+  const { socket, token, activeChat, role } = useSelector(({ socket, auth, profile }) => ({
     ...auth,
     ...socket,
     ...profile
@@ -33,7 +33,7 @@ export const Modal = () => {
   }
   useEffect(() => {
     dispatch(getChatById(id, token))
-  }, [])
+  }, [id])
 
   return (
     <>
@@ -55,7 +55,7 @@ export const Modal = () => {
               </div>
               <div className='flex flex-col items-start justify-center'>
                 <h2 className='text-white text-lg font-light'>
-                 {activeChat.payload.infoInChat.users[0].name}
+                  {role === 'PATIENT' ? activeChat?.infoInChat.users[0].name : activeChat?.infoInChat.users[1].name}
                 </h2>
                 <p className='text-white font-medium text-sm'>Psicologa</p>
               </div>

@@ -5,7 +5,6 @@ export const getChats = (token, name) => {
   return async (dispatch) => {
     try {
       const res = await axios.get('/api/chat', { headers: { Authorization: `Bearer ${token}` } })
-      console.log(res.data)
       dispatch(loadProfile({ chats: res.data.payload, name }))
     } catch (error) {
       const response = {
@@ -22,7 +21,7 @@ export const getChatById = (chatId, token) => {
       const res = await axios.get(`/api/chat/${chatId}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
-      dispatch(loadActiveChat({ activeChat: res.data }))
+      dispatch(loadActiveChat({ activeChat: res.data.payload }))
     } catch (error) {
       const response = {
         error: error.error,
