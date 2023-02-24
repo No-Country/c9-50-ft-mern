@@ -7,17 +7,15 @@ import { getChatById } from '../../redux/profile/thunks'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 const schema = z.object({
-  chatMessage: z.string().min(1, { message: 'Message is required' })
+  content: z.string().min(1, { message: 'Message is required' })
 })
 export const Modal = () => {
-  const { id } = useParams()
+  const { _id } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { socket, token, activeChat, role } = useSelector(({ socket, auth, profile }) => ({
-    ...auth,
-    ...socket,
-    ...profile
-  }))
+  const { token, role, id } = useSelector((state) => state.auth)
+  const { activeChat } = useSelector((state) => state.profile)
+  const { socket } = useSelector((state) => state.socket)
   const {
     register,
     handleSubmit,
@@ -26,14 +24,13 @@ export const Modal = () => {
   } = useForm({
     resolver: zodResolver(schema)
   })
-
-  const onSubmit = (data) => {
-    console.log(data)
-    socket.emit('message', data)
+  console.log(activeChat.infoInChat._id)
+  const onSubmit = ({ content }) => {
+    socket.emit('message', { content, sender: id, chat: activeChat.infoInChat._id })
   }
   useEffect(() => {
-    dispatch(getChatById(id, token))
-  }, [id])
+    dispatch(getChatById(_id, token))
+  }, [_id])
 
   return (
     <>
@@ -55,7 +52,9 @@ export const Modal = () => {
               </div>
               <div className='flex flex-col items-start justify-center'>
                 <h2 className='text-white text-lg font-light'>
-                  {role === 'PATIENT' ? activeChat?.infoInChat.users[0].name : activeChat?.infoInChat.users[1].name}
+                  {role === 'PATIENT'
+                    ? activeChat?.infoInChat.users[0].name
+                    : activeChat?.infoInChat.users[1].name}
                 </h2>
                 <p className='text-white font-medium text-sm'>Psicologa</p>
               </div>
@@ -81,7 +80,7 @@ export const Modal = () => {
                 placeholder='Escribe un mensaje'
                 className='w-3/4 p-4 rounded-lg border-none outline-none bg-neutral-200
                 '
-                {...register('chatMessage', { required: true, minLength: 1 })}
+                {...register('content', { required: true, minLength: 1 })}
               />
 
               <button
