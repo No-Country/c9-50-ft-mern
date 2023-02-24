@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+  chatId: null,
   name: false,
   chats: [],
   activeChat: null,
-  message: null,
   messages: [],
   oldChats: []
 }
@@ -19,13 +19,14 @@ export const profileSlice = createSlice({
     },
     loadActiveChat: (state, { payload }) => {
       state.activeChat = payload.activeChat
+      state.messages = payload.activeChat.messages
+      state.chatId = payload.activeChat.infoInChat._id
     },
-    sendMessage: (state, { payload }) => {
-      state.message = payload.message
-      state.messages = payload.messages
+    addMessage: (state, { payload }) => {
+      state.messages = [...state.messages, payload]
     }
   }
 })
 
-export const { loadProfile, sendMessage, loadActiveChat } = profileSlice.actions
+export const { loadProfile, loadActiveChat, addMessage } = profileSlice.actions
 export default profileSlice.reducer

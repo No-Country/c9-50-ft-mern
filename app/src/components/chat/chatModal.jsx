@@ -4,6 +4,7 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 import { useNavigate, useParams } from 'react-router-dom'
 import * as z from 'zod'
 import { getChatById } from '../../redux/profile/thunks'
+import { addMessage } from '../../redux/profile/profileSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 const schema = z.object({
@@ -13,24 +14,31 @@ export const Modal = () => {
   const { _id } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { token, role, id } = useSelector((state) => state.auth)
-  const { activeChat } = useSelector((state) => state.profile)
+  const { token, role, id: sender } = useSelector((state) => state.auth)
+  const { activeChat, messages, chatId } = useSelector((state) => state.profile)
   const { socket } = useSelector((state) => state.socket)
   const {
     register,
     handleSubmit,
-
     formState: { errors }
   } = useForm({
     resolver: zodResolver(schema)
   })
-  console.log(activeChat.infoInChat._id)
+
   const onSubmit = ({ content }) => {
-    socket.emit('message', { content, sender: id, chat: activeChat.infoInChat._id })
+    socket.emit('message', { content, sender, chat: _id })
   }
+
   useEffect(() => {
     dispatch(getChatById(_id, token))
   }, [_id])
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('new-messages', (message) => dispatch(addMessage(message)))
+      socket.emit('join-room', _id)
+    }
+  }, [socket, chatId])
 
   return (
     <>
@@ -64,10 +72,12 @@ export const Modal = () => {
             </div>
           </div>
           <div className='bg-white h-full w-full'>
-            <div className='flex flex-col w-full px-10 h-4/5 py-5'>
-              <span>
-                <span className='w-auto bg-neutral-200 px-5 py-3 rounded-lg '>mensaje</span>
-              </span>
+            <div className='flex flex-col gap-5 w-full px-10 py-5'>
+              {messages.map(({ _id, content }) => (
+                <span key={_id}>
+                  <span className='w-auto bg-neutral-200 px-5 py-3 rounded-lg'>{content}</span>
+                </span>
+              ))}
             </div>
             <form
               action=''
