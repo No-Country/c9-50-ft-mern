@@ -8,7 +8,7 @@ export const ChatView = () => {
   const navigate = useNavigate()
   const { token, name } = useSelector((state) => state.auth)
   const { chats } = useSelector((state) => state.profile)
-  console.log(chats)
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getChats(token, name))
