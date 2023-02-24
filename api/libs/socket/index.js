@@ -26,7 +26,9 @@ class Socket {
         })
 
         socket.on('message', async (payload) => {
+          console.log(payload)
           const newMessage = await addMessage(payload)
+          console.log(newMessage)
           this.io.to(payload.chat).emit('messages', JSON.parse(JSON.stringify(newMessage)))
         })
       } catch (error) {

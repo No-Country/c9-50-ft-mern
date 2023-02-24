@@ -58,7 +58,7 @@ function App() {
             }
           />
           <Route
-            path='/chat/:id'
+            path='/chat/:_id'
             element={
               <SocketsWrapper>
                 <SalaChat />
