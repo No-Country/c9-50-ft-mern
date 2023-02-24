@@ -34,7 +34,8 @@ const getCalendar = async (req, res, next) => {
 const getAllCalendar = async (req, res, next) => {
   try {
     const { page, limit } = req.query
-    const data = await getAll(page, limit)
+    const { role } = req.user
+    const data = await getAll(page, limit, role)
     success(200, res, { message: data.message, payload: data.data })
   } catch (error) {
     next(error)

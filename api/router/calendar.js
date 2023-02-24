@@ -13,9 +13,9 @@ const { checkjwt } = require('../middlewares/authHandler')
 const router = Router()
 
 router.post('/create', validatorHandle(CreateCalendar, 'body'), checkjwt, createCalendar)
-router.post('/update', validatorHandle(UpdateCalendar, 'body'), checkjwt, updateCalendar)
-router.post('/get', validatorHandle(GetCalendar, 'params'), checkjwt, getCalendar)
-router.post('/getAll', checkjwt, getAllCalendar)
-router.post('/delete', validatorHandle(GetCalendar, 'params'), checkjwt, deleteEvent)
+router.put('/update', validatorHandle(UpdateCalendar, 'body'), checkjwt, updateCalendar)
+router.get('/get', validatorHandle(GetCalendar, 'params'), checkjwt, getCalendar)
+router.get('/getAll', checkjwt, getAllCalendar)
+router.delete('/delete', validatorHandle(GetCalendar, 'params'), checkjwt, deleteEvent)
 
 module.exports = router
