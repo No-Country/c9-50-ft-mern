@@ -6,11 +6,8 @@ import { getChats } from '../../redux/profile/thunks'
 
 export const ChatView = () => {
   const navigate = useNavigate()
-  const { token, name, chats } = useSelector(({ socket, auth, profile }) => ({
-    ...auth,
-    ...socket,
-    ...profile
-  }))
+  const { token, name } = useSelector((state) => state.auth)
+  const { chats } = useSelector((state) => state.profile)
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -49,8 +46,9 @@ export const ChatView = () => {
                 />
               </div>
               <div className='flex-col'>
-                <h2 className=' text-sm sm:text-md md:text-md font-semibold'>{chat.users}</h2>
-                <p className='text-sm'>{}</p>
+                <h2 className=' text-sm sm:text-md md:text-md font-semibold'>
+                  {chat.users[0].name === name ? chat.users[1].name : chat.users[0].name}
+                </h2>
               </div>
             </div>
           ))}

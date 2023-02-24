@@ -45,7 +45,7 @@ const findChatsByUserId = async (userId) => {
       users: {
         $all: [userId]
       }
-    }).populate()
+    }).populate('users', 'name role')
     return {
       allChatsForUserId,
       message: 'Chats found'
