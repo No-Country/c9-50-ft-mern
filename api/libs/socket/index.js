@@ -19,17 +19,17 @@ class Socket {
 
         socket.on('join-room', (chatId) => {
           socket.join(chatId)
+          console.log(`New user on room ${chatId}`)
         })
 
         socket.on('leave-room', (chatId) => {
           socket.leave(chatId)
+          console.log(`User leaved room ${chatId}`)
         })
 
         socket.on('message', async (payload) => {
-          console.log(payload)
           const newMessage = await addMessage(payload)
-          console.log(newMessage)
-          this.io.to(payload.chat).emit('messages', JSON.parse(JSON.stringify(newMessage)))
+          this.io.to(payload.chat).emit('new-messages', JSON.parse(JSON.stringify(newMessage)))
         })
       } catch (error) {
         socket.disconnect()
