@@ -59,7 +59,10 @@ const findChatsByUserId = async (userId) => {
 
 const findChatByChatId = async (chatId) => {
   try {
-    const infoInChat = await ChatModel.findOne({ _id: chatId }).populate('users', 'name role')
+    const infoInChat = await ChatModel.findOne({ _id: chatId }).populate(
+      'users',
+      'name role occupation'
+    )
     const messages = await Message.find({ chat: chatId })
       .populate('sender', 'name')
       .populate('chat', 'users')

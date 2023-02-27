@@ -14,8 +14,8 @@ export const Modal = () => {
   const { _id } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { token, role, id: sender } = useSelector((state) => state.auth)
-  const { activeChat, messages, chatId } = useSelector((state) => state.profile)
+  const { token, id: sender } = useSelector((state) => state.auth)
+  const { activeChat, messages } = useSelector((state) => state.profile)
   const { socket } = useSelector((state) => state.socket)
   const {
     register,
@@ -35,10 +35,10 @@ export const Modal = () => {
 
   useEffect(() => {
     if (socket) {
-      socket.on('new-messages', (message) => dispatch(addMessage(message)))
       socket.emit('join-room', _id)
+      socket.on('new-messages', (message) => dispatch(addMessage(message)))
     }
-  }, [socket, chatId])
+  }, [])
 
   return (
     <>
@@ -58,11 +58,15 @@ export const Modal = () => {
           </div>
           <div className='flex flex-col items-start justify-center'>
             <h2 className='text-white text-lg font-light'>
-              {role === 'PATIENT'
-                ? activeChat?.infoInChat.users[0].name
-                : activeChat?.infoInChat.users[1].name}
+              {activeChat?.infoInChat.users[0]._id === sender // abstraer a una varible
+                ? activeChat?.infoInChat.users[1].name
+                : activeChat?.infoInChat.users[0].name}
             </h2>
-            <p className='text-white font-medium text-sm'>Psicologa</p>
+            <p className='text-white font-medium text-sm'>
+              {activeChat?.infoInChat.users[0]._id === sender
+                ? activeChat?.infoInChat.users[1].occupation
+                : activeChat?.infoInChat.users[0].occupation}
+            </p>
           </div>
         </div>
         <div className='mr-10 mt-4'>
