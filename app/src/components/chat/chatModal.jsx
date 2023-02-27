@@ -92,8 +92,8 @@ export const Modal = () => {
               >
                 {content}
               </div>
-            ))
-          )}
+                ))
+              )}
         </div>
       </div>
       <form
