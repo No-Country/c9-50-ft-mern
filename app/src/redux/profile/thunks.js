@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { loadProfile, loadActiveChat } from './profileSlice'
+import { loadProfile, loadActiveChat, loadingChat } from './profileSlice'
 
 export const getChats = (token, name) => {
   return async (dispatch) => {
@@ -18,6 +18,7 @@ export const getChats = (token, name) => {
 export const getChatById = (chatId, token) => {
   return async (dispatch) => {
     try {
+      dispatch(loadingChat())
       const res = await axios.get(`/api/chat/${chatId}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
