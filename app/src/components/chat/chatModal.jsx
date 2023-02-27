@@ -3,16 +3,17 @@ import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 import { useNavigate, useParams } from 'react-router-dom'
 import * as z from 'zod'
-import { getChatById } from '../../redux/profile/thunks'
 import { addMessage } from '../../redux/profile/profileSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import PuffLoader from 'react-spinners/PuffLoader'
+import { getChatById } from '../../redux/profile/thunks'
 const schema = z.object({
   content: z.string().min(1, { message: 'Message is required' })
 })
 export const Modal = () => {
   const { _id } = useParams()
+  const LastMessage = useRef(null)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { token, id: sender } = useSelector((state) => state.auth)
@@ -25,8 +26,8 @@ export const Modal = () => {
   } = useForm({
     resolver: zodResolver(schema)
   })
-  console.log(loading)
   const onSubmit = ({ content }) => {
+    console.log('messsages sended')
     socket.emit('message', { content, sender, chat: _id })
   }
 
@@ -40,6 +41,9 @@ export const Modal = () => {
       socket.on('new-messages', (message) => dispatch(addMessage(message)))
     }
   }, [])
+  useEffect(() => {
+    LastMessage.current?.scrollIntoView()
+  }, [messages])
 
   return (
     <>
@@ -77,20 +81,25 @@ export const Modal = () => {
       <div className='grow w-full px-5 overflow-hidden py-5'>
         <div className='h-full w-full overflow-y-auto overflow-x-hidden flex flex-col gap-4'>
           {loading
-            ? (<div className='flex justify-center items-center'>
+            ? (
+            <div className='flex justify-center items-center'>
               <PuffLoader color='#020101' />
             </div>
               )
             : (
                 messages.map(({ _id, content, sender: { _id: senderId } }) => (
-              <div
-                className={`w-[80%] max-w-2xl break-words px-5 py-3 rounded-lg ${
-                  senderId === sender ? 'bg-primary text-white ml-auto' : 'bg-neutral-200'
-                }`}
-                key={_id}
-              >
-                {content}
-              </div>
+              <>
+                <div
+                  className={`w-[80%] max-w-2xl break-words px-5 py-3 rounded-lg ${
+                    senderId === sender ? 'bg-primary text-white ml-auto' : 'bg-neutral-200'
+                  }`}
+                  key={_id}
+                >
+                  {content}
+                </div>
+
+                <div ref={LastMessage} key={LastMessage}></div>
+              </>
                 ))
               )}
         </div>
