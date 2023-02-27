@@ -7,6 +7,7 @@ import { getChatById } from '../../redux/profile/thunks'
 import { addMessage } from '../../redux/profile/profileSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
+import PuffLoader from 'react-spinners/PuffLoader'
 const schema = z.object({
   content: z.string().min(1, { message: 'Message is required' })
 })
@@ -15,7 +16,7 @@ export const Modal = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { token, id: sender } = useSelector((state) => state.auth)
-  const { activeChat, messages } = useSelector((state) => state.profile)
+  const { activeChat, messages, loading } = useSelector((state) => state.profile)
   const { socket } = useSelector((state) => state.socket)
   const {
     register,
@@ -24,7 +25,7 @@ export const Modal = () => {
   } = useForm({
     resolver: zodResolver(schema)
   })
-
+  console.log(loading)
   const onSubmit = ({ content }) => {
     socket.emit('message', { content, sender, chat: _id })
   }
@@ -75,16 +76,23 @@ export const Modal = () => {
       </div>
       <div className='grow w-full px-5 overflow-hidden py-5'>
         <div className='h-full w-full overflow-y-auto overflow-x-hidden flex flex-col gap-4'>
-          {messages.map(({ _id, content, sender: { _id: senderId } }) => (
-            <div
-              className={`w-[80%] max-w-2xl break-words px-5 py-3 rounded-lg ${
-                senderId === sender ? 'bg-primary text-white ml-auto' : 'bg-neutral-200'
-              }`}
-              key={_id}
-            >
-              {content}
+          {loading
+            ? (<div className='flex justify-center items-center'>
+              <PuffLoader color='#020101' />
             </div>
-          ))}
+              )
+            : (
+                messages.map(({ _id, content, sender: { _id: senderId } }) => (
+              <div
+                className={`w-[80%] max-w-2xl break-words px-5 py-3 rounded-lg ${
+                  senderId === sender ? 'bg-primary text-white ml-auto' : 'bg-neutral-200'
+                }`}
+                key={_id}
+              >
+                {content}
+              </div>
+                ))
+              )}
         </div>
       </div>
       <form

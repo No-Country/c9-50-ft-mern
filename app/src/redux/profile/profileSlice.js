@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   chatId: null,
+  loading: false,
   name: false,
   chats: [],
   activeChat: null,
@@ -17,7 +18,11 @@ export const profileSlice = createSlice({
       state.name = payload.name
       state.chats = payload.chats
     },
+    loadingChat: (state, { payload }) => {
+      state.loading = true
+    },
     loadActiveChat: (state, { payload }) => {
+      state.loading = false
       state.activeChat = payload.activeChat
       state.messages = payload.activeChat.messages
       state.chatId = payload.activeChat.infoInChat._id
@@ -28,5 +33,5 @@ export const profileSlice = createSlice({
   }
 })
 
-export const { loadProfile, loadActiveChat, addMessage } = profileSlice.actions
+export const { loadProfile, loadActiveChat, addMessage, loadingChat } = profileSlice.actions
 export default profileSlice.reducer
