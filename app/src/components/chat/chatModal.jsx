@@ -76,12 +76,14 @@ export const Modal = () => {
       </div>
       <div className='grow w-full px-5 overflow-hidden py-5'>
         <div className='h-full w-full overflow-y-auto overflow-x-hidden flex flex-col gap-4'>
-          {loading ? (
+          {loading
+            ? (
             <div className='flex justify-center items-center'>
               <PuffLoader color='#020101' />
             </div>
-          ) : (
-            messages.map(({ _id, content, sender: { _id: senderId } }) => (
+              )
+            : (
+                messages.map(({ _id, content, sender: { _id: senderId } }) => (
               <div
                 className={`w-[80%] max-w-2xl break-words px-5 py-3 rounded-lg ${
                   senderId === sender ? 'bg-primary text-white ml-auto' : 'bg-neutral-200'
