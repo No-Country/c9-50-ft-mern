@@ -42,68 +42,68 @@ export const Modal = () => {
 
   return (
     <>
-      <div className='w-full relative h-screen'>
-        <div className='flex flex-col w-full h-full items-end'>
-          <div className='flex flex-row right-0 w-full p bg-slate-500'>
-            <div
-              className='cursor-pointer h-full flex flex-row items-center ml-5 text-white text-xl'
-              onClick={() => navigate('/chat')}
-            >
-              <AiOutlineArrowLeft />
-            </div>
-            <div className='flex flex-row w-full h-24 pl-10 items-center space-x-3'>
-              <div className='flex items-center w-20 h-20 rounded-full overflow-hidden'>
-                <img
-                  src='https://previews.123rf.com/images/seventyfour74/seventyfour741708/seventyfour74170800167/83829695-retrato-de-hermosa-mujer-psic%C3%B3loga-con-gafas-posando-con-portapapeles-en-la-oficina-de-terapia-c%C3%B3mod.jpg'
-                  alt=''
-                />
-              </div>
-              <div className='flex flex-col items-start justify-center'>
-                <h2 className='text-white text-lg font-light'>
-                  {role === 'PATIENT'
-                    ? activeChat?.infoInChat.users[0].name
-                    : activeChat?.infoInChat.users[1].name}
-                </h2>
-                <p className='text-white font-medium text-sm'>Psicologa</p>
-              </div>
-            </div>
-            <div className='mr-10 mt-4'>
-              <p className='text-white text-4xl cursor-pointer'>...</p>
-            </div>
+      <div className='flex flex-row right-0 w-full p bg-slate-500'>
+        <div
+          className='cursor-pointer h-full flex flex-row items-center ml-5 text-white text-xl'
+          onClick={() => navigate('/chat')}
+        >
+          <AiOutlineArrowLeft />
+        </div>
+        <div className='flex flex-row w-full h-24 pl-10 items-center space-x-3'>
+          <div className='flex items-center w-20 h-20 rounded-full overflow-hidden'>
+            <img
+              src='https://previews.123rf.com/images/seventyfour74/seventyfour741708/seventyfour74170800167/83829695-retrato-de-hermosa-mujer-psic%C3%B3loga-con-gafas-posando-con-portapapeles-en-la-oficina-de-terapia-c%C3%B3mod.jpg'
+              alt=''
+            />
           </div>
-          <div className='bg-white h-full w-full'>
-            <div className='flex flex-col gap-5 w-full px-10 py-5'>
-              {messages.map(({ _id, content }) => (
-                <span key={_id}>
-                  <span className='w-auto bg-neutral-200 px-5 py-3 rounded-lg'>{content}</span>
-                </span>
-              ))}
-            </div>
-            <form
-              action=''
-              className='absolute w-full flex flex-row justify-center bottom-10 gap-4'
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <input
-                name='chatMessage'
-                type='text'
-                placeholder='Escribe un mensaje'
-                className='w-3/4 p-4 rounded-lg border-none outline-none bg-neutral-200
-                '
-                {...register('content', { required: true, minLength: 1 })}
-              />
-
-              <button
-                type='submit'
-                className='bg-primary py-5 px-6 hover:bg-primaryHover rounded-full font-bold text-white'
-                disabled={!!errors.chatMessage?.message}
-              >
-                <AiOutlineArrowRight />
-              </button>
-            </form>
+          <div className='flex flex-col items-start justify-center'>
+            <h2 className='text-white text-lg font-light'>
+              {role === 'PATIENT'
+                ? activeChat?.infoInChat.users[0].name
+                : activeChat?.infoInChat.users[1].name}
+            </h2>
+            <p className='text-white font-medium text-sm'>Psicologa</p>
           </div>
         </div>
+        <div className='mr-10 mt-4'>
+          <p className='text-white text-4xl cursor-pointer'>...</p>
+        </div>
       </div>
+      <div className='grow w-full px-5 overflow-hidden py-5'>
+        <div className='h-full w-full overflow-y-auto overflow-x-hidden flex flex-col gap-4'>
+          {messages.map(({ _id, content, sender: { _id: senderId } }) => (
+            <div
+              className={`w-[80%] max-w-2xl break-words px-5 py-3 rounded-lg ${
+                senderId === sender ? 'bg-primary text-white ml-auto' : 'bg-neutral-200'
+              }`}
+              key={_id}
+            >
+              {content}
+            </div>
+          ))}
+        </div>
+      </div>
+      <form
+        className='w-full flex flex-row justify-center bottom-10 gap-4 my-3'
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <input
+          name='chatMessage'
+          type='text'
+          placeholder='Escribe un mensaje'
+          className='w-3/4 p-4 rounded-lg border-none outline-none bg-neutral-200
+                '
+          {...register('content', { required: true, minLength: 1 })}
+        />
+
+        <button
+          type='submit'
+          className='bg-primary py-5 px-6 hover:bg-primaryHover rounded-full font-bold text-white'
+          disabled={!!errors.chatMessage?.message}
+        >
+          <AiOutlineArrowRight />
+        </button>
+      </form>
     </>
   )
 }
