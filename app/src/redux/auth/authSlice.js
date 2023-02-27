@@ -8,6 +8,8 @@ const initialState = {
   id: null,
   token: null,
   error: null,
+  bornDate: null,
+  occupation: null,
   errorMessage: null
 }
 export const authSlice = createSlice({
@@ -24,6 +26,8 @@ export const authSlice = createSlice({
       state.isLoading = false
       state.error = payload.error
       state.errorMessage = null
+      state.bornDate = payload.bornDate
+      state.occupation = payload.occupation
     },
     checkingCredentials: (state) => {
       state.status = 'checking'

@@ -32,7 +32,7 @@ const findUser = async (data) => {
   await User.updateOne({ email }, { isOnline: true })
   if (validated) {
     const token = decode(secret, { userId: user.id, userRole: user.role.tipo })
-    return { token, _id: user._id, role: user.role.tipo, name: user.name, message: 'Login Succes' }
+    return { token, _id: user._id, role: user.role.tipo, name: user.name, message: 'Login Succes', email: user.email, occupation: user.occupation, bornDate: user.bornDate }
   }
 
   throw new Error('Email or Password Incorrect')

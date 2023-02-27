@@ -26,11 +26,13 @@ export const startLogin = (data, remember) => {
     try {
       const { data: res } = await axios.post('/api/user/login', data)
       const response = {
-        email: null,
         name: res.payload.name,
         role: res.payload.role,
         id: res.payload._id,
         token: res.payload.token,
+        bornDate: res.payload.bornDate,
+        email: res.payload.email,
+        occupation: res.payload.occupation,
         error: res.error,
         errorMessage: res.error ? res.message : null
       }
@@ -41,6 +43,9 @@ export const startLogin = (data, remember) => {
             name: res.payload.name,
             role: res.payload.role,
             id: res.payload._id,
+            bornDate: res.payload.bornDate,
+            email: res.payload.email,
+            occupation: res.payload.occupation,
             token: res.payload.token
           })
         )
@@ -51,7 +56,10 @@ export const startLogin = (data, remember) => {
             name: res.payload.name,
             role: res.payload.role,
             id: res.payload._id,
-            token: res.payload.token
+            token: res.payload.token,
+            bornDate: res.payload.bornDate,
+            email: res.payload.email,
+            occupation: res.payload.occupation
           })
         )
       }

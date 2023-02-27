@@ -1,5 +1,5 @@
 const { success, error } = require('../Network/response')
-const { getConnectedColaborator, getConnectedPatient } = require('../services/user.services')
+const { getConnectedColaborator, getConnectedPatient, getUser } = require('../services/user.services')
 
 const getConnectedUsers = async (req, res, next) => {
   const { userRole, userId } = req.user
@@ -16,4 +16,14 @@ const getConnectedUsers = async (req, res, next) => {
   }
 }
 
-module.exports = { getConnectedUsers }
+const getProfile = async (req, res, next) => {
+  const { userId } = req.user
+  try {
+    const user = await getUser(userId)
+    success(200, res, { payload: user.data, message: user.message })
+  } catch (err) {
+    error(err, 400, res, { payload: err, message: err.message })
+  }
+}
+
+module.exports = { getConnectedUsers, getProfile }

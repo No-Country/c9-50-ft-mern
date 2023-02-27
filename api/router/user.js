@@ -34,5 +34,4 @@ router.post('/sendMessage', [validatorHandle(sendMessageSchema, 'body'), checkjw
 router.get('/getConnectedUsers', checkjwt, getConnectedUsers)
 router.get('/logout', checkjwt, logout)
 router.post('/modifyUser', checkjwt, validatorHandle(modifyUser, 'body'), updateUser)
-
 module.exports = router

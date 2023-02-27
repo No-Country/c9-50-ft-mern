@@ -9,7 +9,8 @@ import {
   SalaColaborador,
   NotFound,
   ColUrls,
-  SalaChat
+  SalaChat,
+  Profile
 } from './pages'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
@@ -81,6 +82,14 @@ function App() {
               </SocketsWrapper>
             }
           />
+            <Route
+            path='/profile'
+            element={
+              <SocketsWrapper>
+                <Profile/>
+              </SocketsWrapper>
+            }
+            />
         </Route>
         <Route path='/*' element={<NotFound />} />
       </Routes>
