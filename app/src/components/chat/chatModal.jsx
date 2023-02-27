@@ -13,7 +13,7 @@ const schema = z.object({
 })
 export const Modal = () => {
   const { _id } = useParams()
-  const LastMessage= useRef(null)
+  const LastMessage = useRef(null)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { token, id: sender } = useSelector((state) => state.auth)
@@ -41,9 +41,9 @@ export const Modal = () => {
       socket.on('new-messages', (message) => dispatch(addMessage(message)))
     }
   }, [])
-  useEffect(()=>{
-    LastMessage.current?.scrollIntoView();    
-  },[messages])
+  useEffect(() => {
+    LastMessage.current?.scrollIntoView()
+  }, [messages])
   return (
     <>
       <div className='flex flex-row right-0 w-full p bg-slate-500'>
@@ -88,7 +88,8 @@ export const Modal = () => {
             >
               {content}
             </div>
-          ))}<div ref={LastMessage}></div>
+          ))}
+          <div ref={LastMessage}></div>
         </div>
       </div>
       <form
