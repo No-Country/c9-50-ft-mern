@@ -7,6 +7,7 @@ import { getChatById } from '../../redux/profile/thunks'
 import { addMessage } from '../../redux/profile/profileSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
+import { VideoCameraIcon, CurrencyDollarIcon } from '@heroicons/react/24/solid'
 import PuffLoader from 'react-spinners/PuffLoader'
 const schema = z.object({
   content: z.string().min(1, { message: 'Message is required' })
@@ -70,9 +71,21 @@ export const Modal = () => {
             </p>
           </div>
         </div>
-        <div className='mr-10 mt-4'>
-          <p className='text-white text-4xl cursor-pointer'>...</p>
-        </div>
+        <div className='mr-10 mt-7 flex gap-7'>
+              <a target='blank' href={activeChat?.infoInChat?.users[0]?._id === sender ? activeChat?.infoInChat?.users[1]?.role?.mettUrl : activeChat?.infoInChat?.users[0]?.role?.mettUrl}>
+
+              <VideoCameraIcon
+                className='ml-2  mt-3 -mr-1 h-8 w-8 text-white hover:text-primary'
+                aria-hidden='true'
+                />
+                </a>
+              <a target='blank' href={activeChat?.infoInChat?.users[0]?._id === sender ? activeChat?.infoInChat?.users[1]?.role?.refered : activeChat?.infoInChat?.users[0]?.role?.refered}>
+              <CurrencyDollarIcon
+                className='ml-2 mt-3 -mr-1 h-8 w-8 text-white hover:text-primary'
+                aria-hidden='true'
+                />
+                </a>
+            </div>
       </div>
       <div className='grow w-full px-5 overflow-hidden py-5'>
         <div className='h-full w-full overflow-y-auto overflow-x-hidden flex flex-col gap-4'>
