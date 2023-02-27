@@ -53,7 +53,10 @@ export const ColaboradorWaiting = () => {
               </div>
             </div>
             <div className='flex flex-row items-center h-full'>
-              <button className='w-32 text-white bg-sky-500 h-10' onClick={() => navigate('/chatting')}>
+              <button
+                className='w-32 text-white bg-sky-500 h-10'
+                onClick={() => navigate('/chatting')}
+              >
                 IR AL CHAT
               </button>
             </div>
