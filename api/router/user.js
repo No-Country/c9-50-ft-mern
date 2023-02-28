@@ -25,11 +25,7 @@ const router = Router()
 router.post('/register', validatorHandle(registerUserSchema, 'body'), registerUser)
 router.post('/login', validatorHandle(loginUserSchema, 'body'), loginUser)
 router.post('/recover', validatorHandle(recoverPasswordSchema, 'body'), recoverPassword)
-router.post(
-  '/changePassword',
-  [validatorHandle(changePasswordSchema, 'body'), checkjwt],
-  changePassword
-)
+router.post('/changePassword', [validatorHandle(changePasswordSchema, 'body'), checkjwt], changePassword)
 router.post('/sendMessage', [validatorHandle(sendMessageSchema, 'body'), checkjwt], sendMessage)
 router.get('/getConnectedUsers', checkjwt, getConnectedUsers)
 router.get('/logout', checkjwt, logout)

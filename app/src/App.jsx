@@ -10,7 +10,8 @@ import {
   NotFound,
   ColUrls,
   SalaChat,
-  Profile
+  Profile,
+  ChangePassword
 } from './pages'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
@@ -87,6 +88,14 @@ function App() {
             element={
               <SocketsWrapper>
                 <Profile/>
+              </SocketsWrapper>
+            }
+            />
+            <Route
+            path='/changePassword'
+            element={
+              <SocketsWrapper>
+                <ChangePassword/>
               </SocketsWrapper>
             }
             />
