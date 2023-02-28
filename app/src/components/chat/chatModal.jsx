@@ -5,7 +5,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import * as z from 'zod'
 import { addMessage } from '../../redux/profile/profileSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
+import { VideoCameraIcon, CurrencyDollarIcon } from '@heroicons/react/24/solid'
 import PuffLoader from 'react-spinners/PuffLoader'
 import { getChatById } from '../../redux/profile/thunks'
 const schema = z.object({
@@ -22,13 +23,22 @@ export const Modal = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    reset
   } = useForm({
     resolver: zodResolver(schema)
   })
+  const [mensajes, setMensajes] = useState([])
+  useEffect(() => {
+    let newMenssages = []
+    newMenssages = new Set(messages)
+    const result = [...newMenssages]
+    setMensajes(result)
+  }, [messages])
   const onSubmit = ({ content }) => {
     console.log('messsages sended')
     socket.emit('message', { content, sender, chat: _id })
+    reset()
   }
 
   useEffect(() => {
@@ -39,7 +49,7 @@ export const Modal = () => {
     if (socket) {
       socket.emit('join-room', _id)
       socket.on('new-messages', (message) => dispatch(addMessage(message)))
-    }
+    } return () => socket.emit('leave-room', _id)
   }, [])
   useEffect(() => {
     LastMessage.current?.scrollIntoView()
@@ -74,8 +84,33 @@ export const Modal = () => {
             </p>
           </div>
         </div>
-        <div className='mr-10 mt-4'>
-          <p className='text-white text-4xl cursor-pointer'>...</p>
+        <div className='mr-10 mt-7 flex gap-7'>
+          <a
+            target='blank'
+            href={
+              activeChat?.infoInChat?.users[0]?._id === sender
+                ? activeChat?.infoInChat?.users[1]?.role?.mettUrl
+                : activeChat?.infoInChat?.users[0]?.role?.mettUrl
+            }
+          >
+            <VideoCameraIcon
+              className='ml-2  mt-3 -mr-1 h-8 w-8 text-white hover:text-primary'
+              aria-hidden='true'
+            />
+          </a>
+          <a
+            target='blank'
+            href={
+              activeChat?.infoInChat?.users[0]?._id === sender
+                ? activeChat?.infoInChat?.users[1]?.role?.refered
+                : activeChat?.infoInChat?.users[0]?.role?.refered
+            }
+          >
+            <CurrencyDollarIcon
+              className='ml-2 mt-3 -mr-1 h-8 w-8 text-white hover:text-primary'
+              aria-hidden='true'
+            />
+          </a>
         </div>
       </div>
       <div className='grow w-full px-5 overflow-hidden py-5'>
@@ -87,7 +122,7 @@ export const Modal = () => {
             </div>
               )
             : (
-                messages.map(({ _id, content, sender: { _id: senderId } }) => (
+                mensajes.map(({ _id, content, sender: { _id: senderId } }) => (
               <>
                 <div
                   className={`w-[80%] max-w-2xl break-words px-5 py-3 rounded-lg ${
