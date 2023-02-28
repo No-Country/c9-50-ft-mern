@@ -1,20 +1,19 @@
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import Avatar from 'react-avatar'
 const personas = [
   { id: 1, nombre: 'Marcela Rodriguez', last: 'Saludos' },
   { id: 2, nombre: 'Alejandra Jimenez', last: 'Genial' }
 ]
 export const ColaboradorWaiting = () => {
   const navigate = useNavigate()
+  const { name } = useSelector((state) => state.auth)
   return (
     <div className='flex flex-col items-center w-4/5 h-auto pb-28 m-auto mt-10'>
       <div className='flex flex-col space-y-8 sm:space-y-0 sm:flex-row items-center w-full sm:h-32 sm:justify-between'>
         <div className='h-full flex flex-row items-center justify-center sm:justify-start w-full sm:w-auto'>
           <div className='h-24 w-24 rounded-3xl flex justify-center items-center overflow-hidden'>
-            <img
-              className='h-full w-full'
-              src='https://www.angelacoronapsicologa.com/wp-content/uploads/2021/10/e6.jpg'
-              alt=''
-            />
+            <Avatar name={name} size='100' textSizeRatio={1.75} />
           </div>
           <div className='ml-5 flex flex-col items-start'>
             <h3 className='text-3xl font-semibold'>Mi Perfil</h3>
@@ -42,11 +41,7 @@ export const ColaboradorWaiting = () => {
           >
             <div className='flex flex-col space-y-5 sm:flex-row items-center sm:space-y-0'>
               <div className='w-16 h-16 overflow-hidden rounded-full flex flex-row justify-center items-center'>
-                <img
-                  className='h-full'
-                  src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0Q4JmxazuBpck48ReHTEyA1aVZNq5JOCWug&usqp=CAU'
-                  alt=''
-                />
+                <Avatar name={paciente.nombre} size='100' textSizeRatio={1.75} />
               </div>
               <div className='flex flex-row items-start justify-start ml-3'>
                 <p className='text-lg font-medium pb-4'>{paciente.nombre}</p>
