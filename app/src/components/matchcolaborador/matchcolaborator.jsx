@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import Avatar from 'react-avatar'
 import axios from 'axios'
 
 export const Matchcolaborator = ({ users }) => {
@@ -47,11 +48,7 @@ export const Matchcolaborator = ({ users }) => {
             >
               <div className='flex flex-col sm:flex-row md:flex-row md:items-center space-y-5 sm:space-y-0 items-center space-x-6'>
                 <div className='flex flex-row justify-center items-center rounded-full w-20 h-20 bg-black overflow-hidden'>
-                  <img
-                    className='w-full'
-                    src='https://previews.123rf.com/images/seventyfour74/seventyfour741708/seventyfour74170800167/83829695-retrato-de-hermosa-mujer-psic%C3%B3loga-con-gafas-posando-con-portapapeles-en-la-oficina-de-terapia-c%C3%B3mod.jpg'
-                    alt=''
-                  />
+                  <Avatar name={name} size='100' textSizeRatio={1.75} />
                 </div>
                 <div className='flex flex-col items-start'>
                   <h2 className='font-semibold text-xl'>{name}</h2>

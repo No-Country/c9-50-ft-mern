@@ -1,13 +1,17 @@
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getChats } from '../../redux/profile/thunks'
 import Avatar from 'react-avatar'
-const personas = [
-  { id: 1, nombre: 'Marcela Rodriguez', last: 'Saludos' },
-  { id: 2, nombre: 'Alejandra Jimenez', last: 'Genial' }
-]
+
 export const ColaboradorWaiting = () => {
+  const { token, name } = useSelector((state) => state.auth)
+  const { chats } = useSelector((state) => state.profile)
   const navigate = useNavigate()
-  const { name } = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getChats(token, name))
+  }, [])
   return (
     <div className='flex flex-col items-center w-4/5 h-auto pb-28 m-auto mt-10'>
       <div className='flex flex-col space-y-8 sm:space-y-0 sm:flex-row items-center w-full sm:h-32 sm:justify-between'>
@@ -34,23 +38,29 @@ export const ColaboradorWaiting = () => {
       </div>
       <div className='w-full flex flex-col items-center gap-5'>
         {/* Paciente 1 */}
-        {personas.map((paciente) => (
+        {chats.map((chat) => (
           <div
-            key={paciente.id}
+            key={chat._id}
             className='flex flex-col sm:flex-row sm:justify-between items-center px-6 w-full h-auto sm:h-20 mt-4'
           >
             <div className='flex flex-col space-y-5 sm:flex-row items-center sm:space-y-0'>
               <div className='w-16 h-16 overflow-hidden rounded-full flex flex-row justify-center items-center'>
-                <Avatar name={paciente.nombre} size='100' textSizeRatio={1.75} />
+                <Avatar
+                  name={chat.users[0].name === name ? chat.users[1].name : chat.users[0].name}
+                  size='100'
+                  textSizeRatio={1.75}
+                />
               </div>
               <div className='flex flex-row items-start justify-start ml-3'>
-                <p className='text-lg font-medium pb-4'>{paciente.nombre}</p>
+                <p className='text-lg font-medium pb-4'>
+                  {chat.users[0].name === name ? chat.users[1].name : chat.users[0].name}
+                </p>
               </div>
             </div>
             <div className='flex flex-row items-center h-full'>
               <button
                 className='w-32 text-white bg-sky-500 h-10'
-                onClick={() => navigate('/chatting')}
+                onClick={() => navigate(`/chat/${chat._id}`)}
               >
                 IR AL CHAT
               </button>
