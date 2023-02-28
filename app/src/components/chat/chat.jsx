@@ -1,9 +1,8 @@
-import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getChats } from '../../redux/profile/thunks'
-
+import Avatar from 'react-avatar'
 export const ChatView = () => {
   const navigate = useNavigate()
   const { token, name } = useSelector((state) => state.auth)
@@ -16,18 +15,9 @@ export const ChatView = () => {
   return (
     <>
       <div className='w-full h-screen relative overflow-hidden flex flex-col'>
-        <div
-          className='fixed bg-white p-5 rounded-full shadow-md bottom-8 left-5 text-4xl z-50 cursor-pointer'
-          onClick={() => navigate(-1)}
-        >
-          <AiOutlineArrowLeft />
-        </div>
         <div className='w-full flex flex-row justify-start items-center gap-10 absolute top-0  border-b-2 border-r-2 h-24 bg-slate-500 pl-6'>
           <div className='h-16 w-16 rounded-full overflow-hidden'>
-            <img
-              src='https://previews.123rf.com/images/seventyfour74/seventyfour741708/seventyfour74170800167/83829695-retrato-de-hermosa-mujer-psic%C3%B3loga-con-gafas-posando-con-portapapeles-en-la-oficina-de-terapia-c%C3%B3mod.jpg'
-              alt=''
-            />
+          <Avatar name={name} size='80' textSizeRatio={1.75} maxInitials={2} />
           </div>
           <p className='text-white font-ligth text-xl '>Mi Perfil</p>
         </div>
@@ -40,10 +30,7 @@ export const ChatView = () => {
               onClick={() => navigate(`/chat/${chat._id}`)}
             >
               <div className='h-16 w-16 overflow-hidden rounded-full'>
-                <img
-                  src='https://previews.123rf.com/images/seventyfour74/seventyfour741708/seventyfour74170800167/83829695-retrato-de-hermosa-mujer-psic%C3%B3loga-con-gafas-posando-con-portapapeles-en-la-oficina-de-terapia-c%C3%B3mod.jpg'
-                  alt=''
-                />
+              <Avatar name={chat.users[0].name === name ? chat.users[1].name : chat.users[0].name} size='80' textSizeRatio={1.75} maxInitials={2} />
               </div>
               <div className='flex-col'>
                 <h2 className=' text-sm sm:text-md md:text-md font-semibold'>

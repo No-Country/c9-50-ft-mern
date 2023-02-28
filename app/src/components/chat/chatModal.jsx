@@ -9,6 +9,7 @@ import { useEffect, useState, useRef } from 'react'
 import { VideoCameraIcon, CurrencyDollarIcon } from '@heroicons/react/24/solid'
 import PuffLoader from 'react-spinners/PuffLoader'
 import { getChatById } from '../../redux/profile/thunks'
+import Avatar from 'react-avatar'
 const schema = z.object({
   content: z.string().min(1, { message: 'Message is required' })
 })
@@ -49,7 +50,8 @@ export const Modal = () => {
     if (socket) {
       socket.emit('join-room', _id)
       socket.on('new-messages', (message) => dispatch(addMessage(message)))
-    } return () => socket.emit('leave-room', _id)
+    }
+    return () => socket.emit('leave-room', _id)
   }, [])
   useEffect(() => {
     LastMessage.current?.scrollIntoView()
@@ -66,9 +68,15 @@ export const Modal = () => {
         </div>
         <div className='flex flex-row w-full h-24 pl-10 items-center space-x-3'>
           <div className='flex items-center w-20 h-20 rounded-full overflow-hidden'>
-            <img
-              src='https://previews.123rf.com/images/seventyfour74/seventyfour741708/seventyfour74170800167/83829695-retrato-de-hermosa-mujer-psic%C3%B3loga-con-gafas-posando-con-portapapeles-en-la-oficina-de-terapia-c%C3%B3mod.jpg'
-              alt=''
+            <Avatar
+              name={
+                activeChat?.infoInChat.users[0]._id === sender // abstraer a una varible
+                  ? activeChat?.infoInChat.users[1].name
+                  : activeChat?.infoInChat.users[0].name
+              }
+              size='80'
+              textSizeRatio={1.75}
+              maxInitials={2}
             />
           </div>
           <div className='flex flex-col items-start justify-center'>
