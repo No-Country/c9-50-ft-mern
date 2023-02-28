@@ -45,7 +45,7 @@ export const Modal = () => {
     if (socket) {
       socket.emit('join-room', _id)
       socket.on('new-messages', (message) => dispatch(addMessage(message)))
-    }
+    } return () => socket.emit('leave-room', _id)
   }, [])
 
   return (
