@@ -3,17 +3,18 @@ import { useForm } from 'react-hook-form'
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 import { useNavigate, useParams } from 'react-router-dom'
 import * as z from 'zod'
-import { getChatById } from '../../redux/profile/thunks'
 import { addMessage } from '../../redux/profile/profileSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { VideoCameraIcon, CurrencyDollarIcon } from '@heroicons/react/24/solid'
 import PuffLoader from 'react-spinners/PuffLoader'
+import { getChatById } from '../../redux/profile/thunks'
 const schema = z.object({
   content: z.string().min(1, { message: 'Message is required' })
 })
 export const Modal = () => {
   const { _id } = useParams()
+  const LastMessage = useRef(null)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { token, id: sender } = useSelector((state) => state.auth)
@@ -22,7 +23,8 @@ export const Modal = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    reset
   } = useForm({
     resolver: zodResolver(schema)
   })
@@ -34,7 +36,9 @@ export const Modal = () => {
     setMensajes(result)
   }, [messages])
   const onSubmit = ({ content }) => {
+    console.log('messsages sended')
     socket.emit('message', { content, sender, chat: _id })
+    reset()
   }
 
   useEffect(() => {
@@ -47,6 +51,9 @@ export const Modal = () => {
       socket.on('new-messages', (message) => dispatch(addMessage(message)))
     } return () => socket.emit('leave-room', _id)
   }, [])
+  useEffect(() => {
+    LastMessage.current?.scrollIntoView()
+  }, [messages])
 
   return (
     <>
@@ -115,17 +122,20 @@ export const Modal = () => {
             </div>
               )
             : (
-                mensajes.length !== 0 &&
-            mensajes.map(({ _id, content, sender: { _id: senderId } }) => (
-              <div
-                className={`w-[80%] max-w-2xl break-words px-5 py-3 rounded-lg ${
-                  senderId === sender ? 'bg-primary text-white ml-auto' : 'bg-neutral-200'
-                }`}
-                key={_id}
-              >
-                {content}
-              </div>
-            ))
+                mensajes.map(({ _id, content, sender: { _id: senderId } }) => (
+              <>
+                <div
+                  className={`w-[80%] max-w-2xl break-words px-5 py-3 rounded-lg ${
+                    senderId === sender ? 'bg-primary text-white ml-auto' : 'bg-neutral-200'
+                  }`}
+                  key={_id}
+                >
+                  {content}
+                </div>
+
+                <div ref={LastMessage} key={LastMessage}></div>
+              </>
+                ))
               )}
         </div>
       </div>
