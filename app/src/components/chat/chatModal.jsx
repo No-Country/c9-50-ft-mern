@@ -6,7 +6,7 @@ import * as z from 'zod'
 import { getChatById } from '../../redux/profile/thunks'
 import { addMessage } from '../../redux/profile/profileSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { VideoCameraIcon, CurrencyDollarIcon } from '@heroicons/react/24/solid'
 import PuffLoader from 'react-spinners/PuffLoader'
 const schema = z.object({
@@ -26,7 +26,13 @@ export const Modal = () => {
   } = useForm({
     resolver: zodResolver(schema)
   })
-  console.log(loading)
+  const [mensajes, setMensajes] = useState([])
+  useEffect(() => {
+    let newMenssages = []
+    newMenssages = new Set(messages)
+    const result = [...newMenssages]
+    setMensajes(result)
+  }, [messages])
   const onSubmit = ({ content }) => {
     socket.emit('message', { content, sender, chat: _id })
   }
@@ -39,7 +45,7 @@ export const Modal = () => {
     if (socket) {
       socket.emit('join-room', _id)
       socket.on('new-messages', (message) => dispatch(addMessage(message)))
-    }
+    } return () => socket.emit('leave-room', _id)
   }, [])
 
   return (
@@ -72,30 +78,45 @@ export const Modal = () => {
           </div>
         </div>
         <div className='mr-10 mt-7 flex gap-7'>
-              <a target='blank' href={activeChat?.infoInChat?.users[0]?._id === sender ? activeChat?.infoInChat?.users[1]?.role?.mettUrl : activeChat?.infoInChat?.users[0]?.role?.mettUrl}>
-
-              <VideoCameraIcon
-                className='ml-2  mt-3 -mr-1 h-8 w-8 text-white hover:text-primary'
-                aria-hidden='true'
-                />
-                </a>
-              <a target='blank' href={activeChat?.infoInChat?.users[0]?._id === sender ? activeChat?.infoInChat?.users[1]?.role?.refered : activeChat?.infoInChat?.users[0]?.role?.refered}>
-              <CurrencyDollarIcon
-                className='ml-2 mt-3 -mr-1 h-8 w-8 text-white hover:text-primary'
-                aria-hidden='true'
-                />
-                </a>
-            </div>
+          <a
+            target='blank'
+            href={
+              activeChat?.infoInChat?.users[0]?._id === sender
+                ? activeChat?.infoInChat?.users[1]?.role?.mettUrl
+                : activeChat?.infoInChat?.users[0]?.role?.mettUrl
+            }
+          >
+            <VideoCameraIcon
+              className='ml-2  mt-3 -mr-1 h-8 w-8 text-white hover:text-primary'
+              aria-hidden='true'
+            />
+          </a>
+          <a
+            target='blank'
+            href={
+              activeChat?.infoInChat?.users[0]?._id === sender
+                ? activeChat?.infoInChat?.users[1]?.role?.refered
+                : activeChat?.infoInChat?.users[0]?.role?.refered
+            }
+          >
+            <CurrencyDollarIcon
+              className='ml-2 mt-3 -mr-1 h-8 w-8 text-white hover:text-primary'
+              aria-hidden='true'
+            />
+          </a>
+        </div>
       </div>
       <div className='grow w-full px-5 overflow-hidden py-5'>
         <div className='h-full w-full overflow-y-auto overflow-x-hidden flex flex-col gap-4'>
           {loading
-            ? (<div className='flex justify-center items-center'>
+            ? (
+            <div className='flex justify-center items-center'>
               <PuffLoader color='#020101' />
             </div>
               )
             : (
-                messages.map(({ _id, content, sender: { _id: senderId } }) => (
+                mensajes.length !== 0 &&
+            mensajes.map(({ _id, content, sender: { _id: senderId } }) => (
               <div
                 className={`w-[80%] max-w-2xl break-words px-5 py-3 rounded-lg ${
                   senderId === sender ? 'bg-primary text-white ml-auto' : 'bg-neutral-200'
@@ -104,7 +125,7 @@ export const Modal = () => {
               >
                 {content}
               </div>
-                ))
+            ))
               )}
         </div>
       </div>
