@@ -105,6 +105,19 @@ export const Navbar = () => {
                                 </Link>
                               )}
                             </Menu.Item>
+                            <Menu.Item>
+                              {({ active }) => (
+                                <Link
+                                  to='/changePassword'
+                                  className={classNames(
+                                    active ? 'bg-gray-100 border-r-4 border-primary' : '',
+                                    'block px-4 py-2 text-sm text-gray-700 border-r-2 border-primary'
+                                  )}
+                                >
+                                  Change Password
+                                </Link>
+                              )}
+                            </Menu.Item>
                             {role === 'COLABORATOR' && (
                               <Menu.Item>
                                 {({ active }) => (
