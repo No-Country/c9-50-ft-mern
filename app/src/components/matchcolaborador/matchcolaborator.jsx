@@ -47,11 +47,20 @@ export const Matchcolaborator = ({ users }) => {
               className='flex flex-col justify-center items-center w-3/4 h-auto p-5 sm:py-2 sm:px-8 m-auto bg-neutral-300 mb-8 space-y-10 sm:flex-row sm:justify-between md:flex-row md:justify-between'
             >
               <div className='flex flex-col sm:flex-row md:flex-row md:items-center space-y-5 sm:space-y-0 items-center space-x-6'>
-                <div className='flex flex-row justify-center items-center rounded-full w-20 h-20 bg-black overflow-hidden'>
-                  <Avatar name={name} size='100' textSizeRatio={1.75} />
+                <div className='flex flex-row justify-center items-center rounded-full w-20 h-20 bg-black overflow-hidden '>
+                  <Avatar name={name} size='100' textSizeRatio={1.75} className='animated-ping' />
                 </div>
-                <div className='flex flex-col items-start'>
-                  <h2 className='font-semibold text-xl'>{name}</h2>
+
+                <div className='flex flex-col gap-2 items-start justify-center'>
+                  <div className='flex flex-row gap-2'>
+                    <div>
+                      <h2 className='font-semibold text-xl'>{name}</h2>
+                    </div>
+                    <div className='flex items-center'>
+                      <span className='bg-green-700 w-4 h-4 absolute rounded-full animate-pulse ' />
+                    </div>
+                  </div>
+
                   <p>Profesion: {occupation}</p>
                 </div>
               </div>
