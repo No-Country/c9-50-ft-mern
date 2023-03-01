@@ -34,7 +34,7 @@ export const ColaboradorWaiting = () => {
         </div>
       </div>
       <div className='w-full flex flex-row justify-start items-center mt-32 mb-14'>
-        <h2 className='text-lg pl-5 font-medium'>Mis Pacientes</h2>
+        <h2 className='text-lg pl-5 font-medium'>Mis Pacientes Conectados</h2>
       </div>
       <div className='w-full flex flex-col items-center gap-5'>
         {/* Paciente 1 */}
@@ -52,9 +52,14 @@ export const ColaboradorWaiting = () => {
                 />
               </div>
               <div className='flex flex-row items-start justify-start ml-3'>
-                <p className='text-lg font-medium pb-4'>
-                  {chat.users[0].name === name ? chat.users[1].name : chat.users[0].name}
-                </p>
+                <div className='flex'>
+                  <p className='text-lg font-medium pb-4'>
+                    {chat.users[0].name === name ? chat.users[1].name : chat.users[0].name}
+                  </p>
+                </div>
+                <div className='flex'>
+                  <span className='bg-green-700 w-4 h-4 absolute rounded-full animate-pulse ' />
+                </div>
               </div>
             </div>
             <div className='flex flex-row items-center h-full'>
