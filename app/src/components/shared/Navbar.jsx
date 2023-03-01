@@ -37,10 +37,10 @@ export const Navbar = () => {
                     {open
                       ? (
                         <XMarkIcon className='block h-6 w-6' aria-hidden='true' />
-                      )
+                        )
                       : (
                         <Bars3Icon className='block h-6 w-6' aria-hidden='true' />
-                      )}
+                        )}
                   </Disclosure.Button>
                 </div>
                 <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
@@ -178,12 +178,12 @@ export const Navbar = () => {
                           </Menu.Items>
                         </Transition>
                       </Menu>
-                    )
+                      )
                     : (
                       <Link className='w-auto h-auto text-xs text-white p-4 ml-3' to='/login'>
                         Inicio Sesión
                       </Link>
-                    )}
+                      )}
                 </div>
               </div>
             </div>
