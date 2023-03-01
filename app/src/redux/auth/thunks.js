@@ -118,10 +118,22 @@ export const startRecovery = (data, remember) => {
     }
   }
 }
+
 export const startChangePass = (data, token) => {
   return async (dispatch) => {
     try {
       const { data: res } = await axios.post('/api/user/changePassword', data, { headers: { Authorization: `Bearer ${token}` } })
+      toast.success(res.message)
+    } catch (error) {
+      console.log(error, 'failed')
+    }
+  }
+}
+
+export const startUpdateRegister = (data, token) => {
+  return async (dispatch) => {
+    try {
+      const { data: res } = await axios.post('/api/user/modifyUser', data, { headers: { Authorization: `Bearer ${token}` } })
       toast.success(res.message)
     } catch (error) {
       console.log(error, 'failed')

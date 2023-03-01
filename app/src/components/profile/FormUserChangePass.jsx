@@ -30,12 +30,14 @@ export const FormUserChangePass = () => {
   } = useForm({
     resolver: zodResolver(schema)
   })
+
+  const { token } = useSelector((state) => state.auth)
+
   const onSubmit = async (data) => {
     dispatch(startChangePass(data, token))
     navigate('/')
   }
-  console.log(errors)
-  const { token } = useSelector((state) => state.auth)
+
   return (
     <div className='md:flex items-center w-full justify-center'>
       <div className='overflow-hidden bg-white shadow sm:rounded-lg max-w-xl'>
