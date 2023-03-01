@@ -2,14 +2,17 @@ import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
+import { useDispatch, useSelector } from 'react-redux'
+import { startUpdateRegister } from '../../redux/auth/thunks'
 
 const schema = z.object({
-  meet: z.string().min(1, { message: 'Required' }).url({ message: 'Invalid URL' }),
-  cafecito: z.string().optional()
+  mettUrl: z.string().min(1, { message: 'Required' }).url({ message: 'Invalid URL' }),
+  refered: z.string().optional()
 })
 
 export const ColaboradorUrls = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const {
     register,
     handleSubmit,
@@ -17,9 +20,12 @@ export const ColaboradorUrls = () => {
   } = useForm({
     resolver: zodResolver(schema)
   })
+
+  const { token } = useSelector((state) => state.auth)
+
   const onSubmit = (data, e) => {
+    dispatch(startUpdateRegister(data, token))
     e.target.reset()
-    console.log(data)
     navigate('/colaborador')
   }
   return (
@@ -38,8 +44,8 @@ export const ColaboradorUrls = () => {
             <input
               type='text'
               className='w-full bg-neutral-200 px-4 py-3 rounded-md outline-none'
-              name='meet'
-              {...register('meet')}
+              name='mettUrl'
+              {...register('mettUrl')}
             />
             {errors.meet?.message && (
               <p className='py-2 text-black text-xs font-semibold'>{errors.meet?.message}</p>
@@ -50,8 +56,8 @@ export const ColaboradorUrls = () => {
             <input
               type='text'
               className='w-full bg-neutral-200 px-4 py-3 rounded-md outline-none'
-              name='cafecito'
-              {...register('cafecito')}
+              name='referd'
+              {...register('refered')}
             />
             {errors.cafecito?.message && (
               <p className='py-2 text-black text-xs font-semibold'>{errors.cafecito?.message}</p>
@@ -64,8 +70,11 @@ export const ColaboradorUrls = () => {
             >
               Omitir
             </button>
-            <button className='bg-sky-500 text-white w-52 h-10 sm:w-auto sm:h-auto sm:py-3 sm:px-10' type='submit'>
-              Continuar
+            <button
+              type='submit'
+              className='bg-sky-500 text-white w-52 h-10 sm:w-auto sm:h-auto sm:py-3 sm:px-10'
+            >
+              Confirmar
             </button>
           </div>
         </form>

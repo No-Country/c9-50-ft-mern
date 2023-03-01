@@ -82,7 +82,7 @@ const disconnectUser = async (userId) => {
 
 const updateOneUser = async (userId, data) => {
   try {
-    await User.updateOne({ _id: userId }, { data })
+    await User.updateOne({ _id: userId }, { role: data })
     return { message: 'User updated successfully' }
   } catch (error) {
     return 'There was an error updating the user, try again later'

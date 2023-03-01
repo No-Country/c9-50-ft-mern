@@ -33,7 +33,7 @@ export const Matchcolaborator = ({ users }) => {
     <>
       <div className='py-20 bg-gray-50 h-full'>
         <p htmlFor='' className='w-3/4 m-auto mb-16 text-start text-3xl'>
-          ¿Quien estas buscando?
+          Colaboradores listos para escucharte!
         </p>
         {/* Resultados */}
         <div className='w-3/4 m-auto mb-16'>
