@@ -140,7 +140,6 @@ export const Modal = () => {
                 >
                   {content}
                 </div>
-
                 <div ref={LastMessage} key={LastMessage}></div>
               </>
                 ))
