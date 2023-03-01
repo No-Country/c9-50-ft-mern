@@ -17,11 +17,11 @@ function classNames(...classes) {
 }
 
 export const Navbar = () => {
-  const { status, name, role } = useSelector((state) => state.auth)
+  const { status, name, role, token } = useSelector((state) => state.auth)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const logout = () => {
-    dispatch(startLogout())
+    dispatch(startLogout(token))
     navigate('/')
   }
   return (

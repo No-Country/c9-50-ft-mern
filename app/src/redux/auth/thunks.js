@@ -100,8 +100,9 @@ export const startRegister = (data) => {
     }
   }
 }
-export const startLogout = () => {
+export const startLogout = (token) => {
   return async (dispatch) => {
+    await axios.get('/api/user/logout', { headers: { Authorization: `Barer ${token}` } })
     window.localStorage.clear()
     window.sessionStorage.clear()
     dispatch(logout())
