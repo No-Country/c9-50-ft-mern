@@ -23,7 +23,7 @@ export const Eleccion = () => {
   }, [])
 
   return (
-    <div className='flex flex-col justify-between'>
+    <div className='flex flex-col justify-between h-screen'>
       <Navbar />
       <Matchcolaborator users={connectedUsers} />
       <Footer />
