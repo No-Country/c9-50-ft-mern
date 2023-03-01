@@ -2,6 +2,7 @@ const { error } = require('./../Network/response')
 
 function logError(err, res, req, next) {
   console.log(err)
+  console.log('Error de logueo')
   next(err)
 }
 function handlerErrorZod(err, req, res, next) {

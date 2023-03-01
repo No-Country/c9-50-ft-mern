@@ -6,16 +6,20 @@ const { sendNewUser, sendNewPass } = require('../middlewares/emailHandler')
 const secret = process.env.SECRET
 
 const saveUser = async (data) => {
-  const encryptedPassaword = await bcrypt.hash(data.password, 10)
-  const user = {
-    ...data,
-    password: encryptedPassaword
-  }
-  const newUser = await new User(user).save()
-  await sendNewUser(newUser.email, newUser.name)
-  return {
-    data: { name: newUser.name, email: newUser.email },
-    message: 'User created succefully'
+  try {
+    const encryptedPassaword = await bcrypt.hash(data.password, 10)
+    const user = {
+      ...data,
+      password: encryptedPassaword
+    }
+    const newUser = await new User(user).save()
+    await sendNewUser(newUser.email, newUser.name)
+    return {
+      data: { name: newUser.name, email: newUser.email },
+      message: 'User created succefully'
+    }
+  } catch (error) {
+    throw new Error('Error! Email does already exist')
   }
 }
 
@@ -25,7 +29,7 @@ const findUser = async (data) => {
   const user = await User.findOne({ email })
 
   if (!user) {
-    throw new Error('Error not found')
+    throw new Error('Email or Password Incorrect')
   }
 
   const validated = await bcrypt.compare(password, user.password)
@@ -38,17 +42,20 @@ const findUser = async (data) => {
   throw new Error('Email or Password Incorrect')
 }
 
-const passwordReset = async (data) => {
-  const { email } = data
-  const newPassword = randomPassword()
-  const user = await User.findOne({ email })
-  if (user) {
-    const encryptedPassaword = await bcrypt.hash(newPassword, 10)
-    await User.updateOne({ email }, { password: encryptedPassaword })
-    await sendNewPass(email, newPassword)
+const passwordReset = async (data, next) => {
+  try {
+    const { email } = data
+    const newPassword = randomPassword()
+    const user = await User.findOne({ email })
+    if (user) {
+      const encryptedPassaword = await bcrypt.hash(newPassword, 10)
+      await User.updateOne({ email }, { password: encryptedPassaword })
+      await sendNewPass(email, newPassword)
+    }
     return { message: 'A new password has been sent to your mail' }
+  } catch (error) {
+    next(error)
   }
-  return { message: 'We are not able to found a account with that email' }
 }
 
 const changePasswordDB = async (userId, newPassword) => {
