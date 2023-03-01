@@ -131,6 +131,34 @@ export const Navbar = () => {
                                     Settings
                                   </Link>
                                 )}
+                              </Menu.Item>)}
+                            {role === 'PATIENT' && (
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    to='/eligetucolaborador'
+                                    className={classNames(
+                                      active ? 'bg-gray-100 border-r-4 border-primary' : '',
+                                      'block px-4 py-2 text-sm text-gray-700 border-r-2 border-primary'
+                                    )}
+                                  >
+                                    Elegir Colaborador
+                                  </Link>
+                                )}
+                              </Menu.Item>)}
+                            {role === 'COLABORATOR' && (
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    to='/colaborador'
+                                    className={classNames(
+                                      active ? 'bg-gray-100 border-r-4 border-primary' : '',
+                                      'block px-4 py-2 text-sm text-gray-700 border-r-2 border-primary'
+                                    )}
+                                  >
+                                    Mis Pacientes
+                                  </Link>
+                                )}
                               </Menu.Item>
                             )}
                             <Menu.Item>
