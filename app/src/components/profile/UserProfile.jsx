@@ -29,18 +29,6 @@ export const UserProfile = () => {
               <dt className='text-sm font-medium text-gray-500'>Rol</dt>
               <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{role}</dd>
             </div>
-            {if (role.tipo === 'COLABORATOR') {
-              return (
-                <div className='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                  <dt className='text-sm font-medium text-gray-500'>Meet URL</dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{role.mettUrl}</dd>
-                </div>
-                <div className='bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                  <dt className='text-sm font-medium text-gray-500'>Payment URL</dt>
-                  <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>{role.refered}</dd>
-                </div>
-              )
-            }}
             <div className='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
               <dt className='text-sm font-medium text-gray-500'>Fecha de nacimiento</dt>
               <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
