@@ -31,7 +31,7 @@ export const Matchcolaborator = ({ users }) => {
 
   return (
     <>
-      <div className='py-20 bg-gray-50 h-full'>
+      <div className='py-20 bg-gray-50 h-auto'>
         <p htmlFor='' className='w-3/4 m-auto mb-16 text-start text-3xl'>
           Colaboradores listos para escucharte!
         </p>
