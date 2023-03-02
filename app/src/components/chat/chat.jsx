@@ -14,7 +14,7 @@ export const ChatView = () => {
   }, [])
   return (
     <>
-      <div className='w-full h-screen relative overflow-hidden flex flex-col'>
+      <div className='w-full h-screen relative overflow-y-auto flex flex-col'>
         <div className='w-full flex flex-row justify-start items-center gap-10 absolute top-0  border-b-2 border-r-2 h-24 bg-slate-500 pl-6'>
           <div className='h-16 w-16 rounded-full overflow-hidden'>
             <Avatar name={name} size='65' textSizeRatio={1.75} maxInitials={2} />
@@ -31,7 +31,7 @@ export const ChatView = () => {
             >
               <div className='h-16 w-16 overflow-hidden rounded-full'>
                 <Avatar
-                  name={chat.users[0].name === name ? chat.users[1].name : chat.users[0].name}
+                  name={chat?.users[0]?.name === name ? chat?.users[1]?.name : chat?.users[0]?.name}
                   size='65'
                   textSizeRatio={1.75}
                   maxInitials={2}
@@ -39,7 +39,7 @@ export const ChatView = () => {
               </div>
               <div className='flex-col'>
                 <h2 className=' text-sm sm:text-md md:text-md font-semibold'>
-                  {chat.users[0].name === name ? chat.users[1].name : chat.users[0].name}
+                  {chat?.users[0]?.name === name ? chat?.users[1]?.name : chat?.users[0]?.name}
                 </h2>
               </div>
             </div>

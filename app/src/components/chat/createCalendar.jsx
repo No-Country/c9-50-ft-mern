@@ -24,7 +24,7 @@ export default function CreateCalendar(props) {
   }
 
   function send() {
-    if (datos.activity == null) {
+    if (datos.activity == null || datos.activity.length > 130) {
       setInputErrorActivity('w-full bg-gray-50 text-gray-800 border border-red-500 px-3 py-2')
       return
     }
