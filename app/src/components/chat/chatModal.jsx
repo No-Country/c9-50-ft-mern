@@ -55,7 +55,7 @@ export const Modal = () => {
   }, [])
   useEffect(() => {
     LastMessage.current?.scrollIntoView()
-  }, [messages])
+  }, [mensajes])
 
   return (
     <>
