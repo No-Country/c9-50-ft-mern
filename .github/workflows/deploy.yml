@@ -6,7 +6,7 @@ on:
     - cron: "00 14 * * 5"
 
 jobs:
-  lint:
+  deploy:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -19,43 +19,8 @@ jobs:
         run: npm install
       - name: Check Linting
         run: npm run lint
-
-  build:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Use Node 18
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: Install packages
-        run: npm install
       - name: Build project
         run: npm run build
-      - name: Upload Build
-        uses: actions/upload-artifact@v3
-        with:
-          name: dist
-          path: app/dist
-
-  deploy:
-    needs: [lint, build]
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Use Node 18
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: Install packages
-        run: npm install
-      - name: Download Build
-        uses: actions/download-artifact@v3
-        with:
-          name: dist
-          path: app/dist
       - name: Install Railway
         run: npm i -g @railway/cli
       - name: Deploy
