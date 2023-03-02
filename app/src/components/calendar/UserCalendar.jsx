@@ -43,12 +43,7 @@ export function UserCalendar() {
   }
 
   return (
-    <div className='max-w-screen-2xl px-4 md:px-8 mx-auto'>
-      <div className='mb-10 md:mb-16'>
-        <h2 className='text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6'>
-          Tus turnos agendados
-        </h2>
-      </div>
+    <div onClick={deleteTurno} className='max-w-screen-2xl px-4 md:px-8 mx-auto'>
       <div className='grid sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8'>
         {state !== undefined &&
           state.map((e) => {
