@@ -1,5 +1,5 @@
 import { Navbar, Footer } from '../components'
-import { UserCalendar } from '../components/Calendar/UserCalendar'
+import { UserCalendar } from '../components/calendar/UserCalendar'
 
 export const Calendar = () => {
   return (
