@@ -9,7 +9,8 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 const navigation = [
   { name: 'Nosotros', href: '/nosotros', current: false },
   { name: 'Contacto', href: '/contacto', current: false },
-  { name: 'Chat', href: '/chat', current: false }
+  { name: 'Chat', href: '/chat', current: false },
+  { name: 'Turnos', href: '/calendar', current: false }
 ]
 
 function classNames(...classes) {

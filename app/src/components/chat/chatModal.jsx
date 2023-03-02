@@ -6,10 +6,12 @@ import * as z from 'zod'
 import { addMessage } from '../../redux/profile/profileSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState, useRef } from 'react'
-import { VideoCameraIcon, CurrencyDollarIcon } from '@heroicons/react/24/solid'
+import { VideoCameraIcon, CurrencyDollarIcon, CalendarDaysIcon } from '@heroicons/react/24/solid'
 import PuffLoader from 'react-spinners/PuffLoader'
 import { getChatById } from '../../redux/profile/thunks'
 import Avatar from 'react-avatar'
+import CreateCalendar from './createCalendar'
+
 const schema = z.object({
   content: z.string().min(1, { message: 'Message is required' })
 })
@@ -18,7 +20,7 @@ export const Modal = () => {
   const LastMessage = useRef(null)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { token, id: sender } = useSelector((state) => state.auth)
+  const { token, id: sender, role } = useSelector((state) => state.auth)
   const { activeChat, messages, loading } = useSelector((state) => state.profile)
   const { socket } = useSelector((state) => state.socket)
   const {
@@ -57,6 +59,27 @@ export const Modal = () => {
     LastMessage.current?.scrollIntoView()
   }, [messages])
 
+  const [calendar, setCalendar] = useState(null)
+  function addMeet() {
+    console.log(activeChat.infoInChat)
+    if (activeChat?.infoInChat?.users[0]?._id !== sender) {
+      setCalendar(
+        <CreateCalendar
+          setCalendar={setCalendar}
+          colaboradorId={activeChat?.infoInChat?.users[0]?._id}
+          miRole={role}
+        />
+      )
+    } else {
+      setCalendar(
+        <CreateCalendar
+          setCalendar={setCalendar}
+          colaboradorId={activeChat?.infoInChat?.users[1]?._id}
+          miRole={role}
+        />
+      )
+    }
+  }
   return (
     <>
       <div className='flex flex-row right-0 w-full p bg-slate-500'>
@@ -119,6 +142,13 @@ export const Modal = () => {
               aria-hidden='true'
             />
           </a>
+          <a onClick={addMeet}>
+            <CalendarDaysIcon
+              className='ml-2 mt-3 -mr-1 h-8 w-8 text-white hover:text-primary'
+              aria-hidden='true'
+            />
+          </a>
+          {calendar}
         </div>
       </div>
       <div className='grow w-full px-5 overflow-hidden py-5'>
