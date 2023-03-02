@@ -1,4 +1,4 @@
-const { save, deleteEvent, get, getAll, updateEvent } = require('../services/calendar.services')
+const { save, deleteEvent, get } = require('../services/calendar.services')
 const { success } = require('../Network/response')
 
 const createCalendar = async (req, res, next) => {

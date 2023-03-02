@@ -5,7 +5,7 @@ export const Calendar = () => {
   return (
     <div className='flex flex-col justify-between h-screen'>
       <Navbar />
-      <UserCalendar/>
+      <UserCalendar />
       <Footer />
     </div>
   )
