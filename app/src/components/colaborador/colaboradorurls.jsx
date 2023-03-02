@@ -21,10 +21,10 @@ export const ColaboradorUrls = () => {
     resolver: zodResolver(schema)
   })
 
-  const { token } = useSelector((state) => state.auth)
+  const { token, role } = useSelector((state) => state.auth)
 
   const onSubmit = (data, e) => {
-    dispatch(startUpdateRegister(data, token))
+    dispatch(startUpdateRegister({ tipo: role, mettUrl: data.mettUrl, refered: data.refered }, token))
     e.target.reset()
     navigate('/colaborador')
   }
@@ -56,7 +56,7 @@ export const ColaboradorUrls = () => {
             <input
               type='text'
               className='w-full bg-neutral-200 px-4 py-3 rounded-md outline-none'
-              name='referd'
+              name='refered'
               {...register('refered')}
             />
             {errors.cafecito?.message && (
