@@ -12,8 +12,6 @@ export const socketSlice = createSlice({
   reducers: {
     connect: (state, { payload }) => {
       try {
-        console.log(process.env.RAILWAY_STATIC_URL)
-
         const socket = io('ws://localhost:3002', {
           transports: ['websocket'],
           autoConnect: true,

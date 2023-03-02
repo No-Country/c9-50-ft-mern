@@ -10,6 +10,8 @@ class Socket {
   }
 
   socketEvents() {
+    console.log('Socket connected')
+
     this.io.on('connection', async (socket) => {
       const { token } = socket.handshake.query
 
