@@ -5,7 +5,7 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 import PuffLoader from 'react-spinners/PuffLoader'
 import { toast } from 'react-toastify'
 
-export function UserCalendar() {
+export const UserCalendar = () => {
   const { token } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
   const [state, setState] = useState(undefined)
