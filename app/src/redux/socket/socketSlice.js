@@ -12,7 +12,7 @@ export const socketSlice = createSlice({
   reducers: {
     connect: (state, { payload }) => {
       try {
-        const socket = io('ws://0.0.0.0:3002', {
+        const socket = io('wss://0.0.0.0:3002', {
           transports: ['websocket'],
           autoConnect: true,
           forceNew: true,
