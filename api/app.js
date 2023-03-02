@@ -20,7 +20,7 @@ const MONGO_URL = process.env.MONGO_URL
 
 const app = express()
 
-const io = new Server(3002)
+const io = new Server({})
 
 app.use(express.json())
 app.use(cors())
@@ -40,6 +40,8 @@ if (isProduction) {
 }
 
 new Socket(io)
+
+io.listen(3002)
 
 app.use(logError)
 app.use(handlerErrorZod)
