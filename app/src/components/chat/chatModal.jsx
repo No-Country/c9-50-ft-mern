@@ -59,7 +59,7 @@ export const Modal = () => {
 
   return (
     <>
-      <div className='flex flex-row right-0 w-full p bg-slate-500'>
+      <div className='flex flex-row right-0 w-full p bg-slate-500 h-auto'>
         <div
           className='cursor-pointer h-full flex flex-row items-center ml-5 text-white text-xl'
           onClick={() => navigate('/chat')}
@@ -121,7 +121,7 @@ export const Modal = () => {
           </a>
         </div>
       </div>
-      <div className='grow w-full px-5 overflow-hidden py-5'>
+      <div className='grow w-full h-screen px-5 overflow-hidden py-5'>
         <div className='h-full w-full overflow-y-auto overflow-x-hidden flex flex-col gap-4'>
           {loading
             ? (
@@ -139,8 +139,8 @@ export const Modal = () => {
                   key={_id}
                 >
                   {content}
+                  <div ref={LastMessage}></div>
                 </div>
-                <div ref={LastMessage} key={LastMessage}></div>
               </>
                 ))
               )}

@@ -4,7 +4,7 @@ import { ChatView } from '../components/chat/chat'
 
 export const Chat = () => {
   return (
-    <div className='flex flex-col justify-between h-screen'>
+    <div className='flex flex-col justify-between h-auto'>
       <Navbar />
       <ChatView />
       <Footer />
