@@ -20,8 +20,6 @@ const MONGO_URL = process.env.MONGO_URL
 
 const app = express()
 
-console.log(process.env.RAILWAY_STATIC_URL)
-
 const io = new Server(3002)
 
 app.use(express.json())
