@@ -49,3 +49,42 @@ export const createNewChat = (token, colaboratorId) => {
     }
   }
 }
+
+export const getTurnos = (token) => {
+  return async () => {
+    try {
+      const res = await axios.get('/api/calendar/get', {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      return res.data
+    } catch (error) {
+      return { message: error.message }
+    }
+  }
+}
+
+export const addCalendar = (token, datos) => {
+  return async () => {
+    try {
+      const res = await axios.post('/api/calendar/create', datos, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      return res.data
+    } catch (error) {
+      return { message: error.message }
+    }
+  }
+}
+
+export const deleteCalendar = (id, token) => {
+  return async () => {
+    try {
+      const res = await axios.delete(`/api/calendar/delete/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      return res.data
+    } catch (error) {
+      return { message: error.message }
+    }
+  }
+}
