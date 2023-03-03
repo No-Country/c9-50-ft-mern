@@ -26,6 +26,7 @@ export const FormLogin = () => {
   })
 
   const onSubmit = async (data) => {
+    console.log(process.env.RAILWAY_STATIC_URL)
     dispatch(startLogin(data, remember))
   }
 
