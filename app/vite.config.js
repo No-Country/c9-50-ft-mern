@@ -15,6 +15,11 @@ export default defineConfig({
         changeOrigin: true,
         secure: true
       }
+    },
+    resolve: {
+      alias: {
+        './runtimeConfig': './runtimeConfig.browser'
+      }
     }
   }
 })
