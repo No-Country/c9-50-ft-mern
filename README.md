@@ -11,6 +11,14 @@ Aquí debemos de poner la descripción del proyecto que vamos a realizar
 
 <table>
   <tr>
+  <td>
+      <div align="center">
+        <a href="https://www.linkedin.com/in/jose-antonio-luria-felipe-356094210/" target="_blank" rel="author">
+          <img width="110" src="https://media.licdn.com/dms/image/C5603AQE3gbM41EHiIw/profile-displayphoto-shrink_400_400/0/1657827835160?e=1680739200&v=beta&t=Nw7fvjwtl4mMmG0cyTVCIF0FZKYrNxdzaoTZtibR22o"/>
+        </a>
+        <h4 style="margin-top: 1rem;">Jose Luria</h4>
+      </div>
+    </td>
     <td>
       <div align="center">
         <a href="https://www.linkedin.com/in/jose-antonio-luria-felipe-356094210/" target="_blank" rel="author">
